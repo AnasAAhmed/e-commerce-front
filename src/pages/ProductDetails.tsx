@@ -35,8 +35,7 @@ const ProductDetails = () => {
     toast.success("Added to cart");
   };
 
-
-
+ 
   if (isError) return <Navigate to={"/404"} />;
 
   return (
@@ -52,10 +51,10 @@ const ProductDetails = () => {
             <article className="sec2">
               <p>{name}</p>
               <span className="fa fa-star checked"></span>
-<span className="fa fa-star checked"></span>
-<span className="fa fa-star checked"></span>
-<span className="fa fa-star"></span>
-<span className="fa fa-star"></span><br />
+              <span className="fa fa-star checked"></span>
+              <span className="fa fa-star checked"></span>
+              <span className="fa fa-star"></span>
+              <span className="fa fa-star"></span><br />
               {stock > 0 ? (
                 <>
                   {stock < 5 ? (
@@ -65,12 +64,12 @@ const ProductDetails = () => {
                   )}
                 </>) : (
                 <span className="red">Not Available</span>
-                
-                )}
+
+              )}
               <br />
-                <h3>Description</h3>
-                <p>{description}</p>
-                <br />
+              <h3>Description</h3>
+              <p>{description}</p>
+              <br />
               <h3>${price}</h3>
               <button
                 className="cart-button"
@@ -86,7 +85,10 @@ const ProductDetails = () => {
       </main>
 
 
+   <div onClick={()=> window.scrollTo(0, 0)}>
       <CategoryProduct categories={category} heading={"More of This"} />
+   </div>
+ 
 
     </div>
   );
