@@ -9,6 +9,7 @@ import { server } from "../redux/store";
 import { CartItem } from "../types/types";
 import { addToCart } from "../redux/reducer/cartReducer";
 import toast from "react-hot-toast";
+import { useEffect } from "react";
 
 
 
@@ -22,6 +23,7 @@ const ProductDetails = () => {
     _id: "",
     photo: "",
     category: "",
+    description:"",
     name: "",
     stock: 0,
     price: 0,
@@ -34,7 +36,9 @@ const ProductDetails = () => {
     dispatch(addToCart(cartItem));
     toast.success("Added to cart");
   };
-
+ useEffect(()=>{
+  window.scrollTo(0, 0)
+ },[params.id])
  
   if (isError) return <Navigate to={"/404"} />;
 
@@ -83,13 +87,7 @@ const ProductDetails = () => {
           </>
         )}
       </main>
-
-
-   <div onClick={()=> window.scrollTo(0, 0)}>
       <CategoryProduct categories={category} heading={"More of This"} />
-   </div>
- 
-
     </div>
   );
 };
