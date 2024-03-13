@@ -46,7 +46,7 @@ const ProductDetails = () => {
     <div className="product-container">
       <main className="product-details">
         {isLoading ? (
-          <Skeleton length={20} />
+          <Skeleton width="80vw" />
         ) : (
           <>
             <section className="sec1">
@@ -87,7 +87,7 @@ const ProductDetails = () => {
           </>
         )}
       </main>
-      <CategoryProduct categories={category} heading={"More of This"} />
+      <CategoryProduct category={category} heading={"More of This"} />
     </div>
   );
 };

@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 import { Skeleton } from "../components/loader";
 
 const Search = () => {
+
   const {
     data: categoriesResponse,
     isLoading: loadingCategories,
@@ -21,7 +22,6 @@ const Search = () => {
   const [maxPrice, setMaxPrice] = useState(100000);
   const [category, setCategory] = useState("");
   const [page, setPage] = useState(1);
-
   const {
     isLoading: productLoading,
     data: searchedData,

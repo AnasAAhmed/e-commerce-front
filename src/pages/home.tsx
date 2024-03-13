@@ -41,11 +41,11 @@ const Home = () => {
         )}
       </main>
       <br />
-      <CatgoryProducts heading="Latest Laptop's" categories="laptop"/>
+      <CatgoryProducts heading="Latest Laptop's" category="laptop"/>
       <br />
-      <CatgoryProducts heading="Latest Mobile's" categories="mobile"/>
+      <CatgoryProducts heading="Latest Mobile's" category="mobile"/>
       <br />
-      <CatgoryProducts heading="Latest Wearables" categories="wearables"/>
+      <CatgoryProducts heading="Latest Wearables" category="wearables"/>
       <br />
     </div>
   );

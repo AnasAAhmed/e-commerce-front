@@ -2,16 +2,17 @@
 import { useLatestCategoryProductsQuery } from '../redux/api/productAPI'; // Import the hook
 import ProductCard from './product-card';
 import { Skeleton } from './loader';
+import { Link } from 'react-router-dom';
 
 
 type CategoryProductsProps = {
-  categories: string;
+  category: string;
   heading: string;
   // handler: (cartItem: CartItem) => string | undefined;
 };
 
-const CatgoryProducts = ({ categories,heading }: CategoryProductsProps) => {
-  const { data, isLoading, isError } = useLatestCategoryProductsQuery({ category: categories }); // Pass the category name
+const CatgoryProducts = ({ category,heading }: CategoryProductsProps) => {
+  const { data, isLoading, isError } = useLatestCategoryProductsQuery({ category: category }); // Pass the category name
 
   if (isError) return <div>Error: Cannot Fetch the Products</div>;
 
@@ -20,6 +21,9 @@ const CatgoryProducts = ({ categories,heading }: CategoryProductsProps) => {
 
       <h1>
          {heading}
+         <Link to="/search" className="findmore">
+          More
+        </Link>
       </h1>
 
       <main>
