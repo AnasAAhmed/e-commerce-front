@@ -21,7 +21,7 @@ const CatgoryProducts = ({ category,heading }: CategoryProductsProps) => {
 
       <h1>
          {heading}
-         <Link to="/search" className="findmore">
+         <Link to={`/search/${category}`} className="findmore">
           More
         </Link>
       </h1>

@@ -7,9 +7,13 @@ import {
 import { CustomError } from "../types/api-types";
 import toast from "react-hot-toast";
 import { Skeleton } from "../components/loader";
+import { useParams } from "react-router-dom";
+import {FaFilter} from 'react-icons/fa'
 
 const Search = () => {
 
+
+  const params= useParams();
   const {
     data: categoriesResponse,
     isLoading: loadingCategories,
@@ -20,8 +24,9 @@ const Search = () => {
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("");
   const [maxPrice, setMaxPrice] = useState(100000);
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState(params.category!);
   const [page, setPage] = useState(1);
+
   const {
     isLoading: productLoading,
     data: searchedData,
@@ -49,7 +54,7 @@ const Search = () => {
   return (
     <div className="product-search-page">
       <aside>
-        <h2>Filters</h2>
+        <h2>Filters <FaFilter/></h2>
         <div>
           <h4>Sort</h4>
           <select value={sort} onChange={(e) => setSort(e.target.value)}>
