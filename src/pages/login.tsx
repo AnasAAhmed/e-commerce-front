@@ -61,7 +61,7 @@ const Login = () => {
   return (
     <>
       <div className={toggler?"none":"login"}>
-        <main className="none">
+        <main >
           <h1 className="heading">Login</h1>
           <div>
 
@@ -78,7 +78,7 @@ const Login = () => {
         </main>
       </div>
       <div className={toggler?"signUp":"none"}>
-        <main className="none">
+        <main >
           <h1 className="heading">sign up</h1>
 
           <div>

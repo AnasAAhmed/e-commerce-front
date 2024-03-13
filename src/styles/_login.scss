@@ -44,8 +44,7 @@
         border: 1px solid rgb(124, 124, 124);
         border-radius: 5px;
         font-size: 1.05rem;
-        margin-right: 5px;
-
+        padding-right: 0.4rem;
 
         >svg {
           background-color: white;
@@ -66,12 +65,11 @@
 .signUp {
   height: 90vh;
   @include flex(column);
-
   >main {
     width: 100%;
     height: 80%;
     max-width: 400px;
-    padding: 2rem;
+    padding:2rem;
     @include baseShadow;
     @include flex(column, center, stretch);
 
@@ -114,8 +112,8 @@
         @include flex;
         border: 1px solid rgb(124, 124, 124);
         border-radius: 5px;
+        padding-right: 0.4rem;
         font-size: 1.05rem;
-        margin-right: 5px;
 
         >svg {
           background-color: white;
