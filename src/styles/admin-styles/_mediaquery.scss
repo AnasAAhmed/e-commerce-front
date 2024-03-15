@@ -72,9 +72,19 @@
       width: 100%;
       border: 1px solid rgba(212, 212, 212, 0.379);
     }
+   
   }
 }
-
+@media screen and (width<= 620px) {
+  .product-search-page {
+    > main > .search-product-list {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
 @media screen and (width<= 600px) {
   .product-management {
     flex-direction: column;
@@ -84,7 +94,7 @@
       max-width: 400px;
     }
   }
-
+ 
   .chart-container {
     padding: 0;
     > h1 {

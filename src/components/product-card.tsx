@@ -22,25 +22,18 @@ const ProductCard = ({
     <div className="product-card">
       <Link to={`/product/${productId}`}>
 
-      <img src={`${server}/${photo}`} alt={name} />
-      <p>{name}</p>
-      <span className="span">${price}</span>
-      <br />
-      <span className="fa fa-star checked"></span>
-<span className="fa fa-star checked"></span>
-<span className="fa fa-star checked"></span>
-<span className="fa fa-star"></span>
-<span className="fa fa-star"></span>
-      <div>
-        {/* <button
-          onClick={() =>
-            handler({ productId, price, name, photo, stock, quantity: 1 })
-          }
-          >
-          <FaPlus />
-        </button> */}
-      </div>
-          </Link>
+        <img src={`${server}/${photo}`} alt={name} />
+        <p>{name}</p>
+        <span className="span">${price}</span>
+        <br />
+        <span className="fa fa-star checked"></span>
+        <span className="fa fa-star checked"></span>
+        <span className="fa fa-star checked"></span>
+        <span className="fa fa-star"></span>
+        <span className="fa fa-star"></span>
+        <div>
+        </div>
+      </Link>
     </div>
   );
 };

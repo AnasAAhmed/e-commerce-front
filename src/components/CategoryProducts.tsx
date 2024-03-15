@@ -21,7 +21,7 @@ const CatgoryProducts = ({ category,heading }: CategoryProductsProps) => {
 
       <h1>
          {heading}
-         <Link to={`/search/${category}`} className="findmore">
+         <Link to={`/search/${category}`} className="findmore" onClick={()=> window.scrollTo(0, 0)} >
           More
         </Link>
       </h1>

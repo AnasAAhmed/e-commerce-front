@@ -8,7 +8,7 @@ import { CustomError } from "../types/api-types";
 import toast from "react-hot-toast";
 import { Skeleton } from "../components/loader";
 import { useParams } from "react-router-dom";
-import {FaFilter} from 'react-icons/fa'
+import { RiFilterFill } from "react-icons/ri";
 
 const Search = () => {
 
@@ -54,7 +54,7 @@ const Search = () => {
   return (
     <div className="product-search-page">
       <aside>
-        <h2>Filters <FaFilter/></h2>
+        <h2>Filters <RiFilterFill/></h2>
         <div>
           <h4>Sort</h4>
           <select value={sort} onChange={(e) => setSort(e.target.value)}>
