@@ -5,13 +5,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Header from "./components/header";
 import Loader from "./components/loader";
+import Home from "./pages/home";
 import ProtectedRoute from "./components/protected-route";
 import { auth } from "./firebase";
 import { getUser } from "./redux/api/userAPI";
 import { userExist, userNotExist } from "./redux/reducer/userReducer";
 import { RootState } from "./redux/store";
 
-const Home = lazy(() => import("./pages/home"));
+
 const Search = lazy(() => import("./pages/search"));
 const Cart = lazy(() => import("./pages/cart"));
 const ProductDetails = lazy(() => import("./pages/ProductDetails"));
