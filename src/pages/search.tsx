@@ -6,14 +6,14 @@ import {
 } from "../redux/api/productAPI";
 import { CustomError } from "../types/api-types";
 import toast from "react-hot-toast";
-import { Skeleton } from "../components/loader";
+import { SearchProductLoader, Skeleton } from "../components/loader";
 import { useParams } from "react-router-dom";
 import { RiFilterFill } from "react-icons/ri";
 
 const Search = () => {
 
 
-  const params= useParams();
+  const params = useParams();
   const {
     data: categoriesResponse,
     isLoading: loadingCategories,
@@ -39,7 +39,7 @@ const Search = () => {
     page,
     price: maxPrice,
   });
-
+  const load = true
   const isPrevPage = page > 1;
   const isNextPage = searchedData?.totalPage === page;
 
@@ -54,7 +54,7 @@ const Search = () => {
   return (
     <div className="product-search-page">
       <aside>
-        <h2>Filters <RiFilterFill/></h2>
+        <h2>Filters <RiFilterFill /></h2>
         <div>
           <h4>Sort</h4>
           <select value={sort} onChange={(e) => setSort(e.target.value)}>
@@ -101,7 +101,7 @@ const Search = () => {
         />
 
         {productLoading ? (
-          <Skeleton length={10} />
+          <SearchProductLoader />
         ) : (
           <div className="search-product-list">
             {searchedData?.products.map((i) => (
@@ -110,13 +110,12 @@ const Search = () => {
                 productId={i._id}
                 name={i.name}
                 price={i.price}
-                // stock={i.stock}
-                // handler={addToCartHandler}
                 photo={i.photo}
               />
             ))}
           </div>
         )}
+
 
         {searchedData && searchedData.totalPage > 1 && (
           <article>

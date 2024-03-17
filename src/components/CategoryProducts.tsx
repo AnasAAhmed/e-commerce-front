@@ -1,7 +1,7 @@
 
 import { useLatestCategoryProductsQuery } from '../redux/api/productAPI'; // Import the hook
 import ProductCard from './product-card';
-import { Skeleton } from './loader';
+import { ProductLoader, Skeleton } from './loader';
 import { Link } from 'react-router-dom';
 
 
@@ -27,8 +27,8 @@ const CatgoryProducts = ({ category,heading }: CategoryProductsProps) => {
       </h1>
 
       <main>
-        {isLoading ? (
-          <Skeleton width="80vw" />
+      {isLoading ? (
+          <ProductLoader/>
         ) : (
           data?.products.map((i) => (
             <ProductCard
@@ -36,8 +36,6 @@ const CatgoryProducts = ({ category,heading }: CategoryProductsProps) => {
               productId={i._id}
               name={i.name}
               price={i.price}
-              // stock={i.stock}
-              // handler={handler}
               photo={i.photo}
             />
           ))

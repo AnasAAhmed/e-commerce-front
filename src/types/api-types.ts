@@ -5,6 +5,7 @@ import {
   Order,
   Pie,
   Product,
+  Review,
   ShippingInfo,
   Stats,
   User,
@@ -111,6 +112,11 @@ export type NewOrderRequest = {
   user: string;
 };
 
+
+export interface GetProductReviewsResponse {
+  success: boolean; // Indicates whether the request was successful
+  reviews: Review[]; // Array of review objects for the product
+}
 export type UpdateOrderRequest = {
   userId: string;
   orderId: string;

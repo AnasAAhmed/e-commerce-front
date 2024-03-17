@@ -31,7 +31,7 @@
 
   main {
     flex: 2 1 calc(100% - 250px);
-    padding: 0 20px;
+    padding: 0 10px 0 40px;
 
     h1 {
       font-size: 1.5rem;
@@ -48,9 +48,12 @@
     }
 
     .search-product-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      // grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      // justify-content: center;
+      align-items: center;
+      // gap: 10px;
     }
 
     article {

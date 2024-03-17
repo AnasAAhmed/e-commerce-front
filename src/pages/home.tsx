@@ -1,6 +1,6 @@
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
-import { Skeleton } from "../components/loader";
+import { ProductLoader, Skeleton } from "../components/loader";
 import ProductCard from "../components/product-card";
 import { useLatestProductsQuery } from "../redux/api/productAPI";
 import CatgoryProducts from "../components/CategoryProducts";
@@ -8,9 +8,9 @@ import CatgoryProducts from "../components/CategoryProducts";
 const Home = () => {
   const { data, isLoading, isError } = useLatestProductsQuery("");
 
- 
 
-  
+// const load =true
+
 
   if (isError) toast.error("Cannot Fetch the Products");
 
@@ -27,7 +27,7 @@ const Home = () => {
 
       <main>
         {isLoading ? (
-          <Skeleton width="80vw" />
+          <ProductLoader/>
         ) : (
           data?.products.map((i) => (
             <ProductCard
@@ -41,11 +41,11 @@ const Home = () => {
         )}
       </main>
       <br />
-      <CatgoryProducts heading="Latest Laptop's" category="laptop"/>
+      <CatgoryProducts heading="Latest Laptop's" category="laptop" />
       <br />
-      <CatgoryProducts heading="Latest Mobile's" category="mobile"/>
+      <CatgoryProducts heading="Latest Mobile's" category="mobile" />
       <br />
-      <CatgoryProducts heading="Latest Wearables" category="wearables"/>
+      <CatgoryProducts heading="Latest Wearables" category="wearables" />
       <br />
     </div>
   );

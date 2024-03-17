@@ -7,7 +7,13 @@ export type User = {
   dob: string;
   _id: string;
 };
-
+export interface Review {
+  _id: string; // Unique identifier for the review
+  user: string; // ID of the user who left the review
+  name: string; // Name of the reviewer
+  rating: number; // Rating given in the review
+  comment: string; // Comment or review text
+}
 
 export type IShippingInfo ={
     address: string;

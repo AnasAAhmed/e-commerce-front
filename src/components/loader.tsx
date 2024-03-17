@@ -24,3 +24,91 @@ export const Skeleton = ({ width = "unset", length = 3 }: SkeletonProps) => {
     </div>
   );
 };
+export const ProductLoader = () => {
+  return (<>
+    <div className="productCard-skeleton">
+      <div></div>
+      <p></p>
+      <span className="span"></span>
+      <br />
+    </div>
+    <div className="productCard-skeleton">
+      <div></div>
+      <p></p>
+      <span className="span"></span>
+      <br />
+    </div>
+    <div className="productCard-skeleton">
+      <div></div>
+      <p></p>
+      <span className="span"></span>
+      <br />
+    </div>
+    <div className="productCard-skeleton">
+      <div></div>
+      <p></p>
+      <span className="span"></span>
+      <br />
+    </div>
+  </>)
+}
+export const SearchProductLoader = () => {
+  return (
+  <div className="search-product-list">
+    
+    <div className="productCard-skeleton">
+      <div></div>
+      <p></p>
+      <span className="span"></span>
+      <br />
+    </div>
+    <div className="productCard-skeleton">
+      <div></div>
+      <p></p>
+      <span className="span"></span>
+      <br />
+    </div>
+    <div className="productCard-skeleton">
+      <div></div>
+      <p></p>
+      <span className="span"></span>
+      <br />
+    </div>
+    <div className="productCard-skeleton">
+      <div></div>
+      <p></p>
+      <span className="span"></span>
+      <br />
+    </div>
+    <div className="productCard-skeleton">
+      <div></div>
+      <p></p>
+      <span className="span"></span>
+      <br />
+    </div>
+    <div className="productCard-skeleton">
+      <div></div>
+      <p></p>
+      <span className="span"></span>
+      <br />
+    </div>
+    <div className="productCard-skeleton">
+      <div></div>
+      <p></p>
+      <span className="span"></span>
+      <br />
+    </div>
+    <div className="productCard-skeleton">
+      <div></div>
+      <p></p>
+      <span className="span"></span>
+      <br />
+    </div>
+    <div className="productCard-skeleton">
+      <div></div>
+      <p></p>
+      <span className="span"></span>
+      <br />
+    </div>
+  </div>)
+}

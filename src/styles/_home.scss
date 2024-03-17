@@ -66,16 +66,15 @@
 }
 
 .product-card {
-  width: 18.75rem;
   background-color: #fff;
   text-align: center;
   @include flex(column, flex-start, center, 4px);
   position: relative;
+  border-radius: 10px;
+  border: none;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
-  background-color: white;
-  padding: 0.5rem 0 1rem 0;
-  margin: 1rem 0;
+  margin: 1rem 0.5rem;
 
   &:hover {
     transform: translateY(-10px);
@@ -86,7 +85,8 @@
   img {
     @include square(calc(20.75rem - 3rem));
     max-width: 100%;
-    margin-bottom: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
   }
 
   .span {
@@ -101,10 +101,51 @@
 
 }
 
-@media only screen and (max-width: 480px) {
-  .product-card {
-    padding: 2rem 2rem 0 2rem;
+
+
+.productCard-skeleton {
+  background-color: #d3d3d3;
+  text-align: center;
+  @include flex(column, flex-start, center, 4px);
+  position: relative;
+  border-radius: 10px;
+  border: none;
+  padding-bottom: 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  margin: 1rem 0.5rem;
+  animation: productCard-skeleton-loading 1.5s infinite;
+
+  div {
+    @include square(calc(20.75rem - 3rem));
+    max-width: 100%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    animation: productCard-skeleton-loading 1.5s infinite;
 
   }
 
+  .span {
+    color: rgb(196, 196, 196);
+    font-weight: 700;
+    font-size: 1.1rem;
+    animation: productCard-skeleton-loading 1.5s infinite;
+  }
+
+  
+
+}
+
+@keyframes productCard-skeleton-loading {
+  0% {
+    opacity: 0.6;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.6;
+  }
 }

@@ -23,7 +23,7 @@ const ProductDetails = () => {
     _id: "",
     photo: "",
     category: "",
-    description:"",
+    description: "",
     name: "",
     stock: 0,
     price: 0,
@@ -36,10 +36,11 @@ const ProductDetails = () => {
     dispatch(addToCart(cartItem));
     toast.success("Added to cart");
   };
- useEffect(()=>{
-  window.scrollTo(0, 0)
- },[params.id])
- 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [params.id])
+
+  
   if (isError) return <Navigate to={"/404"} />;
 
   return (
@@ -54,11 +55,7 @@ const ProductDetails = () => {
             </section>
             <article className="sec2">
               <p>{name}</p>
-              <span className="fa fa-star checked"></span>
-              <span className="fa fa-star checked"></span>
-              <span className="fa fa-star checked"></span>
-              <span className="fa fa-star"></span>
-              <span className="fa fa-star"></span><br />
+
               {stock > 0 ? (
                 <>
                   {stock < 5 ? (
@@ -93,3 +90,10 @@ const ProductDetails = () => {
 };
 
 export default ProductDetails
+
+
+// <span className="fa fa-star checked"></span>
+// <span className="fa fa-star checked"></span>
+// <span className="fa fa-star checked"></span>
+// <span className="fa fa-star"></span>
+// <span className="fa fa-star"></span><br />
