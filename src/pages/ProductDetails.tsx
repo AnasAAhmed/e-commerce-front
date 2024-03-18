@@ -47,7 +47,7 @@ const ProductDetails = () => {
     <div className="product-container">
       <main className="product-details">
         {isLoading ? (
-          <Skeleton width="80vw" />
+          <Skeleton length={12} />
         ) : (
           <>
             <section className="sec1">

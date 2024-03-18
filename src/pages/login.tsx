@@ -51,6 +51,7 @@ const Login = () => {
         const error = res.error as FetchBaseQueryError;
         const message = (error.data as MessageResponse).message;
         toast.error(message);
+        toast.error("OR Invlid Email");
         dispatch(userNotExist());
       }
     } catch (error) {

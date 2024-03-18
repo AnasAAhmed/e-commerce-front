@@ -6,7 +6,7 @@ import {
 } from "../redux/api/productAPI";
 import { CustomError } from "../types/api-types";
 import toast from "react-hot-toast";
-import { SearchProductLoader, Skeleton } from "../components/loader";
+import { SearchProductLoader } from "../components/loader";
 import { useParams } from "react-router-dom";
 import { RiFilterFill } from "react-icons/ri";
 
@@ -39,7 +39,7 @@ const Search = () => {
     page,
     price: maxPrice,
   });
-  const load = true
+  
   const isPrevPage = page > 1;
   const isNextPage = searchedData?.totalPage === page;
 

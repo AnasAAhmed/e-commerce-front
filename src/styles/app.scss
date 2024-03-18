@@ -439,6 +439,160 @@ $color3: rgb(0, 104, 136);
   animation: skeleon-loading 1.5s infinite;
 }
 
+
+.productCard-skeleton {
+  background-color: #d3d3d3;
+  text-align: center;
+  @include flex(column, flex-start, center, 4px);
+  position: relative;
+  border-radius: 10px;
+  border: none;
+  padding-bottom: 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  margin: 1rem 0.5rem;
+  animation: productCard-skeleton-loading 1.5s infinite;
+
+  div {
+    @include square(calc(20.75rem - 3rem));
+    max-width: 100%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+
+  }
+
+  .span {
+    color: rgb(196, 196, 196);
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+
+  
+
+}
+.dashboard-skeleton {
+  overflow-y: auto;
+  animation: admin-skeleton-loading 1.5s infinite;
+
+  .bar {
+    height: 4rem;
+    @include flex(row, unset);
+    padding: 0 1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.37);
+
+  }
+
+  .widget-container {
+    @include flex(row, space-between, stretch, 2rem);
+    padding: 2rem 2rem 2rem 0;
+
+    .widget {
+      width: 16rem;
+      height: 8rem;
+      background-color: rgb(221, 221, 221);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.132);
+      padding: 2rem;
+      border-radius: 10px;
+      @include flex(row, space-between, stretch, 0);
+      animation: admin-skeleton-loading 1.5s infinite;
+
+
+      .widget-circle {
+        position: relative;
+        @include square(5rem);
+        border-radius: 50%;
+        flex: none;
+        display: grid;
+        place-items: center;
+        background-color: rgb(224, 224, 224);
+        animation: admin-skeleton-loading 1.5s infinite;
+
+      }
+    }
+  }
+
+  .graph-container {
+    @include flex(row, unset, unset, 2rem);
+    padding: 0 2rem 2rem 0;
+
+    .revenue-chart {
+      width: 100%;
+      padding: 1rem 3rem;
+      background-color: rgb(221, 221, 221);
+
+      animation: admin-skeleton-loading 1.5s infinite;
+    }
+
+    .dashboard-categories {
+      width: 100%;
+      max-width: 16rem;
+      @include flex(column, center, unset, 0);
+      padding-bottom: 2rem;
+      animation: admin-skeleton-loading 1.5s infinite;
+      background-color: rgb(221, 221, 221);
+
+      .category-item {
+        width: 100%;
+        @include flex(row, space-between);
+        padding: 1rem;
+
+      }
+    }
+  }
+
+  .transaction-container {
+    display: flex;
+    gap: 2rem;
+    padding: 0 2rem 2rem 0;
+    height: 30rem;
+    animation: admin-skeleton-loading 1.5s infinite;
+
+    .gender-chart {
+      width: 100%;
+      max-width: 20rem;
+      padding: 1rem;
+      position: relative;
+      background-color: rgb(221, 221, 221);
+
+    }
+
+    .transaction-box {
+      width: 100%;
+      padding: 1rem;
+      overflow-x: auto;
+      animation: admin-skeleton-loading 1.5s infinite;
+      background-color: rgb(221, 221, 221);
+
+    }
+  }
+}
+
+@keyframes admin-skeleton-loading {
+  0% {
+    opacity: 0.6;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.6;
+  }
+}
+@keyframes productCard-skeleton-loading {
+  0% {
+    opacity: 0.6;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.6;
+  }
+}
 @keyframes loading-animation {
   to {
     transform: rotateZ(360deg);

@@ -1,6 +1,6 @@
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
-import { ProductLoader, Skeleton } from "../components/loader";
+import { ProductLoader } from "../components/loader";
 import ProductCard from "../components/product-card";
 import { useLatestProductsQuery } from "../redux/api/productAPI";
 import CatgoryProducts from "../components/CategoryProducts";
@@ -9,7 +9,7 @@ const Home = () => {
   const { data, isLoading, isError } = useLatestProductsQuery("");
 
 
-// const load =true
+
 
 
   if (isError) toast.error("Cannot Fetch the Products");

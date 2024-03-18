@@ -7,10 +7,10 @@ import { Navigate } from "react-router-dom";
 import AdminSidebar from "../../components/admin/AdminSidebar";
 import { BarChart, DoughnutChart } from "../../components/admin/Charts";
 import Table from "../../components/admin/DashboardTable";
-import { Skeleton } from "../../components/loader";
 import { useStatsQuery } from "../../redux/api/dashboardAPI";
 import { RootState } from "../../redux/store";
 import { getLastMonths } from "../../utils/features";
+import { DashboardSkeleton } from "../../components/admin/Loader";
 
 const userImg =
   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJxA5cTf-5dh5Eusm0puHbvAhOrCRPtckzjA&usqp";
@@ -31,7 +31,8 @@ const Dashboard = () => {
       <AdminSidebar />
       <main className="dashboard">
         {isLoading ? (
-          <Skeleton length={20} />
+         <DashboardSkeleton/>
+        // <Skeleton/>
         ) : (
           <>
             <div className="bar">

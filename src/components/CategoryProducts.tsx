@@ -1,7 +1,7 @@
 
 import { useLatestCategoryProductsQuery } from '../redux/api/productAPI'; // Import the hook
 import ProductCard from './product-card';
-import { ProductLoader, Skeleton } from './loader';
+import { ProductLoader } from './loader';
 import { Link } from 'react-router-dom';
 
 
