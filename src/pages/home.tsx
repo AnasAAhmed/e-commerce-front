@@ -5,6 +5,8 @@ import ProductCard from "../components/product-card";
 import { useLatestProductsQuery } from "../redux/api/productAPI";
 import CatgoryProducts from "../components/CategoryProducts";
 
+
+
 const Home = () => {
   const { data, isLoading, isError } = useLatestProductsQuery("");
 
@@ -16,8 +18,9 @@ const Home = () => {
 
   return (
     <div className="home">
-      <section></section>
+      <section>
 
+      </section>
       <h1>
         Latest Products
         <Link to="/search" className="findmore">
@@ -27,7 +30,7 @@ const Home = () => {
 
       <main>
         {isLoading ? (
-          <ProductLoader/>
+          <ProductLoader />
         ) : (
           data?.products.map((i) => (
             <ProductCard

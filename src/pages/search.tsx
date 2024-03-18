@@ -39,7 +39,7 @@ const Search = () => {
     page,
     price: maxPrice,
   });
-  
+
   const isPrevPage = page > 1;
   const isNextPage = searchedData?.totalPage === page;
 
@@ -100,6 +100,7 @@ const Search = () => {
           onChange={(e) => setSearch(e.target.value)}
         />
 
+
         {productLoading ? (
           <SearchProductLoader />
         ) : (
@@ -115,6 +116,7 @@ const Search = () => {
             ))}
           </div>
         )}
+
 
 
         {searchedData && searchedData.totalPage > 1 && (

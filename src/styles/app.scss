@@ -458,7 +458,6 @@ $color3: rgb(0, 104, 136);
     max-width: 100%;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-
   }
 
   .span {
@@ -466,26 +465,21 @@ $color3: rgb(0, 104, 136);
     font-weight: 700;
     font-size: 1.1rem;
   }
-
-  
-
 }
+
 .dashboard-skeleton {
   overflow-y: auto;
   animation: admin-skeleton-loading 1.5s infinite;
-
   .bar {
     height: 4rem;
     @include flex(row, unset);
     padding: 0 1rem;
     border-bottom: 1px solid rgba(0, 0, 0, 0.37);
-
   }
 
   .widget-container {
-    @include flex(row, space-between, stretch, 2rem);
+    @include flex(row, space-betdween, stretch, 2rem);
     padding: 2rem 2rem 2rem 0;
-
     .widget {
       width: 16rem;
       height: 8rem;
@@ -496,7 +490,6 @@ $color3: rgb(0, 104, 136);
       @include flex(row, space-between, stretch, 0);
       animation: admin-skeleton-loading 1.5s infinite;
 
-
       .widget-circle {
         position: relative;
         @include square(5rem);
@@ -506,20 +499,18 @@ $color3: rgb(0, 104, 136);
         place-items: center;
         background-color: rgb(224, 224, 224);
         animation: admin-skeleton-loading 1.5s infinite;
-
       }
     }
   }
 
   .graph-container {
-    @include flex(row, unset, unset, 2rem);
+    @include flex(row, 2rem);
     padding: 0 2rem 2rem 0;
-
     .revenue-chart {
       width: 100%;
       padding: 1rem 3rem;
       background-color: rgb(221, 221, 221);
-
+         height: 42rem;
       animation: admin-skeleton-loading 1.5s infinite;
     }
 
@@ -543,7 +534,7 @@ $color3: rgb(0, 104, 136);
   .transaction-container {
     display: flex;
     gap: 2rem;
-    padding: 0 2rem 2rem 0;
+    // padding: 0 2rem 2rem 0;
     height: 30rem;
     animation: admin-skeleton-loading 1.5s infinite;
 
