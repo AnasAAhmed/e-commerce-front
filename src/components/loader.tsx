@@ -54,61 +54,86 @@ export const ProductLoader = () => {
 }
 export const SearchProductLoader = () => {
   return (
-  <div className="search-product-list">
-    
-    <div className="productCard-skeleton">
-      <div></div>
-      <p></p>
-      <span className="span"></span>
-      <br />
-    </div>
-    <div className="productCard-skeleton">
-      <div></div>
-      <p></p>
-      <span className="span"></span>
-      <br />
-    </div>
-    <div className="productCard-skeleton">
-      <div></div>
-      <p></p>
-      <span className="span"></span>
-      <br />
-    </div>
-    <div className="productCard-skeleton">
-      <div></div>
-      <p></p>
-      <span className="span"></span>
-      <br />
-    </div>
-    <div className="productCard-skeleton">
-      <div></div>
-      <p></p>
-      <span className="span"></span>
-      <br />
-    </div>
-    <div className="productCard-skeleton">
-      <div></div>
-      <p></p>
-      <span className="span"></span>
-      <br />
-    </div>
-    <div className="productCard-skeleton">
-      <div></div>
-      <p></p>
-      <span className="span"></span>
-      <br />
-    </div>
-    <div className="productCard-skeleton">
-      <div></div>
-      <p></p>
-      <span className="span"></span>
-      <br />
-    </div>
-    <div className="productCard-skeleton">
-      <div></div>
-      <p></p>
-      <span className="span"></span>
-      <br />
-    </div>
-  </div>)
+    <div className="search-product-list">
+
+      <div className="productCard-skeleton">
+        <div></div>
+        <p></p>
+        <span className="span"></span>
+        <br />
+      </div>
+      <div className="productCard-skeleton">
+        <div></div>
+        <p></p>
+        <span className="span"></span>
+        <br />
+      </div>
+      <div className="productCard-skeleton">
+        <div></div>
+        <p></p>
+        <span className="span"></span>
+        <br />
+      </div>
+      <div className="productCard-skeleton">
+        <div></div>
+        <p></p>
+        <span className="span"></span>
+        <br />
+      </div>
+      <div className="productCard-skeleton">
+        <div></div>
+        <p></p>
+        <span className="span"></span>
+        <br />
+      </div>
+      <div className="productCard-skeleton">
+        <div></div>
+        <p></p>
+        <span className="span"></span>
+        <br />
+      </div>
+      <div className="productCard-skeleton">
+        <div></div>
+        <p></p>
+        <span className="span"></span>
+        <br />
+      </div>
+      <div className="productCard-skeleton">
+        <div></div>
+        <p></p>
+        <span className="span"></span>
+        <br />
+      </div>
+      <div className="productCard-skeleton">
+        <div></div>
+        <p></p>
+        <span className="span"></span>
+        <br />
+      </div>
+    </div>)
+}
+export const ProductDetailsSkeleton = () => {
+  return (
+    <>
+      <section className="sec1skeleton">
+        <div></div>
+      </section>
+      <article className="sec2skeleton">
+        <p>{''}</p>
+  <span></span>
+        
+        <br />
+        <h3>Description</h3>
+        <p>{''}</p>
+        <br />
+        <h3>{''}</h3>
+        <button
+          className="cart-button"
+         
+        >
+         
+        </button>
+      </article>
+    </>
+  )
 }

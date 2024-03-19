@@ -17,32 +17,34 @@ const Home = () => {
   if (isError) toast.error("Cannot Fetch the Products");
 
   return (
-    <div className="home">
-      <section>
+    <>
+      <div className="home">
+        <section>
 
-      </section>
-      <h1>
-        Latest Products
-        <Link to="/search" className="findmore">
-          More
-        </Link>
-      </h1>
+        </section>
+        <h1>
+          Latest Products
+          <Link to="/search" className="findmore">
+            More
+          </Link>
+        </h1>
 
-      <main>
-        {isLoading ? (
-          <ProductLoader />
-        ) : (
-          data?.products.map((i) => (
-            <ProductCard
-              key={i._id}
-              productId={i._id}
-              name={i.name}
-              price={i.price}
-              photo={i.photo}
-            />
-          ))
-        )}
-      </main>
+        <main>
+          {isLoading ? (
+            <ProductLoader />
+          ) : (
+            data?.products.map((i) => (
+              <ProductCard
+                key={i._id}
+                productId={i._id}
+                name={i.name}
+                price={i.price}
+                photo={i.photo}
+              />
+            ))
+          )}
+        </main>
+      </div>
       <br />
       <CatgoryProducts heading="Latest Laptop's" category="laptop" />
       <br />
@@ -50,7 +52,7 @@ const Home = () => {
       <br />
       <CatgoryProducts heading="Latest Wearables" category="wearables" />
       <br />
-    </div>
+    </>
   );
 };
 

@@ -37,13 +37,14 @@ const ProductCard = ({
 
             <img src={`${server}/${photo}`} alt={name} />
             <p>{name}</p>
-            <span className="span">${price}</span>
+            <span className="span">${price}</span>{"  "}<span className="cutPrice">1000</span>
             <br />
             <span className="fa fa-star checked"></span>
             <span className="fa fa-star checked"></span>
             <span className="fa fa-star checked"></span>
             <span className="fa fa-star"></span>
             <span className="fa fa-star"></span>
+            (2.1)
             <div>
             </div>
           </Link>

@@ -94,7 +94,7 @@ $color3: rgb(0, 104, 136);
   dialog {
     border: 1px solid #ccc;
     border-radius: 5px;
-    padding:5px;
+    padding: 5px;
     width: 100px;
     position: absolute;
     left: calc(100% - 100px);
@@ -155,15 +155,19 @@ $color3: rgb(0, 104, 136);
     p {
       margin-bottom: 20px;
     }
+
     h3 {
       margin: 20px 0;
     }
+
     span {
       margin-bottom: 20px;
     }
-    .checked{
+
+    .checked {
       color: orange;
     }
+
     .cart-button {
       width: 100%;
       padding: 10px 20px;
@@ -181,21 +185,115 @@ $color3: rgb(0, 104, 136);
     }
   }
 
+ 
+    .sec1skeleton {
+      flex: 1 1 300px; // Adjust width as needed
+      margin-left: 20px;
+      background-color: #d3d3d3;
+      animation: productCard-skeleton-loading 1.5s infinite;
+
+      div {
+        max-width: 100%;
+        height: auto;
+
+      }
+    }
+
+    .sec2skeleton {
+      flex: 1 1 300px; // Adjust width as needed
+      margin-left: 20px;
+      animation: productCard-skeleton-loading 1.5s infinite;
+
+      p {
+        padding: 15px 15px;
+ background-color: #dddddd;
+        margin-bottom: 20px;
+      }
+
+      h3 {
+        margin: 20px 0;
+      }
+
+      span {
+        padding: 3px 45px;
+        background-color: #dddddd;
+        margin-bottom: 20px;
+      }
+
+      .checked {
+        color: orange;
+      }
+
+      .cart-button {
+        width: 100%;
+        padding: 20px 20px;
+        animation: productCard-skeleton-loading 1.5s infinite;
+        background-color: #cfcfcf;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+          background-color: #ff9900; // Darker shade of Amazon's button color on hover
+        }
+      }
+    }
+  
+
   // Media queries for responsiveness
   @media only screen and (max-width: 768px) {
-    .sec1, .sec2 {
+
+    .sec1 {
       flex: 1 1 100%;
-      margin: 0  30px;
+      margin: 0 30px;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    .sec2 {
+      flex: 1 1 100%;
+      margin: 0 30px;
+    }
+    .sec1skeleton {
+      flex: 1 1 100%;
+      margin: 0 30px;
+
+      div {
+        width: 100%;
+      }
+    }
+
+    .sec2skeleton {
+      flex: 1 1 100%;
+      margin: 0 30px;
     }
   }
 
   @media only screen and (max-width: 480px) {
-    .sec1, .sec2 {
+
+    .sec1,
+    .sec2 {
+      
       flex: 1 1 100%;
-      margin: 0 ;
-      padding: 0  30px;
+      margin: 0;
+      padding: 0 30px;
 
       img {
+        margin-bottom: 20px;
+      }
+    }
+    .sec1skeleton,
+    .sec2skeleton {
+      
+      flex: 1 1 100%;
+      margin: 0;
+      padding: 0 30px;
+
+      div {
         margin-bottom: 20px;
       }
     }
@@ -425,6 +523,8 @@ $color3: rgb(0, 104, 136);
   }
 }
 
+
+
 .skeleton-loader {
   display: flex;
   flex-direction: column;
@@ -454,7 +554,8 @@ $color3: rgb(0, 104, 136);
   animation: productCard-skeleton-loading 1.5s infinite;
 
   div {
-    @include square(calc(20.75rem - 3rem));
+    height: 19rem;
+    width: 17.7rem;
     max-width: 100%;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
@@ -470,6 +571,7 @@ $color3: rgb(0, 104, 136);
 .dashboard-skeleton {
   overflow-y: auto;
   animation: admin-skeleton-loading 1.5s infinite;
+
   .bar {
     height: 4rem;
     @include flex(row, unset);
@@ -480,6 +582,7 @@ $color3: rgb(0, 104, 136);
   .widget-container {
     @include flex(row, space-betdween, stretch, 2rem);
     padding: 2rem 2rem 2rem 0;
+
     .widget {
       width: 16rem;
       height: 8rem;
@@ -506,11 +609,12 @@ $color3: rgb(0, 104, 136);
   .graph-container {
     @include flex(row, 2rem);
     padding: 0 2rem 2rem 0;
+
     .revenue-chart {
       width: 100%;
       padding: 1rem 3rem;
       background-color: rgb(221, 221, 221);
-         height: 42rem;
+      height: 42rem;
       animation: admin-skeleton-loading 1.5s infinite;
     }
 
@@ -571,6 +675,7 @@ $color3: rgb(0, 104, 136);
     opacity: 0.6;
   }
 }
+
 @keyframes productCard-skeleton-loading {
   0% {
     opacity: 0.6;
@@ -584,6 +689,7 @@ $color3: rgb(0, 104, 136);
     opacity: 0.6;
   }
 }
+
 @keyframes loading-animation {
   to {
     transform: rotateZ(360deg);

@@ -1,17 +1,21 @@
-@media screen and (width<= 1200px) {
+@media screen and (width<=1200px) {
   .admin-container {
     overflow: auto;
   }
+
   .dashboard {
+
     .widget-container,
     .graph-container,
     .transaction-container {
       justify-content: center;
       flex-wrap: wrap;
     }
+
     .graph-container {
       padding: 2rem;
     }
+
     .transaction-container {
       padding: 2rem;
       height: unset;
@@ -21,34 +25,40 @@
   .product-management {
     padding: 2rem;
   }
+
+
 }
 
-@media screen and (width<= 1100px) {
+@media screen and (width<=1100px) {
   .admin-container {
     grid-template-columns: 1fr !important;
   }
+
 }
 
-@media screen and (width<= 768px) {
+@media screen and (width<=768px) {
   .cart {
     display: block;
     padding: 2rem;
 
-    > main {
+    >main {
       width: 100%;
     }
-    > aside {
+
+    >aside {
       width: 100%;
     }
   }
-  
+
   .cartitem {
     width: 100%;
-    > img {
+
+    >img {
       width: 3rem;
       height: 3rem;
     }
-    > div {
+
+    >div {
       flex-direction: column;
       gap: 0;
     }
@@ -58,87 +68,127 @@
     display: block;
     padding: 0;
 
-    > aside {
+    >aside {
       @include flex(row, space-between, center);
       flex-wrap: wrap;
       box-shadow: none;
-      > h2 {
+
+      >h2 {
         @include heading;
         font-size: 1.2rem;
       }
     }
-    > main > input {
+
+    >main>input {
       width: 100%;
       border: 1px solid rgba(212, 212, 212, 0.379);
+
     }
-   
+
   }
 }
-@media screen and (max-width:750px){
-  .product-card{
-    img{
-  @include square(calc(16.75rem - 3rem));
+
+
+
+@media screen and (max-width:750px) {
+  .product-card {
+    img {
+      @include square(calc(18.75rem - 3rem));
 
     }
   }
-  .productCard-skeleton{ 
-  height: 17.75rem;
-  width: 13.75rem;
+
+  .productCard-skeleton {
+    height: 19.5rem;
+    width: 15.75rem;
   }
-  
+
 }
-@media screen and (max-width:550px){
-  .product-card{
-    img{
-  @include square(calc(12.75rem - 3rem));
+
+@media screen and (max-width:550px) {
+  .product-card {
+    img {
+      @include square(calc(14.75rem - 3rem));
 
     }
   }
-  .productCard-skeleton{ 
-    height: 13.75rem;
-    width: 9.75rem
-    }
+
+  .productCard-skeleton {
+    height: 14.75rem;
+    width: 11.75rem
+  }
 }
-@media screen and (max-width:450px){
-  .product-card{
-    img{
-  @include square(calc(10.75rem - 3rem));
+
+@media screen and (max-width:420px) {
+  .product-card {
+    img {
+      @include square(calc(13.3rem - 3rem));
 
     }
   }
-  .productCard-skeleton{ 
-    height: 11.75rem;
-    width: 7.75rem;
+
+  .product-search-page {
+    main {
+      .search-product-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
     }
+  }
+
+  .home {
+    main {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .homee {
+    main {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .productCard-skeleton {
+    height: 13.5rem;
+    width: 10.3rem;
+  }
 }
-@media screen and (width<= 600px) {
+
+@media screen and (width<=600px) {
   .product-management {
     flex-direction: column;
     align-items: center;
     padding: 0;
-    > section {
+
+    >section {
       max-width: 400px;
     }
-   
+
   }
- 
+
   .chart-container {
     padding: 0;
-    > h1 {
+
+    >h1 {
       margin: 0;
       text-align: center;
     }
-    > section {
+
+    >section {
       margin: 8rem auto;
     }
   }
 
-  .dashboard-app-container > section {
+  .dashboard-app-container>section {
+
     .coupon-form,
     .stopwatch {
       display: flex;
       flex-direction: column;
     }
+
     .stopwatch {
       align-items: center;
     }

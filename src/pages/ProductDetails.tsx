@@ -1,5 +1,5 @@
 import { Navigate, useParams } from "react-router-dom";
-import { Skeleton } from "../components/loader";
+import { ProductDetailsSkeleton, Skeleton } from "../components/loader";
 import CategoryProduct from "../components/CategoryProducts";
 import { useDispatch } from "react-redux";
 import {
@@ -44,10 +44,11 @@ const ProductDetails = () => {
   if (isError) return <Navigate to={"/404"} />;
 
   return (
-    <div className="product-container">
+    <div>
       <main className="product-details">
-        {isLoading ? (
-          <Skeleton length={12} />
+        {!isLoading ? (
+          // <Skeleton length={12} />
+          <ProductDetailsSkeleton/>
         ) : (
           <>
             <section className="sec1">
