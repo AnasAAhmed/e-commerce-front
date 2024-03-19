@@ -19,6 +19,9 @@ const NewProduct = () => {
   const [photoPrev, setPhotoPrev] = useState<string>("");
   const [photo, setPhoto] = useState<File>();
 
+  const [load, setLoad] = useState<boolean>(false);
+
+
   const [newProduct] = useNewProductMutation();
   const navigate = useNavigate();
 
@@ -40,7 +43,7 @@ const NewProduct = () => {
 
   const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+     setLoad(true);
     if (!name || !price || stock < 0 || !category || !photo || !description) return;
 
     const formData = new FormData();
@@ -54,6 +57,7 @@ const NewProduct = () => {
     formData.set("category", category);
 
     const res = await newProduct({ id: user?._id!, formData });
+    setLoad(false);
 
     responseToast(res, navigate, "/admin/product");
   };
@@ -136,7 +140,7 @@ const NewProduct = () => {
             </div>
 
             {photoPrev && <img src={photoPrev} alt="New Image" />}
-            <button type="submit">Create</button>
+            <button type="submit">{load?"Creating...":"Create"}</button>
           </form>
         </article>
       </main>

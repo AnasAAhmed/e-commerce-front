@@ -18,7 +18,7 @@ const ProductDetails = () => {
 
   const { data, isLoading, isError } = useProductDetailsQuery(params.id!);
 
-  const { _id: productId, price, cutPrice,description, photo, name, stock, category } = data?.product || {
+  const { _id: productId, price, cutPrice, description, photo, name, stock, category } = data?.product || {
     _id: "",
     photo: "",
     category: "",
@@ -37,16 +37,16 @@ const ProductDetails = () => {
   };
 
   useEffect(() => {
-    window.scrollTo(0,0)
+    window.scrollTo(0, 0)
   }, [params.id])
-  
+
   if (isError) return <Navigate to={"/404"} />;
 
   return (
     <div>
       <main className="product-details">
         {isLoading ? (
-          <ProductDetailsSkeleton/>
+          <ProductDetailsSkeleton />
         ) : (
           <>
             <section className="sec1">
@@ -54,7 +54,14 @@ const ProductDetails = () => {
             </section>
             <article className="sec2">
               <p>{name}</p>
+              <span className="fa fa-star checked"></span>
+              <span className="fa fa-star checked"></span>
+              <span className="fa fa-star checked"></span>
+              <span className="fa fa-star "></span>
+              <span className="fa fa-star "></span>{"  "}
+              <span className="">Reviews (33)</span>
 
+              <br />
               {stock > 0 ? (
                 <>
                   {stock < 5 ? (
@@ -69,13 +76,12 @@ const ProductDetails = () => {
               <br />
               <h3>Description</h3>
               <p>{description}</p>
-              <br />
               <h3>${price}</h3>
-              <span className="cutPrice">${cutPrice}</span>
+              <span className="cutPrice">{cutPrice > 0 ? `$${cutPrice}` : ""}</span>
               <button
                 className="cart-button"
                 onClick={() =>
-                  addToCartHandler({ productId, price,cutPrice, description,name, photo, stock, quantity: 1 })
+                  addToCartHandler({ productId, price, cutPrice, description, name, photo, stock, quantity: 1 })
                 }
               >
                 Add to Cart

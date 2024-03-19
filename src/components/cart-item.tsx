@@ -23,8 +23,10 @@ const CartItem = ({
       <img src={`${server}/${photo}`} alt={name} />
       <article>
         <Link to={`/product/${productId}`}>{name}</Link>
-        <span>${price}</span>
-        <span className="cutPrice">{cutPrice >0 ? `$${cutPrice}`:""}</span>
+        <div className="price">
+        <h3>${price}</h3>
+        <p className="cutPrice">{cutPrice >0 ? `$${cutPrice}`:""}</p>
+        </div>
         <p>{description}</p>
       </article>
 

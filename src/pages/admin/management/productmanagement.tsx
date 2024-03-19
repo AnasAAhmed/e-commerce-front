@@ -39,6 +39,8 @@ const Productmanagement = () => {
   const [photoUpdate, setPhotoUpdate] = useState<string>("");
   const [photoFile, setPhotoFile] = useState<File>();
 
+  const [load, setLoad] = useState<boolean>(false);
+
   const [updateProduct] = useUpdateProductMutation();
   const [deleteProduct] = useDeleteProductMutation();
 
@@ -60,6 +62,7 @@ const Productmanagement = () => {
 
   const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoad(true);
 
     const formData = new FormData();
 
@@ -77,6 +80,7 @@ const Productmanagement = () => {
       userId: user?._id!,
       productId: data?.product._id!,
     });
+    setLoad(false);
 
     responseToast(res, navigate, "/admin/product");
   };
@@ -194,7 +198,7 @@ const Productmanagement = () => {
                 </div>
 
                 {photoUpdate && <img src={photoUpdate} alt="New Image" />}
-                <button type="submit">Update</button>
+                <button type="submit">{load?"Updating...":"Update"}</button>
               </form>
             </article>
           </>

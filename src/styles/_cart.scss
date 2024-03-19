@@ -72,7 +72,14 @@
         color: $color3;
       }
     }
-
+.price{
+  display: flex;
+  flex-direction: row;
+  >p{
+    margin-left: 10px;
+    font-size: large;
+  }
+}
     span {
       font-weight: 700;
     }

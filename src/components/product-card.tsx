@@ -6,7 +6,7 @@ type ProductsProps = {
   photo: string;
   name: string;
   price: number;
-  cutPrice?: number;
+  cutPrice: number;
   loading?: boolean;
   // stock: number;
   // handler: (cartItem: CartItem) => string | undefined;
@@ -36,10 +36,9 @@ const ProductCard = ({
       ) : (
         <div className="product-card">
           <Link to={`/product/${productId}`}>
-
             <img src={`${server}/${photo}`} alt={name} />
             <p>{name}</p>
-            <span className="span">${price}</span>{"  "}<span className="cutPrice">{cutPrice}</span>
+            <span className="span">${price}</span>{"  "}<span className="cutPrice">{cutPrice > 0 ? `$${cutPrice}`:""}</span>
             <br />
             <span className="fa fa-star checked"></span> (2.1){" "}
             <span className="">Reviews (33)</span> 
