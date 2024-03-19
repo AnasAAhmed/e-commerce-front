@@ -94,11 +94,13 @@ const TransactionManagement = () => {
                 <ProductCard
                   key={i._id}
                   name={i.name}
+                  description={i.description}
                   photo={`${server}/${i.photo}`}
                   productId={i.productId}
                   _id={i._id}
                   quantity={i.quantity}
                   price={i.price}
+                  cutPrice={i.cutPrice}
                 />
               ))}
             </section>
