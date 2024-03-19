@@ -1,5 +1,5 @@
 import { Navigate, useParams } from "react-router-dom";
-import { ProductDetailsSkeleton, Skeleton } from "../components/loader";
+import { ProductDetailsSkeleton } from "../components/loader";
 import CategoryProduct from "../components/CategoryProducts";
 import { useDispatch } from "react-redux";
 import {
