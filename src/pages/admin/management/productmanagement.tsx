@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import { FaTrash } from "react-icons/fa";
+import { FaArrowLeft, FaTrash } from "react-icons/fa";
 import { useSelector } from "react-redux";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import AdminSidebar from "../../../components/admin/AdminSidebar";
 import { Skeleton } from "../../../components/loader";
 import {
@@ -20,16 +20,18 @@ const Productmanagement = () => {
 
   const { data, isLoading, isError } = useProductDetailsQuery(params.id!);
 
-  const { price, photo, description, name, stock, category } = data?.product || {
+  const { price,cutPrice, photo, description, name, stock, category } = data?.product || {
     photo: "",
     category: "",
     name: "",
     description:"",
     stock: 0,
     price: 0,
+    cutPrice: 0,
   };
 
   const [priceUpdate, setPriceUpdate] = useState<number>(price);
+  const [cutpriceUpdate, setCutPriceUpdate] = useState<number>(cutPrice);
   const [stockUpdate, setStockUpdate] = useState<number>(stock);
   const [nameUpdate, setNameUpdate] = useState<string>(name);
   const [descriptionUpdate, setDescriptionUpdate] = useState<string>(description);
@@ -64,6 +66,7 @@ const Productmanagement = () => {
     if (nameUpdate) formData.set("name", nameUpdate);
     if (descriptionUpdate) formData.set("description", descriptionUpdate);
     if (priceUpdate) formData.set("price", priceUpdate.toString());
+    if (cutpriceUpdate) formData.set("cutPrice", cutpriceUpdate.toString());
     if (stockUpdate !== undefined)
       formData.set("stock", stockUpdate.toString());
     if (photoFile) formData.set("photo", photoFile);
@@ -92,6 +95,7 @@ const Productmanagement = () => {
       setNameUpdate(data.product.name);
       setDescriptionUpdate(data.product.description);
       setPriceUpdate(data.product.price);
+      setCutPriceUpdate(data.product.cutPrice);
       setStockUpdate(data.product.stock);
       setCategoryUpdate(data.product.category);
     }
@@ -103,6 +107,9 @@ const Productmanagement = () => {
     <div className="admin-container">
       <AdminSidebar />
       <main className="product-management">
+      <Link to={"/admin/transaction"}>
+            <FaArrowLeft/>
+            </Link>
         {isLoading ? (
           <Skeleton length={20} />
         ) : (
@@ -150,6 +157,15 @@ const Productmanagement = () => {
                     placeholder="Price"
                     value={priceUpdate}
                     onChange={(e) => setPriceUpdate(Number(e.target.value))}
+                  />
+                </div>
+                <div>
+                  <label>cutPrice</label>
+                  <input
+                    type="number"
+                    placeholder="Price"
+                    value={cutpriceUpdate}
+                    onChange={(e) => setCutPriceUpdate(Number(e.target.value))}
                   />
                 </div>
                 <div>

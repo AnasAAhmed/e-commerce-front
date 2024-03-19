@@ -46,6 +46,7 @@ export type IOrder  ={
 export type Product = {
   name: string;
   price: number;
+  cutPrice: number;
   description:string;
   stock: number;
   category: string;
@@ -66,6 +67,8 @@ export type CartItem = {
   photo: string;
   name: string;
   price: number;
+  cutPrice: number;
+  description: string;
   quantity: number;
   stock: number;
 };

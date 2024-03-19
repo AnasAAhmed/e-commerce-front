@@ -12,14 +12,13 @@ import toast from "react-hot-toast";
 import { useEffect } from "react";
 
 
-
 const ProductDetails = () => {
 
   const params = useParams();
 
   const { data, isLoading, isError } = useProductDetailsQuery(params.id!);
 
-  const { _id: productId, price, description, photo, name, stock, category } = data?.product || {
+  const { _id: productId, price, cutPrice,description, photo, name, stock, category } = data?.product || {
     _id: "",
     photo: "",
     category: "",
@@ -27,8 +26,8 @@ const ProductDetails = () => {
     name: "",
     stock: 0,
     price: 0,
+    cutPrice: 0,
   };
-
   const dispatch = useDispatch();
 
   const addToCartHandler = (cartItem: CartItem) => {
@@ -36,18 +35,17 @@ const ProductDetails = () => {
     dispatch(addToCart(cartItem));
     toast.success("Added to cart");
   };
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [params.id])
 
+  useEffect(() => {
+    window.scrollTo(0,0)
+  }, [params.id])
   
   if (isError) return <Navigate to={"/404"} />;
 
   return (
     <div>
       <main className="product-details">
-        {!isLoading ? (
-          // <Skeleton length={12} />
+        {isLoading ? (
           <ProductDetailsSkeleton/>
         ) : (
           <>
@@ -73,10 +71,11 @@ const ProductDetails = () => {
               <p>{description}</p>
               <br />
               <h3>${price}</h3>
+              <span className="cutPrice">${cutPrice}</span>
               <button
                 className="cart-button"
                 onClick={() =>
-                  addToCartHandler({ productId, price, name, photo, stock, quantity: 1 })
+                  addToCartHandler({ productId, price,cutPrice, description,name, photo, stock, quantity: 1 })
                 }
               >
                 Add to Cart

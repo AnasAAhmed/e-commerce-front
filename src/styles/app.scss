@@ -140,7 +140,8 @@ $color3: rgb(0, 104, 136);
 
   .sec1 {
     flex: 1 1 300px; // Adjust width as needed
-    margin-left: 20px;
+    // margin-left: 20px;
+    margin: 30px;
 
     img {
       max-width: 100%;
@@ -185,69 +186,69 @@ $color3: rgb(0, 104, 136);
     }
   }
 
- 
-    .sec1skeleton {
-      flex: 1 1 300px; // Adjust width as needed
-      margin-left: 20px;
-      background-color: #d3d3d3;
-      animation: productCard-skeleton-loading 1.5s infinite;
 
-      div {
-        max-width: 100%;
-        height: auto;
+  .sec1skeleton {
+    flex: 1 1 300px; // Adjust width as needed
+    margin-left: 20px;
+    background-color: #d3d3d3;
+    animation: productCard-skeleton-loading 1.5s infinite;
 
-      }
+    div {
+      max-width: 100%;
+      height: auto;
+
+    }
+  }
+
+  .sec2skeleton {
+    flex: 1 1 300px; // Adjust width as needed
+    margin-left: 20px;
+    animation: productCard-skeleton-loading 1.5s infinite;
+
+    p {
+      padding: 15px 15px;
+      background-color: #dddddd;
+      margin-bottom: 20px;
     }
 
-    .sec2skeleton {
-      flex: 1 1 300px; // Adjust width as needed
-      margin-left: 20px;
+    h3 {
+      margin: 20px 0;
+    }
+
+    span {
+      padding: 3px 45px;
+      background-color: #dddddd;
+      margin-bottom: 20px;
+    }
+
+    .checked {
+      color: orange;
+    }
+
+    .cart-button {
+      width: 100%;
+      padding: 20px 20px;
       animation: productCard-skeleton-loading 1.5s infinite;
+      background-color: #cfcfcf;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
 
-      p {
-        padding: 15px 15px;
- background-color: #dddddd;
-        margin-bottom: 20px;
-      }
-
-      h3 {
-        margin: 20px 0;
-      }
-
-      span {
-        padding: 3px 45px;
-        background-color: #dddddd;
-        margin-bottom: 20px;
-      }
-
-      .checked {
-        color: orange;
-      }
-
-      .cart-button {
-        width: 100%;
-        padding: 20px 20px;
-        animation: productCard-skeleton-loading 1.5s infinite;
-        background-color: #cfcfcf;
-        border: none;
-        border-radius: 5px;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-
-        &:hover {
-          background-color: #ff9900; // Darker shade of Amazon's button color on hover
-        }
+      &:hover {
+        background-color: #ff9900; // Darker shade of Amazon's button color on hover
       }
     }
-  
+  }
+
 
   // Media queries for responsiveness
   @media only screen and (max-width: 768px) {
 
     .sec1 {
       flex: 1 1 100%;
-      margin: 0 30px;
+      margin: 30px 0;
 
       img {
         width: 100%;
@@ -257,10 +258,13 @@ $color3: rgb(0, 104, 136);
     .sec2 {
       flex: 1 1 100%;
       margin: 0 30px;
+
     }
+
     .sec1skeleton {
       flex: 1 1 100%;
-      margin: 0 30px;
+      margin: 30px;
+      height: 25rem;
 
       div {
         width: 100%;
@@ -277,7 +281,7 @@ $color3: rgb(0, 104, 136);
 
     .sec1,
     .sec2 {
-      
+
       flex: 1 1 100%;
       margin: 0;
       padding: 0 30px;
@@ -286,11 +290,11 @@ $color3: rgb(0, 104, 136);
         margin-bottom: 20px;
       }
     }
+
     .sec1skeleton,
     .sec2skeleton {
-      
+
       flex: 1 1 100%;
-      margin: 0;
       padding: 0 30px;
 
       div {
@@ -298,6 +302,10 @@ $color3: rgb(0, 104, 136);
       }
     }
   }
+}
+
+.cutPrice {
+  text-decoration: line-through;
 }
 
 .admin-container {

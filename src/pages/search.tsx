@@ -112,6 +112,7 @@ const Search = () => {
                 name={i.name}
                 price={i.price}
                 photo={i.photo}
+                cutPrice={i.cutPrice}
               />
             ))}
           </div>

@@ -1,10 +1,11 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AdminSidebar from "../../../components/admin/AdminSidebar";
 import { useNewProductMutation } from "../../../redux/api/productAPI";
 import { RootState } from "../../../redux/store";
 import { responseToast } from "../../../utils/features";
+import { FaArrowLeft } from "react-icons/fa";
 
 const NewProduct = () => {
   const { user } = useSelector((state: RootState) => state.userReducer);
@@ -12,6 +13,7 @@ const NewProduct = () => {
   const [name, setName] = useState<string>("");
   const [category, setCategory] = useState<string>("");
   const [price, setPrice] = useState<number>(1000);
+  const [cutPrice, setCutPrice] = useState<number>(0);
   const [description, setDescription] = useState<string>("");
   const [stock, setStock] = useState<number>(1);
   const [photoPrev, setPhotoPrev] = useState<string>("");
@@ -39,12 +41,13 @@ const NewProduct = () => {
   const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!name || !price || stock < 0 || !category || !photo||!description) return;
+    if (!name || !price || stock < 0 || !category || !photo || !description) return;
 
     const formData = new FormData();
 
     formData.set("name", name);
     formData.set("price", price.toString());
+    formData.set("cutPrice", cutPrice.toString());
     formData.set("description", description);
     formData.set("stock", stock.toString());
     formData.set("photo", photo);
@@ -59,6 +62,9 @@ const NewProduct = () => {
     <div className="admin-container">
       <AdminSidebar />
       <main className="product-management">
+      <Link to={"/admin/transaction"}>
+            <FaArrowLeft/>
+            </Link>
         <article>
           <form onSubmit={submitHandler}>
             <h2>New Product</h2>
@@ -90,6 +96,16 @@ const NewProduct = () => {
                 placeholder="Price"
                 value={price}
                 onChange={(e) => setPrice(Number(e.target.value))}
+              />
+            </div>
+            <div>
+              <label>cutPrice</label>
+              <input
+                required
+                type="number"
+                placeholder="Price"
+                value={cutPrice}
+                onChange={(e) => setCutPrice(Number(e.target.value))}
               />
             </div>
             <div>

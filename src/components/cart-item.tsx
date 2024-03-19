@@ -16,7 +16,7 @@ const CartItem = ({
   decrementHandler,
   removeHandler,
 }: CartItemProps) => {
-  const { photo, productId, name, price, quantity } = cartItem;
+  const { photo, productId,description,cutPrice, name, price, quantity } = cartItem;
 
   return (
     <div className="cart-item">
@@ -24,6 +24,8 @@ const CartItem = ({
       <article>
         <Link to={`/product/${productId}`}>{name}</Link>
         <span>${price}</span>
+        <span className="cutPrice">{cutPrice >0 ? `$${cutPrice}`:""}</span>
+        <p>{description}</p>
       </article>
 
       <div>
