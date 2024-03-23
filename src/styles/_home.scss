@@ -77,9 +77,23 @@
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
   }
-.cutPrice{
-  text-decoration: line-through;
-}
+
+  .truncate-name {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    /* Ensures ellipsis works properly */
+    margin: 0.5rem 0;
+    /* Adjust margin as needed */
+  }
+
+  .cutPrice {
+    text-decoration: line-through;
+    font-size: small;
+    color: rgb(39, 39, 39);
+  }
+
   .span {
     color: rgb(231, 80, 80);
     font-weight: 700;

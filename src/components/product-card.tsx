@@ -36,9 +36,9 @@ const ProductCard = ({
       ) : (
         <div className="product-card">
           <Link to={`/product/${productId}`}>
-            <img src={`${server}/${photo}`} alt={name} />
-            <p>{name}</p>
-            <span className="span">${price}</span>{"  "}<span className="cutPrice">{cutPrice > 0 ? `$${cutPrice}`:""}</span>
+            <img src={`${server}/${photo}`} alt={"Product"} />
+            <p className="truncate-name">{name}</p>
+            <span className="span">${price}{" "}<span className="cutPrice">{cutPrice > 0 ? `$${cutPrice}`:""}</span></span>
             <br />
             <span className="fa fa-star checked"></span> (2.1){" "}
             <span className="">Reviews (33)</span> 
