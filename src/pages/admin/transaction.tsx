@@ -9,9 +9,11 @@ import { Skeleton } from "../../components/loader";
 import { useAllOrdersQuery } from "../../redux/api/orderAPI";
 import { RootState } from "../../redux/store";
 import { CustomError } from "../../types/api-types";
+import CopyText from "../../utils/function";
 
 interface DataType {
   user: string;
+  userId: ReactElement;
   amount: number;
   discount: number;
   quantity: number;
@@ -21,8 +23,12 @@ interface DataType {
 
 const columns: Column<DataType>[] = [
   {
-    Header: "Avatar",
+    Header: "User",
     accessor: "user",
+  },
+  {
+    Header: "userId",
+    accessor: "userId",
   },
   {
     Header: "Amount",
@@ -63,6 +69,7 @@ const Transaction = () => {
       setRows(
         data.orders.map((i) => ({
           user: i.user.name,
+          userId: <div className="truncate"><CopyText text={i.user._id}/></div>,
           amount: i.total,
           discount: i.discount,
           quantity: i.orderItems.length,
@@ -79,7 +86,7 @@ const Transaction = () => {
               {i.status}
             </span>
           ),
-          action: <Link to={`/admin/transaction/${i._id}`}>Manage</Link>,
+          action: <Link className="text-md font-medium py-1 px-2 rounded-md hover:bg-black hover:text-white" to={`/admin/transaction/${i._id}`}>Manage</Link>,
         }))
       );
   }, [data]);

@@ -2,6 +2,7 @@ export type User = {
   name: string;
   email: string;
   photo: string;
+  phone: number;
   gender: string;
   role: string;
   dob: string;
@@ -50,6 +51,10 @@ export type Product = {
   description:string;
   stock: number;
   category: string;
+  collections: string;
+  size: string[];
+  style: string[];
+  color: string[];
   photo: string;
   _id: string;
 };
@@ -68,9 +73,11 @@ export type CartItem = {
   name: string;
   price: number;
   cutPrice: number;
-  description: string;
   quantity: number;
   stock: number;
+  size?: string;
+  color?: string;
+  style?: string;
 };
 export type OrderItem = Omit<CartItem, "stock"> & { _id: string };
 
@@ -86,6 +93,8 @@ export type Order = {
   user: {
     name: string;
     _id: string;
+   email: string;
+    phone: number;
   };
   _id: string;
 };

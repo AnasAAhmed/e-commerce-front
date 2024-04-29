@@ -1,6 +1,6 @@
 import { ReactElement, useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { FaTrash } from "react-icons/fa";
+import { FaTrash, FaEdit } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { Column } from "react-table";
 import AdminSidebar from "../../components/admin/AdminSidebar";
@@ -13,6 +13,7 @@ import {
 import { RootState } from "../../redux/store";
 import { CustomError } from "../../types/api-types";
 import { responseToast } from "../../utils/features";
+import UserModal from "../../components/UserModal";
 
 interface DataType {
   avatar: ReactElement;
@@ -21,6 +22,7 @@ interface DataType {
   gender: string;
   role: string;
   action: ReactElement;
+  details: ReactElement;
 }
 
 const columns: Column<DataType>[] = [
@@ -48,26 +50,44 @@ const columns: Column<DataType>[] = [
     Header: "Action",
     accessor: "action",
   },
+  {
+    Header: "Details",
+    accessor: "details",
+  },
 ];
 
 const Customers = () => {
   const { user } = useSelector((state: RootState) => state.userReducer);
-
-  const { isLoading, data, isError, error } = useAllUsersQuery(user?._id!);
+  
+  const [searchId, setSearchId] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  
+  const { isLoading, data, isError, error } = useAllUsersQuery({
+    id:user?._id,
+    email:email,
+    searchId:searchId
+  });
 
   const [rows, setRows] = useState<DataType[]>([]);
 
   const [deleteUser] = useDeleteUserMutation();
 
   const deleteHandler = async (userId: string) => {
-    const res = await deleteUser({ userId, adminUserId: user?._id! });
-    responseToast(res, null, "");
+    const confirmed = window.confirm("Are you sure you want to delete this user completely?");
+    if (confirmed) {
+      const res = await deleteUser({ userId, adminUserId: user?._id! });
+      responseToast(res, null, "");
+    } else {
+      // User cancelled the deletion, do nothing
+    }
   };
 
   if (isError) {
     const err = error as CustomError;
     toast.error(err.data.message);
   }
+
+
 
   useEffect(() => {
     if (data)
@@ -87,10 +107,14 @@ const Customers = () => {
           gender: i.gender,
           role: i.role,
           action: (
+
             <button onClick={() => deleteHandler(i._id)}>
               <FaTrash />
             </button>
           ),
+          details: (
+            <UserModal  user={i} heading={<FaEdit />} />
+          )
         }))
       );
   }, [data]);
@@ -106,9 +130,22 @@ const Customers = () => {
   return (
     <div className="admin-container">
       <AdminSidebar />
-      <main>{isLoading ? <Skeleton length={20} /> : Table}</main>
+      
+      <main>
+        <input type="text"
+        onChange={(e)=>setSearchId(e.target.value)}
+        placeholder="Search By id"
+        />
+        <input type="email"
+        onChange={(e)=>setEmail(e.target.value)}
+        placeholder="Search By email"
+        />
+        {isLoading ? <Skeleton length={20} /> : Table}</main>
     </div>
   );
 };
 
 export default Customers;
+
+
+

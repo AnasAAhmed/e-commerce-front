@@ -1,19 +1,13 @@
-// import { FaTrash } from "react-icons/fa";
-// import { useSelector } from "react-redux";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { Skeleton } from "../components/loader";
 import {
-    //   useDeleteOrderMutation,
     useOrderDetailsQuery,
-    //   useUpdateOrderMutation,
 } from "../redux/api/orderAPI";
 import {
-    // RootState,
     server
 } from "../redux/store";
 import { Order, OrderItem } from "../types/types";
 import { FaArrowLeft } from "react-icons/fa";
-// import { responseToast } from "../utils/features";
 
 const defaultData: Order = {
     shippingInfo: {
@@ -30,22 +24,22 @@ const defaultData: Order = {
     tax: 0,
     total: 0,
     orderItems: [],
-    user: { name: "", _id: "" },
+    user: { name: "", _id: "",email:"",phone:0 },
     _id: "",
 };
 
 const OrderDetails = () => {
-    //   const { user } = useSelector((state: RootState) => state.userReducer);
 
     const params = useParams();
     //   const navigate = useNavigate();
-
     const { isLoading, data, isError } = useOrderDetailsQuery(params.id!);
 
+    
+    
     const {
         shippingInfo: { address, city, state, country, pinCode },
         orderItems,
-        user: { name },
+        user: {name ,email,phone},
         status,
         tax,
         subtotal,
@@ -53,32 +47,12 @@ const OrderDetails = () => {
         discount,
         shippingCharges,
     } = data?.order || defaultData;
-
-    //   const [updateOrder] = useUpdateOrderMutation();
-    //   const [deleteOrder] = useDeleteOrderMutation();
-
-    //   const updateHandler = async () => {
-    //     const res = await updateOrder({
-    //       userId: user?._id!,
-    //       orderId: data?.order._id!,
-    //     });
-    //     responseToast(res, navigate, "/admin/transaction");
-    //   };
-
-    //   const deleteHandler = async () => {
-    //     const res = await deleteOrder({
-    //       userId: user?._id!,
-    //       orderId: data?.order._id!,
-    //     });
-    //     responseToast(res, navigate, "/admin/transaction");
-    //   };
-
     if (isError) return <Navigate to={"/404"} />;
 
     return (
         <div className="user-container ">
             <Link to={"/orders"}>
-            <FaArrowLeft/>
+                <FaArrowLeft />
             </Link>
 
             <main className="product-management ">
@@ -94,27 +68,28 @@ const OrderDetails = () => {
                             <h2>Order Items</h2>
 
                             {orderItems.map((i) => (
-                                <ProductCard
+                                <OrderProductCard
                                     key={i._id}
                                     name={i.name}
-                                    description={i.description}
                                     photo={`${server}/${i.photo}`}
                                     productId={i.productId}
                                     _id={i._id}
                                     quantity={i.quantity}
                                     price={i.price}
                                     cutPrice={i.cutPrice}
+                                    size={i.size}
+                                    style={i.style}
+                                    color={i.color}
                                 />
                             ))}
                         </section>
 
                         <article className="shipping-info-card">
-                            {/* <button className="product-delete-btn" onClick={deleteHandler}>
-                <FaTrash />
-              </button> */}
                             <h1>Order Info</h1>
                             <h5>User Info</h5>
                             <p>Name: {name}</p>
+                            <p>Email: {email}</p>
+                            <p>Phone: {phone}</p>
                             <p>
                                 Address:{" "}
                                 {`${address}, ${city}, ${state}, ${country} ${pinCode}`}
@@ -150,19 +125,27 @@ const OrderDetails = () => {
     );
 };
 
-const ProductCard = ({
+const OrderProductCard = ({
     name,
     photo,
     price,
     quantity,
     productId,
+    color,
+    size,
+    style,
 }: OrderItem) => (
     <div className="transaction-product-card">
         <img src={photo} alt={name} />
-        <Link to={`/product/${productId}`}>{name}</Link>
+        <Link to={`/product/${productId}`}className="line-clamp-2 w-50" >{name}</Link>
         <span>
-           ${price} X {quantity} =${price * quantity}
+            ${price} X {quantity} =${price * quantity}
         </span>
+        {size !== '' && <span className="text-gray-500 ">Size: {size}</span>}
+
+          {color !== '' && <span className="text-gray-500 "><span className="rounded-full px-[11px] py-[0.5px] " style={{ backgroundColor: color }}></span></span>}
+
+          {style !== '' && <span className="text-gray-500 ">Style: {style}</span>}
     </div>
 );
 

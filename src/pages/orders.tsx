@@ -78,9 +78,7 @@ const Orders = () => {
               {i.status}
             </span>
           ),
-            action: <Link to={`/order/${i._id}`}>Details</Link>,
-            // action: <Link to={`/admin/transaction/${i._id}`}>Manage</Link>,
-          
+            action: <Link className="text-md font-medium py-1 px-2 rounded-md hover:bg-black hover:text-white" to={`/order/${i._id}`}>Details</Link>,     
         }))
       );
   }
@@ -90,12 +88,11 @@ const Orders = () => {
     column,
     rows,
     "dashboard-product-box",
-    "Orders",
+    "My Orders",
     rows.length > 6
   )();
   return (
     <div className="container">
-      <h1>My Orders</h1>
       {isLoading ? <Skeleton length={20} /> : Table}
     </div>
   );

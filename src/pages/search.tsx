@@ -7,13 +7,12 @@ import {
 import { CustomError } from "../types/api-types";
 import toast from "react-hot-toast";
 import { SearchProductLoader } from "../components/loader";
-import { useParams } from "react-router-dom";
+
 import { RiFilterFill } from "react-icons/ri";
+import { useParams } from "react-router-dom";
 
 const Search = () => {
-
-
-  const params = useParams();
+  const params = useParams()
   const {
     data: categoriesResponse,
     isLoading: loadingCategories,
@@ -51,33 +50,42 @@ const Search = () => {
     const err = productError as CustomError;
     toast.error(err.data.message);
   }
+
   return (
-    <div className="product-search-page">
-      <aside>
-        <h2>Filters <RiFilterFill /></h2>
-        <div>
-          <h4>Sort</h4>
-          <select value={sort} onChange={(e) => setSort(e.target.value)}>
+    <div className="flex flex-col sm:flex-row">
+      <aside className="flex-1 p-4 min-w-[20vh] md:max-w-[40vh]">
+        <h2 className="text-lg font-semibold mb-4">
+          Filters <RiFilterFill className="inline-block" />
+        </h2>
+        <div className="mb-4">
+          <h4 className="text-base mb-2">Sort</h4>
+          <select
+            className="w-full p-2 border border-gray-300 rounded"
+            value={sort}
+            onChange={(e) => setSort(e.target.value)}
+          >
             <option value="">None</option>
             <option value="asc">Price (Low to High)</option>
             <option value="dsc">Price (High to Low)</option>
           </select>
         </div>
 
-        <div>
-          <h4>Max Price: {maxPrice || ""}</h4>
+        <div className="mb-4">
+          <h4 className="text-base mb-2">Max Price: {maxPrice || ""}</h4>
           <input
             type="range"
             min={1}
             max={100000}
             value={maxPrice}
             onChange={(e) => setMaxPrice(Number(e.target.value))}
+            className="w-full"
           />
         </div>
 
         <div>
-          <h4>Category</h4>
+          <h4 className="text-base mb-2">Category</h4>
           <select
+            className="w-full p-2 border border-gray-300 rounded"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
           >
@@ -91,20 +99,22 @@ const Search = () => {
           </select>
         </div>
       </aside>
-      <main>
-        <h1>Products</h1>
+      <main className="flex-2 p-4">
+        <h1 className="text-2xl font-semibold mb-4">Products</h1>
         <input
           type="text"
           placeholder="Search by name..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
+          className="w-full md:w-11/12 p-4 border border-gray-300 rounded-lg mb-4"
         />
 
-
         {productLoading ? (
-          <SearchProductLoader />
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <SearchProductLoader />
+          </div>
         ) : (
-          <div className="search-product-list">
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {searchedData?.products.map((i) => (
               <ProductCard
                 key={i._id}
@@ -118,22 +128,22 @@ const Search = () => {
           </div>
         )}
 
-
-
         {searchedData && searchedData.totalPage > 1 && (
-          <article>
+          <article className="flex justify-center items-center mt-4">
             <button
               disabled={!isPrevPage}
               onClick={() => setPage((prev) => prev - 1)}
+              className={`px-4 py-2 ${isPrevPage?'bg-violet-500':'bg-gray-400'} text-white rounded mr-2`}
             >
               Prev
             </button>
-            <span>
+            <span className="text-base">
               {page} of {searchedData.totalPage}
             </span>
             <button
               disabled={isNextPage}
               onClick={() => setPage((prev) => prev + 1)}
+              className={`px-4 py-2 ${!isNextPage?'bg-violet-500':'bg-gray-400'} text-white rounded ml-2`}
             >
               Next
             </button>
@@ -145,3 +155,4 @@ const Search = () => {
 };
 
 export default Search;
+

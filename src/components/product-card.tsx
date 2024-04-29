@@ -7,9 +7,7 @@ type ProductsProps = {
   name: string;
   price: number;
   cutPrice: number;
-  loading?: boolean;
-  // stock: number;
-  // handler: (cartItem: CartItem) => string | undefined;
+  handleRelatedProductClick?:any;
 };
 
 const ProductCard = ({
@@ -18,36 +16,19 @@ const ProductCard = ({
   cutPrice,
   name,
   photo,
-  loading,
-  // stock,
-  // handler,
+  handleRelatedProductClick
 }: ProductsProps) => {
   return (
-    <>
-      {loading ? (
-        <>
-          <div className="productCard-skeleton">
-            <div></div>
-            <p></p>
-            <span className="span"></span>
-            <br />
-          </div>
-        </>
-      ) : (
-        <div className="product-card">
-          <Link to={`/product/${productId}`}>
-            <img src={`${server}/${photo}`} alt={"Product"} />
-            <p className="truncate-name">{name}</p>
-            <span className="span">${price}{" "}<span className="cutPrice">{cutPrice > 0 ? `$${cutPrice}`:""}</span></span>
-            <br />
-            <span className="fa fa-star checked"></span> (2.1){" "}
-            <span className="">Reviews (33)</span> 
-            <div>
-            </div>
-          </Link>
-        </div>
-      )}
-    </>
+    <div className="flex flex-col items-center justify-center text-center max-w-[35vh] bg-white shadow-md rounded-lg transition-transform object-cover duration-300 transform hover:-translate-y-2 hover:bg-gray-200 my-4 mx-[1px]" onClick={handleRelatedProductClick}>
+      <Link to={`/product/${productId}`}>
+        <img src={`${server}/${photo}`} alt={name} className="w-[35vh] h-64 rounded-t-lg" />
+        <p className="truncate-name font-semibold">{name}</p>
+        <span className="span">${price}{" "}<span className="cutPrice">{cutPrice > 0 ? `$${cutPrice}` : ""}</span></span>
+        <br />
+        <span className="fa fa-star text-orange-500 text-clip "></span> (2.1){" "}
+        <span className="">Reviews (33)</span>
+      </Link>
+    </div>
   );
 };
 

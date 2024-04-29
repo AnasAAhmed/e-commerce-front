@@ -26,6 +26,10 @@ export const productAPI = createApi({
       query: ({ category }) => `latest/${category}`, // Fetch latest products by category
       providesTags: ["product"],
     }),
+    latestCollectionsProducts: builder.query<AllProductsResponse, { collections?: string }>({
+      query: ({ collections }) => `collection/${collections}`, // Fetch latest products by collection
+      providesTags: ["product"],
+    }),
     allProducts: builder.query<AllProductsResponse, string>({
       query: (id) => `admin-products?id=${id}`,
       providesTags: ["product"],
@@ -87,6 +91,7 @@ export const productAPI = createApi({
 export const {
   useLatestProductsQuery,
   useLatestCategoryProductsQuery,
+  useLatestCollectionsProductsQuery,
   useAllProductsQuery,
   useCategoriesQuery,
   useSearchProductsQuery,

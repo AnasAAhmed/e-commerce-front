@@ -28,6 +28,11 @@ export type AllUsersResponse = {
   success: boolean;
   users: User[];
 };
+export type AllUsersRequest = {
+  email?:string;
+  id?:string;
+  searchId?:string;
+};
 
 export type UserResponse = {
   success: boolean;
@@ -38,6 +43,7 @@ export type AllProductsResponse = {
   success: boolean;
   products: Product[];
 };
+
 export type CategoriesResponse = {
   success: boolean;
   categories: string[];

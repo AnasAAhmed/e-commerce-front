@@ -8,12 +8,13 @@ import { loadStripe } from "@stripe/stripe-js";
 import { FormEvent, useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { useNewOrderMutation } from "../redux/api/orderAPI";
 import { resetCart } from "../redux/reducer/cartReducer";
 import { RootState } from "../redux/store";
 import { NewOrderRequest } from "../types/api-types";
 import { responseToast } from "../utils/features";
+import { FaArrowLeft } from "react-icons/fa";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_KEY);
 
@@ -79,7 +80,7 @@ const CheckOutForm = () => {
       <form onSubmit={submitHandler}>
         <PaymentElement />
         <button type="submit" disabled={isProcessing}>
-          {isProcessing ? "Processing..." : "Pay"}
+          {isProcessing ? "Processing..." : "Pay"}{"  "}${total}
         </button>
       </form>
     </div>
@@ -100,6 +101,9 @@ const Checkout = () => {
       }}
       stripe={stripePromise}
     >
+      <Link className="back-btn" to={"/shipping"}>
+        <FaArrowLeft />
+      </Link>
       <CheckOutForm />
     </Elements>
   );

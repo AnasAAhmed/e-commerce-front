@@ -1,3 +1,6 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -36,11 +39,8 @@ $color3: rgb(0, 104, 136);
 }
 
 @import "admin-styles/mixin";
-@import "home";
 @import "cart";
 @import "shipping";
-@import "login";
-@import "search";
 @import "admin-styles/dashboard";
 @import "admin-styles/products";
 @import "admin-styles/chart";
@@ -64,48 +64,11 @@ $color3: rgb(0, 104, 136);
   @include heading;
   margin: 1.5rem 0;
   text-align: center;
+  font-size: 1.8rem;
+  font-weight: 400;
 }
 
-.header {
-  @include flex(row, flex-end, stretch, 1.2rem);
-  padding: 1rem;
 
-  a {
-    color: $color2;
-    letter-spacing: 2px;
-    font-size: 1.2rem;
-
-    &:hover {
-      color: $color3;
-    }
-  }
-
-  button {
-    border: none;
-    font-size: 1.2rem;
-    cursor: pointer;
-    background-color: transparent;
-
-    &:hover {
-      color: $color3;
-    }
-  }
-
-  dialog {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 5px;
-    width: 100px;
-    position: absolute;
-    left: calc(100% - 100px);
-    top: 5%;
-    z-index: 10;
-
-    >div {
-      @include flex(column, flex-start, center, 0.25rem);
-    }
-  }
-}
 
 .not-found {
   height: 80vh;
@@ -114,6 +77,20 @@ $color3: rgb(0, 104, 136);
   >svg {
     font-size: 5rem;
   }
+}
+@keyframes slideIn {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-modal {
+  animation: slideIn 0.3s ease-out forwards;
 }
 
 .checkout-container {
@@ -132,181 +109,29 @@ $color3: rgb(0, 104, 136);
   }
 }
 
-.product-details {
-  margin-top: 2rem;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+.back-btn {
+  @include square(2.5rem);
+  background-color: $color2;
+  color: $color1;
+  @include flex;
+  position: fixed;
+  top: 2rem;
+  left: 2rem;
+  border-radius: 100%;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  @include baseShadow;
 
-  .sec1 {
-    flex: 1 1 300px; // Adjust width as needed
-    // margin-left: 20px;
-    margin: 30px;
-
-    img {
-      max-width: 100%;
-      height: auto;
-    }
+  svg {
+    transition: all 0.3s;
   }
 
-  .sec2 {
-    flex: 1 1 300px; // Adjust width as needed
-    margin-left: 20px;
-
-    p {
-      margin-bottom: 20px;
-    }
-
-    h3 {
-      margin: 20px 0;
-    }
-
-    span {
-      margin-bottom: 20px;
-    }
-
-    .checked {
-      color: orange;
-    }
-
-    .cart-button {
-      width: 100%;
-      padding: 10px 20px;
-      background-color: #ffa41b; // Amazon's Add to Cart button color
-      border: none;
-      border-radius: 5px;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-
-      &:hover {
-        background-color: #ff9900; // Darker shade of Amazon's button color on hover
-      }
-    }
-  }
-
-
-  .sec1skeleton {
-    flex: 1 1 300px; // Adjust width as needed
-    margin-left: 20px;
-    background-color: #d3d3d3;
-    animation: productCard-skeleton-loading 1.5s infinite;
-
-    div {
-      max-width: 100%;
-      height: auto;
-
-    }
-  }
-
-  .sec2skeleton {
-    flex: 1 1 300px; // Adjust width as needed
-    margin-left: 20px;
-    animation: productCard-skeleton-loading 1.5s infinite;
-
-    p {
-      padding: 15px 15px;
-      background-color: #dddddd;
-      margin-bottom: 20px;
-    }
-
-    h3 {
-      margin: 20px 0;
-    }
-
-    span {
-      padding: 3px 45px;
-      background-color: #dddddd;
-      margin-bottom: 20px;
-    }
-
-    .checked {
-      color: orange;
-    }
-
-    .cart-button {
-      width: 100%;
-      padding: 20px 20px;
-      animation: productCard-skeleton-loading 1.5s infinite;
-      background-color: #cfcfcf;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-
-      &:hover {
-        background-color: #ff9900; // Darker shade of Amazon's button color on hover
-      }
-    }
-  }
-
-
-  // Media queries for responsiveness
-  @media only screen and (max-width: 768px) {
-
-    .sec1 {
-      flex: 1 1 100%;
-      margin: 0 0 30px 0;
-
-      img {
-        width: 100%;
-      }
-    }
-
-    .sec2 {
-      flex: 1 1 100%;
-      margin: 30px;
-
-    }
-
-    .sec1skeleton {
-      flex: 1 1 100%;
-      margin: 0 30px;
-      height: 10rem;
-
-      div {
-        width: 100%;
-      }
-    }
-
-    .sec2skeleton {
-      flex: 1 1 100%;
-      margin: 0 30px;
-    }
-  }
-
-  @media only screen and (max-width: 480px) {
-
-    .sec1,
-    .sec2 {
-
-      flex: 1 1 100%;
-      margin: 0;
-      padding: 0 30px;
-
-      img {
-        margin-bottom: 20px;
-      }
-    }
-
-    .sec1skeleton,
-    .sec2skeleton {
-
-      flex: 1 1 100%;
-      // padding: 0 30px;
-
-      div {
-        margin-bottom: 20px;
-      }
-    }
+  &:hover svg {
+    translate: -0.25rem;
   }
 }
 
-.cutPrice {
-  text-decoration: line-through;
-}
 
 .admin-container {
   @include grid(1fr 4fr, 2rem);
@@ -328,8 +153,9 @@ $color3: rgb(0, 104, 136);
       margin: 2rem 1rem;
 
       >h5 {
-        @include heading(2px);
+        @include heading(3px);
         opacity: 0.8;
+        font-weight: 500;
         margin: 1rem 0;
       }
 
@@ -428,14 +254,6 @@ $color3: rgb(0, 104, 136);
         width: 4rem;
         height: 4rem;
         object-fit: contain;
-        border-radius: 10px;
-      }
-
-      a {
-        text-decoration: none;
-        background-color: rgba(44, 104, 255, 0.455);
-        color: rgba(44, 104, 255);
-        padding: 0.25rem 0.5rem;
         border-radius: 10px;
       }
 
@@ -593,7 +411,7 @@ $color3: rgb(0, 104, 136);
 
     .widget {
       width: 16rem;
-      height: 11rem;
+      height: 9rem;
       background-color: rgb(221, 221, 221);
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.132);
       padding: 2rem;
@@ -671,20 +489,6 @@ $color3: rgb(0, 104, 136);
 }
 
 @keyframes admin-skeleton-loading {
-  0% {
-    opacity: 0.6;
-  }
-
-  50% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0.6;
-  }
-}
-
-@keyframes productCard-skeleton-loading {
   0% {
     opacity: 0.6;
   }

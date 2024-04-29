@@ -2,76 +2,93 @@ import { Link } from "react-router-dom";
 import {
   FaSearch,
   FaShoppingBag,
-  FaSignInAlt,
-  FaUser,
-  FaSignOutAlt,
 } from "react-icons/fa";
-import { useState } from "react";
 import { User } from "../types/types";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
 import toast from "react-hot-toast";
-
+import UserModal from "./UserModal";
+import { useState } from "react";
+import { RiMenuLine } from "react-icons/ri";
 interface PropsType {
   user?: User | null;
+  cartItemsLength: number
 }
 
-const Header = ({ user }: PropsType) => {
+const Header = ({ user, cartItemsLength }: PropsType) => {
+
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const logoutHandler = async () => {
     try {
       await signOut(auth);
       toast.success("Sign Out Successfully");
-      setIsOpen(false);
     } catch (error) {
       toast.error("Sign Out Fail");
     }
   };
 
   return (
-    <nav className="header">
+    <nav className="header flex items-center justify-between px-4 py-2 bg-white">
+      <Link to={"/"} onClick={() => setIsOpen(false)} className="text-gray-800 hover:text-gray-400 font-bold">LOGO.</Link>
 
-      <Link onClick={() => setIsOpen(false)} to={"/"}>
-        HOME
-      </Link>
-      <Link onClick={() => setIsOpen(false)} to={"/search"}>
-        <FaSearch />
-      </Link>
-      <Link onClick={() => setIsOpen(false)} to={"/cart"}>
-        <FaShoppingBag />
-      </Link>
-
-      {user?._id ? (
-        <>
-          <button
-            onClick={() => setIsOpen((prev) => !prev)}
-          >
-            <FaUser />
-          </button>
-          <dialog open={isOpen}>
-            <div>
+        {/* Mobile Nav */}
+      <div className="flex items-center ">
+        {user?._id && (
+          <>
+            <div className="hidden sm:flex mx-3">
               {user.role === "admin" && (
-                <Link onClick={() => setIsOpen(false)} to="/admin/dashboard">
-                  Admin
+                <Link className=" hover:text-gray-500 mr-2 font-semibold" onClick={() => setIsOpen(false)} to="/admin/dashboard">Dashboard
                 </Link>
               )}
-
-              <Link onClick={() => setIsOpen(false)} to="/orders">
-                Orders
+              <Link className=" hover:text-gray-500 mx-2 font-semibold" onClick={() => setIsOpen(false)} to="/orders">
+                My Orders
               </Link>
-              <button onClick={logoutHandler}>
-                <FaSignOutAlt />
-              </button>
-            </div>
-          </dialog>
-        </>
-      ) : (
-        <Link to={"/login"}>
-          <FaSignInAlt />
+            </div>      
+          </>
+        )}
+
+        <Link to={"/search"} className="px-3 py-1 items-center rounded-lg mr-2  hover:text-gray-500" onClick={() => setIsOpen(false)} >
+          <FaSearch size={"1.2rem"} />
         </Link>
-      )}
+
+        <Link to={"/cart"} onClick={() => setIsOpen(false)} className="mr-4 hover:text-gray-500 relative">
+          <FaShoppingBag size={"1.3rem"} className=" hover:text-gray-500" />
+          <span className="absolute -top-1 -right-2 bg-red-500 text-white rounded-full px-1 text-xs">{cartItemsLength > 0 ? cartItemsLength : ""}</span>
+        </Link>
+
+        {/* Desktop Nav */}   
+        {user?._id && (
+          <div className="flex sm:hidden relative">
+            <button
+              onClick={() => setIsOpen((prev) => !prev)}
+              className="mx-3 "
+            >
+              <RiMenuLine size={"1.5rem"} />
+            </button>
+            <dialog className="top-8 py-2 px-4 rounded-lg bg-gray-100" open={isOpen} style={{ left: 'calc(100% - 100px)' }}>
+              <div className="flex flex-col">
+                {user.role === "admin" && (
+                  <Link className=" mb-1 hover:text-gray-500 font-semibold" onClick={() => setIsOpen(false)} to="/admin/dashboard">
+                    Dashboard
+                  </Link>
+                )}
+                <Link className=" hover:text-gray-500 font-semibold" onClick={() => setIsOpen(false)} to="/orders">
+                  My Orders
+                </Link>
+              </div>
+            </dialog>
+          </div>
+        )}
+
+        {user?._id ? (<UserModal user={user} logoutHandler={logoutHandler} />) : (
+          <Link to={"/login"} className=" mx-2 font-semibold inline-blockbg-indigo-500 bg-indigo-500 text-white px-4 py-1 rounded-lg hover:bg-indigo-600">
+            <p className="cursor-pointer">Login</p>
+          </Link>
+        )}
+      </div>
     </nav>
+
   );
 };
 

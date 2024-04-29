@@ -11,6 +11,7 @@ import {
 import { RootState, server } from "../../../redux/store";
 import { Order, OrderItem } from "../../../types/types";
 import { responseToast } from "../../../utils/features";
+import CopyText from "../../../utils/function";
 
 const defaultData: Order = {
   shippingInfo: {
@@ -27,7 +28,7 @@ const defaultData: Order = {
   tax: 0,
   total: 0,
   orderItems: [],
-  user: { name: "", _id: "" },
+  user: { name: "", _id: "",email:"",phone:0 },
   _id: "",
 };
 
@@ -42,7 +43,7 @@ const TransactionManagement = () => {
   const {
     shippingInfo: { address, city, state, country, pinCode },
     orderItems,
-    user: { name },
+    user: { name, _id,email,phone },
     status,
     tax,
     subtotal,
@@ -76,9 +77,9 @@ const TransactionManagement = () => {
     <div className="admin-container">
       <AdminSidebar />
       <main className="product-management">
-      <Link to={"/admin/transaction"}>
-            <FaArrowLeft/>
-            </Link>
+        <Link to={"/admin/transaction"}>
+          <FaArrowLeft />
+        </Link>
         {isLoading ? (
           <Skeleton />
         ) : (
@@ -91,16 +92,18 @@ const TransactionManagement = () => {
               <h2>Order Items</h2>
 
               {orderItems.map((i) => (
-                <ProductCard
+                <OrderProductCard
                   key={i._id}
                   name={i.name}
-                  description={i.description}
                   photo={`${server}/${i.photo}`}
                   productId={i.productId}
                   _id={i._id}
                   quantity={i.quantity}
                   price={i.price}
                   cutPrice={i.cutPrice}
+                  size={i.size}
+                  style={i.style}
+                  color={i.color}
                 />
               ))}
             </section>
@@ -112,9 +115,12 @@ const TransactionManagement = () => {
               <h1>Order Info</h1>
               <h5>User Info</h5>
               <p>Name: {name}</p>
+              <CopyText text={_id} heading={"UserId:"}/>
+              <p>Email: {email}</p>
+              <CopyText text={phone} heading={"Phone:"}/>
               <p>
                 Address:{" "}
-                {`${address}, ${city}, ${state}, ${country} ${pinCode}`}
+                {`${address}, city: ${city}, state: ${state}, country: ${country} pinCode: ${pinCode}`}
               </p>
               <h5>Amount Info</h5>
               <p>Subtotal: {subtotal}</p>
@@ -131,8 +137,8 @@ const TransactionManagement = () => {
                     status === "Delivered"
                       ? "purple"
                       : status === "Shipped"
-                      ? "green"
-                      : "red"
+                        ? "green"
+                        : "red"
                   }
                 >
                   {status}
@@ -149,19 +155,27 @@ const TransactionManagement = () => {
   );
 };
 
-const ProductCard = ({
+const OrderProductCard = ({
   name,
   photo,
   price,
   quantity,
   productId,
+  size,
+  style,
+  color,
 }: OrderItem) => (
   <div className="transaction-product-card">
     <img src={photo} alt={name} />
-    <Link to={`/product/${productId}`}>{name}</Link>
+    <Link to={`/product/${productId}`} className="line-clamp-2 w-50">{name}</Link>
     <span>
-     ${price} X {quantity} =${price * quantity}
+      ${price} X {quantity} =${price * quantity}
     </span>
+    {size !== '' && <span className="text-gray-500 ">Size: {size}</span>}
+
+    {color !== '' && <span className="text-gray-500 "><span className="rounded-full px-[11px] py-[0.5px] " style={{ backgroundColor: color }}></span></span>}
+
+    {style !== '' && <span className="text-gray-500 ">Style: {style}</span>}
   </div>
 );
 

@@ -111,8 +111,10 @@
       @include square(calc(14.75rem - 3rem));
 
     }
+    .truncate-name{
+     max-width: 188px;
+    }
   }
-
   .productCard-skeleton {
     height: 14.75rem;
     width: 11.75rem
@@ -153,6 +155,13 @@
   .productCard-skeleton {
     height: 16.5rem;
     width: 10.3rem;
+  }
+}
+@media screen and (max-width:326px) {
+  .product-card {
+    .truncate-name{
+     max-width: 100px;
+    }
   }
 }
 

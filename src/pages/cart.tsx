@@ -12,8 +12,10 @@ import {
 } from "../redux/reducer/cartReducer";
 import { RootState, server } from "../redux/store";
 import { CartItem } from "../types/types";
+import { toast } from "react-hot-toast";
 
 const Cart = () => {
+
   const { cartItems, subtotal, tax, total, shippingCharges, discount } =
     useSelector((state: RootState) => state.cartReducer);
   const dispatch = useDispatch();
@@ -22,12 +24,12 @@ const Cart = () => {
   const [isValidCouponCode, setIsValidCouponCode] = useState<boolean>(false);
 
   const incrementHandler = (cartItem: CartItem) => {
-    if (cartItem.quantity >= cartItem.stock) return;
+    if (cartItem.quantity >= cartItem.stock) return toast.error("Out of Stock");
 
     dispatch(addToCart({ ...cartItem, quantity: cartItem.quantity + 1 }));
   };
   const decrementHandler = (cartItem: CartItem) => {
-    if (cartItem.quantity <= 1) return;
+    if (cartItem.quantity <= 1) return ;
 
     dispatch(addToCart({ ...cartItem, quantity: cartItem.quantity - 1 }));
   };
@@ -66,8 +68,8 @@ const Cart = () => {
   }, [cartItems]);
 
   return (
-    <div className="cart">
-      <main>
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 my-8 mx-auto max-w-7xl px-4">
+      <main className="lg:col-span-2">
         {cartItems.length > 0 ? (
           cartItems.map((i, idx) => (
             <CartItemCard
@@ -79,39 +81,36 @@ const Cart = () => {
             />
           ))
         ) : (
-          <h1>No Items Added</h1>
+          <h1 className="text-2xl font-bold text-gray-800">No Items Added</h1>
         )}
       </main>
       <aside>
-        <p>Subtotal:${subtotal}</p>
-        <p>Shipping Charges:${shippingCharges}</p>
-        <p>Tax:${tax}</p>
-        <p>
-          Discount: <em className="red"> -${discount}</em>
-        </p>
-        <p>
-          <b>Total:${total}</b>
-        </p>
+        <div className="bg-white p-6 rounded-lg shadow-lg lg:fixed">
+          <p className="text-lg font-semibold text-gray-800">Order Summary</p>
+          <p className="mt-4">Subtotal: <span className="font-semibold">${subtotal}</span></p>
+          <p>Shipping Charges: <span className="font-semibold">${shippingCharges}</span></p>
+          <p>Tax: <span className="font-semibold">${tax}</span></p>
+          <p>Discount: <span className="font-semibold text-red-500">-${discount}</span></p>
+          <p className="mt-4"><b>Total: <span className="font-semibold">${total}</span></b></p>
 
-        <input
-          type="text"
-          placeholder="Coupon Code"
-          value={couponCode}
-          onChange={(e) => setCouponCode(e.target.value)}
-        />
+          <input
+            type="text"
+            placeholder="Coupon Code"
+            value={couponCode}
+            onChange={(e) => setCouponCode(e.target.value)}
+            className="mt-4 p-2 border border-gray-300 rounded-lg"
+          />
 
-        {couponCode &&
-          (isValidCouponCode ? (
-            <span className="green">
-             ${discount} off using the <code>{couponCode}</code>
-            </span>
-          ) : (
-            <span className="red">
-              Invalid Coupon <VscError />
-            </span>
-          ))}
+          {couponCode && (
+            isValidCouponCode ? (
+              <span className="text-green-500 mt-2 block">-${discount} off using the <code>{couponCode}</code></span>
+            ) : (
+              <span className="text-red-500 mt-2 block">Invalid Coupon <VscError /></span>
+            )
+          )}
 
-        {cartItems.length > 0 && <Link to="/shipping">Checkout</Link>}
+           <Link to={`${cartItems.length > 0? "/shipping":"/cart"}`} className={`${cartItems.length > 0?"":"cursor-not-allowed"} mt-4 mx-2 inline-blockbg-indigo-500 bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-500`}>Checkout</Link>
+        </div>
       </aside>
     </div>
   );

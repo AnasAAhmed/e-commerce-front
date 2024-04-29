@@ -13,7 +13,7 @@ import { CustomError } from "../../types/api-types";
 
 interface DataType {
   photo: ReactElement;
-  name: string;
+  name: ReactElement;
   price: number;
   stock: number;
   action: ReactElement;
@@ -59,10 +59,10 @@ const Products = () => {
       setRows(
         data.products.map((i) => ({
           photo: <img src={`${server}/${i.photo}`} />,
-          name: i.name,
+          name: <Link to={`/product/${i._id}`} className="text-md font-medium line-clamp-2 w-70 hover:text-indigo-500">{i.name}</Link>,
           price: i.price,
           stock: i.stock,
-          action: <Link to={`/admin/product/${i._id}`}>Manage</Link>,
+          action: <Link className="text-md font-medium py-1 px-2 rounded-md hover:bg-black hover:text-white" to={`/admin/product/${i._id}`}>Manage</Link>,
         }))
       );
   }, [data]);
