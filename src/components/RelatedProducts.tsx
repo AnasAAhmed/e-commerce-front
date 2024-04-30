@@ -1,6 +1,6 @@
 
-import { useLatestCategoryProductsQuery } from '../redux/api/productAPI'; 
-import {  ProductLoader } from './loader';
+import { FaSpinner } from 'react-icons/fa';
+import { useLatestCategoryProductsQuery } from '../redux/api/productAPI';
 import ProductCard from './product-card';
 import { Link } from 'react-router-dom';
 
@@ -8,7 +8,7 @@ type CategoryProductsProps = {
   category: string;
   heading?: string;
   handleRelatedProductClick?: any;
-  filteredProductId?: string; 
+  filteredProductId?: string;
 };
 
 const RelatedProducts = ({ category, heading, handleRelatedProductClick, filteredProductId }: CategoryProductsProps) => {
@@ -24,27 +24,25 @@ const RelatedProducts = ({ category, heading, handleRelatedProductClick, filtere
   return (
     <div className="homee">
       <h1 className='text-4xl my-8 flex items-center justify-center'>{heading}</h1>
-      <main className='w-full flex justify-center flex-wrap gap-2'>
         {isLoading ? (
-          <ProductLoader/>
+          <div className="flex items-center justify-center h-[30.8rem]">
+            <FaSpinner className="animate-spin h-36 w-36 text-gray-500" />
+          </div>
         ) : (
-          <>
-            {filteredProducts?.map((product) => (
-              <ProductCard
-                key={product._id}
-                productId={product._id}
-                name={product.name}
-                price={product.price}
-                photo={product.photo}
-                cutPrice={product.cutPrice}
-                handleRelatedProductClick={handleRelatedProductClick}
-              />
-            ))}
-          </>
-        )
-        }
-
+          <main className='w-full sm:flex sm:justify-center sm:flex-wrap gap-2 grid grid-cols-2 '>
+          {filteredProducts?.map((product) => (
+            <ProductCard
+              key={product._id}
+              productId={product._id}
+              name={product.name}
+              price={product.price}
+              photo={product.photo}
+              cutPrice={product.cutPrice}
+              handleRelatedProductClick={handleRelatedProductClick}
+            />
+          ))}
       </main>
+        )}
       {heading && (
         <h1 className='text-2xl'>
           <Link to={`/search/${category}`} className="flex items-center justify-center" onClick={() => window.scrollTo(0, 0)}>

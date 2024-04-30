@@ -6,10 +6,10 @@ import {
 } from "../redux/api/productAPI";
 import { CustomError } from "../types/api-types";
 import toast from "react-hot-toast";
-import { SearchProductLoader } from "../components/loader";
-
 import { RiFilterFill } from "react-icons/ri";
 import { useParams } from "react-router-dom";
+import { FaSpinner } from "react-icons/fa";
+import { SearchProductLoader } from "../components/loader";
 
 const Search = () => {
   const params = useParams()
@@ -108,14 +108,11 @@ const Search = () => {
           onChange={(e) => setSearch(e.target.value)}
           className="w-full md:w-11/12 p-4 border border-gray-300 rounded-lg mb-4"
         />
-
-        {productLoading ? (
-          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <SearchProductLoader />
-          </div>
-        ) : (
-          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {searchedData?.products.map((i) => (
+        <div className="w-full sm:flex sm:justify-center sm:flex-wrap gap-2 grid grid-cols-2 ">
+          {productLoading ? (
+            <SearchProductLoader/>
+          ) : (
+            searchedData?.products.map((i) => (
               <ProductCard
                 key={i._id}
                 productId={i._id}
@@ -124,16 +121,16 @@ const Search = () => {
                 photo={i.photo}
                 cutPrice={i.cutPrice}
               />
-            ))}
-          </div>
-        )}
+            ))
+          )}
+        </div>
 
         {searchedData && searchedData.totalPage > 1 && (
           <article className="flex justify-center items-center mt-4">
             <button
               disabled={!isPrevPage}
               onClick={() => setPage((prev) => prev - 1)}
-              className={`px-4 py-2 ${isPrevPage?'bg-violet-500':'bg-gray-400'} text-white rounded mr-2`}
+              className={`px-4 py-2 ${isPrevPage ? 'bg-violet-500' : 'bg-gray-400'} text-white rounded mr-2`}
             >
               Prev
             </button>
@@ -143,7 +140,7 @@ const Search = () => {
             <button
               disabled={isNextPage}
               onClick={() => setPage((prev) => prev + 1)}
-              className={`px-4 py-2 ${!isNextPage?'bg-violet-500':'bg-gray-400'} text-white rounded ml-2`}
+              className={`px-4 py-2 ${!isNextPage ? 'bg-violet-500' : 'bg-gray-400'} text-white rounded ml-2`}
             >
               Next
             </button>

@@ -29,7 +29,7 @@ const Cart = () => {
     dispatch(addToCart({ ...cartItem, quantity: cartItem.quantity + 1 }));
   };
   const decrementHandler = (cartItem: CartItem) => {
-    if (cartItem.quantity <= 1) return ;
+    if (cartItem.quantity <= 1) return;
 
     dispatch(addToCart({ ...cartItem, quantity: cartItem.quantity - 1 }));
   };
@@ -93,23 +93,27 @@ const Cart = () => {
           <p>Discount: <span className="font-semibold text-red-500">-${discount}</span></p>
           <p className="mt-4"><b>Total: <span className="font-semibold">${total}</span></b></p>
 
-          <input
-            type="text"
-            placeholder="Coupon Code"
-            value={couponCode}
-            onChange={(e) => setCouponCode(e.target.value)}
-            className="mt-4 p-2 border border-gray-300 rounded-lg"
-          />
 
-          {couponCode && (
-            isValidCouponCode ? (
-              <span className="text-green-500 mt-2 block">-${discount} off using the <code>{couponCode}</code></span>
-            ) : (
-              <span className="text-red-500 mt-2 block">Invalid Coupon <VscError /></span>
-            )
-          )}
+          <div className="flex flex-row justify-center items-center">
 
-           <Link to={`${cartItems.length > 0? "/shipping":"/cart"}`} className={`${cartItems.length > 0?"":"cursor-not-allowed"} mt-4 mx-2 inline-blockbg-indigo-500 bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-500`}>Checkout</Link>
+            <input
+              type="text"
+              placeholder="Coupon Code"
+              value={couponCode}
+              onChange={(e) => setCouponCode(e.target.value)}
+              className="h-11 px-2 border border-gray-300 rounded-lg"
+            />
+
+            {couponCode && (
+              isValidCouponCode ? (
+                <span className="text-green-500 mt-2 block">-${discount} off using the <code>{couponCode}</code></span>
+              ) : (
+                <span className="text-red-500 mt-2 block">Invalid Coupon <VscError /></span>
+              )
+            )}
+
+            <Link to={`${cartItems.length > 0 ? "/shipping" : "/cart"}`} className={`${cartItems.length > 0 ? "" : "cursor-not-allowed"} my-6 mx-2 inline-blockbg-indigo-500 bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-500`}>Checkout</Link>
+          </div>
         </div>
       </aside>
     </div>

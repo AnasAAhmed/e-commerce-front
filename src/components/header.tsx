@@ -48,11 +48,11 @@ const Header = ({ user, cartItemsLength }: PropsType) => {
           </>
         )}
 
-        <Link to={"/search"} className="px-3 py-1 items-center rounded-lg mr-2  hover:text-gray-500" onClick={() => setIsOpen(false)} >
+        <Link to={"/search"} className="px-3 py-1 items-center rounded-lg  hover:text-gray-500" onClick={() => setIsOpen(false)} >
           <FaSearch size={"1.2rem"} />
         </Link>
 
-        <Link to={"/cart"} onClick={() => setIsOpen(false)} className="mr-4 hover:text-gray-500 relative">
+        <Link to={"/cart"} onClick={() => setIsOpen(false)} className="mr-2 hover:text-gray-500 relative">
           <FaShoppingBag size={"1.3rem"} className=" hover:text-gray-500" />
           <span className="absolute -top-1 -right-2 bg-red-500 text-white rounded-full px-1 text-xs">{cartItemsLength > 0 ? cartItemsLength : ""}</span>
         </Link>
@@ -82,7 +82,7 @@ const Header = ({ user, cartItemsLength }: PropsType) => {
         )}
 
         {user?._id ? (<UserModal user={user} logoutHandler={logoutHandler} />) : (
-          <Link to={"/login"} className=" mx-2 font-semibold inline-blockbg-indigo-500 bg-indigo-500 text-white px-4 py-1 rounded-lg hover:bg-indigo-600">
+          <Link to={"/login"} className=" ml-2 font-semibold inline-blockbg-indigo-500 bg-indigo-500 text-white px-4 py-1 rounded-lg hover:bg-indigo-600">
             <p className="cursor-pointer">Login</p>
           </Link>
         )}

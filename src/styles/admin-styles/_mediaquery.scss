@@ -138,30 +138,9 @@
     }
   }
 
-  .home {
-    main {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-
-  .homee {
-    main {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-
   .productCard-skeleton {
     height: 16.5rem;
     width: 10.3rem;
-  }
-}
-@media screen and (max-width:326px) {
-  .product-card {
-    .truncate-name{
-     max-width: 100px;
-    }
   }
 }
 

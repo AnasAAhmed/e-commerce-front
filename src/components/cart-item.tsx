@@ -44,7 +44,7 @@ const CartItem = ({
           <button className="text-white font-bold py-1 px-3 bg-black hover:opacity-55 rounded-md" onClick={() => incrementHandler(cartItem)}>+</button>
           <button onClick={() => removeHandler(productId)} className="text-gray-500 hover:text-red-500"><FaTrash /></button>
         </div>
-        <p className="text-gray-500 text-center text-2xl">${price}{cutPrice > 0 && <span className="cutPrice ">${cutPrice}</span>}</p>
+        <p className="text-gray-500 text-center text-2xl">${price}{cutPrice > 0 && <span className="text-red-500 line-through text-lg ">${cutPrice}</span>}</p>
       </div>
     </div>
 

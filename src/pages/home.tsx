@@ -1,16 +1,16 @@
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
-import { ProductLoader } from "../components/loader";
 import ProductCard from "../components/product-card";
-import {  useLatestProductsQuery } from "../redux/api/productAPI";
+import { useLatestProductsQuery } from "../redux/api/productAPI";
 import CollectionProducts from "../components/CollectionProducts";
 import heroImg from '../assets/Ecommerce.png'
+import { FaSpinner } from "react-icons/fa";
 
 
 
 const Home = () => {
   const { data, isLoading, isError } = useLatestProductsQuery("");
- 
+
 
 
 
@@ -24,12 +24,13 @@ const Home = () => {
           <img src={heroImg} className="w-full h-[60vh]" alt="heroImg" />
         </section>
         <h1 className="text-4xl my-8 flex items-center justify-center">Latest Products</h1>
-        <main className="w-full flex justify-center flex-wrap gap-2">
         {isLoading ? (
-          <ProductLoader />
+          <div className="flex items-center justify-center h-[20.4rem]">
+            <FaSpinner className="animate-spin h-20 w-20 text-gray-500" />
+          </div>
         ) : (
-          <>
-          { data?.products.map((i) => (
+          <main className="w-full sm:flex sm:justify-center sm:flex-wrap gap-2 grid grid-cols-2 ">
+            {data?.products.map((i) => (
               <ProductCard
                 key={i._id}
                 productId={i._id}
@@ -39,10 +40,8 @@ const Home = () => {
                 cutPrice={i.cutPrice}
               />
             ))}
-            </>
-          )
-          }
-        </main>
+          </main>
+        )}
         <h1 className="text-2xl">
           <Link to="/search" className="flex items-center justify-center">
             More
@@ -50,7 +49,7 @@ const Home = () => {
         </h1>
       </div>
       <br />
-      <CollectionProducts heading="Pc's & Laptops" collection="computers"  />
+      <CollectionProducts heading="Pc's & Laptops" collection="computers" />
       <br />
       <CollectionProducts heading="Men's" collection="men" />
       <br />
