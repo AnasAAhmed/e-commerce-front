@@ -8,7 +8,6 @@ import { CustomError } from "../types/api-types";
 import toast from "react-hot-toast";
 import { RiFilterFill } from "react-icons/ri";
 import { useParams } from "react-router-dom";
-import { FaSpinner } from "react-icons/fa";
 import { SearchProductLoader } from "../components/loader";
 
 const Search = () => {
