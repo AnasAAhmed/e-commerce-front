@@ -14,6 +14,8 @@ import { RootState } from "../../redux/store";
 import { CustomError } from "../../types/api-types";
 import { responseToast } from "../../utils/features";
 import UserModal from "../../components/UserModal";
+import { BsSearch } from "react-icons/bs";
+import { MdOutlineEmail } from "react-icons/md";
 
 interface DataType {
   avatar: ReactElement;
@@ -58,14 +60,14 @@ const columns: Column<DataType>[] = [
 
 const Customers = () => {
   const { user } = useSelector((state: RootState) => state.userReducer);
-  
+
   const [searchId, setSearchId] = useState<string>("");
   const [email, setEmail] = useState<string>("");
-  
+
   const { isLoading, data, isError, error } = useAllUsersQuery({
-    id:user?._id,
-    email:email,
-    searchId:searchId
+    id: user?._id,
+    email: email,
+    searchId: searchId
   });
 
   const [rows, setRows] = useState<DataType[]>([]);
@@ -113,7 +115,7 @@ const Customers = () => {
             </button>
           ),
           details: (
-            <UserModal  user={i} heading={<FaEdit />} />
+            <UserModal user={i} heading={<FaEdit />} />
           )
         }))
       );
@@ -130,17 +132,22 @@ const Customers = () => {
   return (
     <div className="admin-container">
       <AdminSidebar />
-      
+
       <main>
-        <input type="text"
-        onChange={(e)=>setSearchId(e.target.value)}
-        placeholder="Search By id"
-        />
-        <input type="email"
-        onChange={(e)=>setEmail(e.target.value)}
-        placeholder="Search By email"
-        />
-        {isLoading ? <Skeleton length={20} /> : Table}</main>
+        <div className="bar">
+          <BsSearch size="2rem" />
+          <input type="text"
+            onChange={(e) => setSearchId(e.target.value)}
+            placeholder="Search By id"
+          />
+            <MdOutlineEmail size="3rem" />
+          <input type="email"
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Search By email"
+          />
+        </div>
+        {isLoading ? <Skeleton length={20} /> : Table}
+      </main>
     </div>
   );
 };

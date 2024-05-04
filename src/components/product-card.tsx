@@ -19,19 +19,19 @@ const ProductCard = ({
   handleRelatedProductClick
 }: ProductsProps) => {
   return (
-    <div className="flex flex-col items-center justify-center text-center max-w-[35vh] bg-white shadow-md rounded-md transition-transform object-cover duration-300 transform hover:-translate-y-2 my-1 mx-[1px]" onClick={handleRelatedProductClick}>
-
-      <Link to={`/product/${productId}`}>
-        <img src={`${server}/${photo}`} alt={name} className="w-[350px] h-40 md:h-56 rounded-t-md" />
-        <p className="line-clamp-2 text-center  font-semibold">{name}</p>
-        <span className="span">${price}{" "}<span className="cutPrice">{cutPrice > 0 ? `$${cutPrice}` : ""}</span></span>
-        <br />
-        <span className="fa fa-star text-orange-500 text-clip "></span> (2.1){" "}
-        <span className="">Reviews (33)</span>
-      </Link>
-
-    </div>
+    <Link to={`/product/${productId}`} className="w-[220px] flex flex-col gap-2 " 
+    // onClick={handleRelatedProductClick}
+    >
+      <img src={`${server}/${photo}`} alt={name} width={250} height={300} className="h-[250px] rounded-lg object-cover" />
+      <p className="line-clamp-2 min-h-[3rem] w-full font-semibold mx-2">{name}</p>
+      <span className="text-lg font-semibold mx-2">${price}{" "}<span className="text-sm line-through text-red-500 ">{cutPrice > 0 ? `$${cutPrice}` : ""}</span></span>
+      <div className="flex flex-row items-center justify-between mx-2">
+        <p className="fa fa-star text-orange-500 text-clip">(2.1)</p>
+        <p className="font-semibold ">Reviews (33)</p>
+      </div>
+    </Link>
   );
 };
 
 export default ProductCard;
+

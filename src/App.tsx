@@ -4,6 +4,7 @@ import { Toaster } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Header from "./components/header";
+import Footer from "./components/Footer";
 import Loader from "./components/loader";
 import Home from "./pages/home";
 import ProtectedRoute from "./components/protected-route";
@@ -14,6 +15,7 @@ import { RootState } from "./redux/store";
 
 
 const Search = lazy(() => import("./pages/search"));
+const Collections = lazy(() => import("./pages/Collections"));
 const Cart = lazy(() => import("./pages/cart"));
 const ProductDetails = lazy(() => import("./pages/ProductDetails"));
 const Shipping = lazy(() => import("./pages/shipping"));
@@ -69,6 +71,7 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/search" element={<Search />} />
             <Route path="/search/:category" element={<Search />} />
+            <Route path="/collections/:collection" element={<Collections />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/product/:id" element={<ProductDetails />} />
 
@@ -128,6 +131,7 @@ const App = () => {
           </Routes>
         </Suspense>
         <Toaster position="bottom-center" />
+        <Footer/>
       </Router>
   );
 };

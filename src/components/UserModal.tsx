@@ -28,7 +28,7 @@ const UserModal = ({ user, logoutHandler, heading, children }: UserModalType) =>
 
     return (
         <>
-            <button onClick={openModal} className="focus:outline-none">
+            <button onClick={openModal} className="focus:outline-none ">
                 {heading ? (
                     <span className="text-blue-500">{heading}</span>
                 ) : (
@@ -57,13 +57,12 @@ const UserModal = ({ user, logoutHandler, heading, children }: UserModalType) =>
                                 <span className="font-semibold">DOB:</span>
                                 <span>{user.dob.toString().split('T')[0]}</span>
                                 {currentUser?.role === "admin" && (<> <span className="font-semibold ">ID:</span>
-                                <div className="truncate"><CopyText text={user._id} /></div>
+                                    <div className="truncate"><CopyText text={user._id} /></div>
                                 </>)}
                             </div>
                         </div>
                         <div className='flex items-center justify-between '>
-                            {/* div as a Button */}
-                            <div onClick={closeModal} className="mt-4 cursor-pointer bg-indigo-500 w-[4.5rem] text-white px-4 py-1 rounded hover:bg-indigo-600 focus:outline-none">Close</div>
+                             <div onClick={closeModal} className="mt-4 cursor-pointer bg-indigo-500 w-[4.5rem] text-white px-4 py-1 rounded hover:bg-indigo-600 focus:outline-none">Close</div>
                             {logoutHandler && (
                                 <button onClick={logoutHandler} className="mt-4 cursor-pointer bg-red-500 w-[4.9rem] text-white py-1 rounded hover:bg-red-600 focus:outline-none">
                                     Logout
@@ -73,7 +72,7 @@ const UserModal = ({ user, logoutHandler, heading, children }: UserModalType) =>
                         {children}
                     </div>
                 </div>
-            )}
+            )} 
         </>
     );
 };

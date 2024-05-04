@@ -2,6 +2,8 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import {
   AllProductsResponse,
   CategoriesResponse,
+  CollectionProductsResponse,
+  CollectionsResponse,
   DeleteProductRequest,
   MessageResponse,
   NewProductRequest,
@@ -26,8 +28,14 @@ export const productAPI = createApi({
       query: ({ category }) => `latest/${category}`, // Fetch latest products by category
       providesTags: ["product"],
     }),
-    latestCollectionsProducts: builder.query<AllProductsResponse, { collections?: string }>({
-      query: ({ collections }) => `collection/${collections}`, // Fetch latest products by collection
+    latestCollectionsProducts: builder.query<CollectionProductsResponse, { collection: string,limit?:number }>({
+      query: ({ collection ,limit}) =>{  
+        let base = `allcollections/${collection}`;
+
+      if (limit) base += `&limit=${limit}`;
+
+      return base;
+    }, // Fetch latest products by collection
       providesTags: ["product"],
     }),
     allProducts: builder.query<AllProductsResponse, string>({
@@ -36,6 +44,10 @@ export const productAPI = createApi({
     }),
     categories: builder.query<CategoriesResponse, string>({
       query: () => `categories`,
+      providesTags: ["product"],
+    }),
+    collections: builder.query<CollectionsResponse, string>({
+      query: () => `collections`,
       providesTags: ["product"],
     }),
 
@@ -94,6 +106,7 @@ export const {
   useLatestCollectionsProductsQuery,
   useAllProductsQuery,
   useCategoriesQuery,
+  useCollectionsQuery,
   useSearchProductsQuery,
   useNewProductMutation,
   useProductDetailsQuery,

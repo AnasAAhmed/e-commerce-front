@@ -43,10 +43,19 @@ export type AllProductsResponse = {
   success: boolean;
   products: Product[];
 };
+export type CollectionProductsResponse = {
+  success: boolean;
+  productCollection: Product[];
+};
 
 export type CategoriesResponse = {
   success: boolean;
   categories: string[];
+};
+
+export type CollectionsResponse = {
+  success: boolean;
+  collections: string[];
 };
 
 export type SearchProductsResponse = AllProductsResponse & {

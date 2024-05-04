@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -39,7 +40,6 @@ $color3: rgb(0, 104, 136);
 }
 
 @import "admin-styles/mixin";
-@import "cart";
 @import "shipping";
 @import "admin-styles/dashboard";
 @import "admin-styles/products";
@@ -78,11 +78,13 @@ $color3: rgb(0, 104, 136);
     font-size: 5rem;
   }
 }
+
 @keyframes slideIn {
   from {
     transform: translateY(-50px);
     opacity: 0;
   }
+
   to {
     transform: translateY(0);
     opacity: 1;
@@ -137,6 +139,30 @@ $color3: rgb(0, 104, 136);
   @include grid(1fr 4fr, 2rem);
   height: 100vh;
   background-color: rgb(247, 247, 247);
+
+  >main {
+    .bar {
+      height: 4rem;
+      @include flex(row, unset);
+      padding: 0 1rem;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.37);
+
+      >input {
+        margin-right: auto;
+        @include inputStyle(100%, 1rem 0);
+      }
+
+      >svg {
+        font-size: 1.2rem;
+        opacity: 0.7;
+      }
+
+      >img {
+        @include square(2rem);
+        border-radius: 50%;
+      }
+    }
+  }
 
   >aside {
     width: 100%;

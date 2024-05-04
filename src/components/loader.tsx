@@ -26,23 +26,26 @@ export const Skeleton = ({ width = "unset", length = 3 }: SkeletonProps) => {
 };
 
 
-export const SearchProductLoader = () => {
+export const ProductCardLoader = ({numOfArr}:{numOfArr?:number}) => {
   return (
-      Array.from({ length: 12 }, (_, index) => (
-        <div  key={index} className="flex flex-col items-center justify-center text-center max-w-[35vh] bg-white shadow-md rounded-md transition-transform object-cover duration-300 transform hover:-translate-y-2 mx-2 my-1">
-        <div className="animate-pulse w-[300px] h-40 md:h-56 bg-gray-200 rounded-t-md"></div>
-        <div className="animate-pulse w-[300px] h-6 bg-gray-200 rounded-md mt-2"></div>
-        <div className="animate-pulse w-[300px] h-6 bg-gray-200 rounded-md mt-1"></div>
-        <div className="animate-pulse w-[300px] h-6 bg-gray-200 rounded-md mt-1"></div>
-        <div className="animate-pulse w-[300px] h-6 bg-gray-200 rounded-md mt-1"></div>
+    Array.from({ length: numOfArr||4 }, (_,i) => (
+      <div key={i}
+        className="w-[220px] flex flex-col gap-2  bg-white rounded-md transition-transform object-cover duration-300 transform hover:-translate-y-2">
+        <div className="animate-pulse h-[250px] rounded-lg bg-gray-300"></div>
+        <div className="animate-pulse h-6 bg-gray-300 rounded-md"></div>
+        <div className="animate-pulse h-6 bg-gray-300 rounded-md"></div>
+        <div className="animate-pulse h-6 w-20 bg-gray-300 rounded-md"></div>
+        <div className="flex flex-row items-center justify-between">
+          <div className="animate-pulse h-6 w-12 bg-gray-300 rounded-md"></div>
+          <div className="animate-pulse h-6 w-20 bg-gray-300 rounded-md"></div>
+        </div>
       </div>
     ))
-  );
-};
+  )
+}
 export const ProductDetailsSkeleton = () => {
   return (
     <>
-      {/* <div className="product-details-skeleton flex flex-wrap justify-center mt-8"> */}
       <section className="sec1 flex-1 flex-shrink-0 w-full md:w-72 mr-10 mb-10">
         <div className="animate-pulse w-full md:h-[400px] h-[320px] bg-gray-300"></div>
       </section>

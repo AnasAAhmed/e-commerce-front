@@ -1,8 +1,7 @@
-
-import { FaSpinner } from 'react-icons/fa';
 import { useLatestCategoryProductsQuery } from '../redux/api/productAPI';
 import ProductCard from './product-card';
 import { Link } from 'react-router-dom';
+import { ProductCardLoader } from './loader';
 
 type CategoryProductsProps = {
   category: string;
@@ -22,15 +21,13 @@ const RelatedProducts = ({ category, heading, handleRelatedProductClick, filtere
     : data?.products;
 
   return (
-    <div className="homee">
-      <h1 className='text-4xl my-8 flex items-center justify-center'>{heading}</h1>
+    <div>
+      <h1 className='text-4xl mb-12 flex items-center justify-center'>{heading}</h1>
+      <main className='flex flex-wrap justify-center gap-16 '>
         {isLoading ? (
-          <div className="flex items-center justify-center h-[30.8rem]">
-            <FaSpinner className="animate-spin h-36 w-36 text-gray-500" />
-          </div>
+          <ProductCardLoader />
         ) : (
-          <main className='w-full sm:flex sm:justify-center sm:flex-wrap gap-2 grid grid-cols-2 '>
-          {filteredProducts?.map((product) => (
+          filteredProducts?.map((product) => (
             <ProductCard
               key={product._id}
               productId={product._id}
@@ -40,12 +37,12 @@ const RelatedProducts = ({ category, heading, handleRelatedProductClick, filtere
               cutPrice={product.cutPrice}
               handleRelatedProductClick={handleRelatedProductClick}
             />
-          ))}
-      </main>
+          ))
         )}
+      </main>
       {heading && (
-        <h1 className='text-2xl'>
-          <Link to={`/search/${category}`} className="flex items-center justify-center" onClick={() => window.scrollTo(0, 0)}>
+        <h1 className='text-2xl my-6 flex items-center justify-center'>
+          <Link to={`/search/${category}`} onClick={() => window.scrollTo(0, 0)}>
             More
           </Link>
         </h1>

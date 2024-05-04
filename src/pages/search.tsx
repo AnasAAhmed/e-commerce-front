@@ -8,7 +8,7 @@ import { CustomError } from "../types/api-types";
 import toast from "react-hot-toast";
 import { RiFilterFill } from "react-icons/ri";
 import { useParams } from "react-router-dom";
-import { SearchProductLoader } from "../components/loader";
+import { FaSpinner } from "react-icons/fa";
 
 const Search = () => {
   const params = useParams()
@@ -22,6 +22,7 @@ const Search = () => {
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("");
   const [maxPrice, setMaxPrice] = useState(100000);
+  const [loading, setLoading] = useState(false);
   const [category, setCategory] = useState(params.category!);
   const [page, setPage] = useState(1);
 
@@ -41,6 +42,13 @@ const Search = () => {
   const isPrevPage = page > 1;
   const isNextPage = searchedData?.totalPage === page;
 
+  const handleSearchClick = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 300);
+  };
+
   if (isError) {
     const err = error as CustomError;
     toast.error(err.data.message);
@@ -51,17 +59,17 @@ const Search = () => {
   }
 
   return (
-    <div className="flex flex-col sm:flex-row">
-      <aside className="flex-1 p-4 min-w-[20vh] md:max-w-[40vh]">
-        <h2 className="text-lg font-semibold mb-4">
-          Filters <RiFilterFill className="inline-block" />
-        </h2>
+    <div className="flex flex-col  ">
+      <h2 className="text-lg text-center font-semibold mb-2 mx-2">
+        Filters <RiFilterFill className="inline-block mb-2" />
+      </h2>
+      <div className="flex flex-wrap justify-center gap-4">
         <div className="mb-4">
           <h4 className="text-base mb-2">Sort</h4>
           <select
-            className="w-full p-2 border border-gray-300 rounded"
+            className="w-60 p-2 border border-gray-300 rounded"
             value={sort}
-            onChange={(e) => setSort(e.target.value)}
+            onChange={(e) => { setSort(e.target.value); handleSearchClick() }}
           >
             <option value="">None</option>
             <option value="asc">Price (Low to High)</option>
@@ -76,17 +84,17 @@ const Search = () => {
             min={1}
             max={100000}
             value={maxPrice}
-            onChange={(e) => setMaxPrice(Number(e.target.value))}
-            className="w-full"
+            onChange={(e) => { setMaxPrice(Number(e.target.value)); handleSearchClick() }}
+            className="w-60"
           />
         </div>
 
         <div>
           <h4 className="text-base mb-2">Category</h4>
           <select
-            className="w-full p-2 border border-gray-300 rounded"
+            className="w-60 p-2 border border-gray-300 rounded"
             value={category}
-            onChange={(e) => setCategory(e.target.value)}
+            onChange={(e) => { setCategory(e.target.value); handleSearchClick() }}
           >
             <option value="">ALL</option>
             {!loadingCategories &&
@@ -97,38 +105,44 @@ const Search = () => {
               ))}
           </select>
         </div>
-      </aside>
-      <main className="flex-2 p-4">
+      </div>
+      <main className="p-4 flex flex-col items-center ">
         <h1 className="text-2xl font-semibold mb-4">Products</h1>
         <input
           type="text"
-          placeholder="Search by name..."
+          placeholder="Search by brand or name..."
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="w-full md:w-11/12 p-4 border border-gray-300 rounded-lg mb-4"
+          onChange={(e) => { setSearch(e.target.value); handleSearchClick() }}
+          className="w-[90vw] p-2 border border-gray-300 rounded-lg mb-12 "
         />
-        <div className="w-full sm:flex sm:justify-center sm:flex-wrap gap-2 grid grid-cols-2 ">
-          {productLoading ? (
-            <SearchProductLoader/>
-          ) : (
-            searchedData?.products.map((i) => (
-              <ProductCard
-                key={i._id}
-                productId={i._id}
-                name={i.name}
-                price={i.price}
-                photo={i.photo}
-                cutPrice={i.cutPrice}
-              />
-            ))
-          )}
+        <div className="my-5">
+          <div className="flex flex-wrap justify-center gap-16 min-h-[90vh]">
+            {searchedData?.products.length > 0 ?
+              loading || productLoading ? (
+                <div className="flex items-center justify-center h-[25.4rem]">
+                  <FaSpinner className="animate-spin h-36 w-36 text-gray-500" />
+                </div>
+              ) : (
+                searchedData?.products.map((i) => (
+                  <ProductCard
+                    key={i._id}
+                    productId={i._id}
+                    name={i.name}
+                    price={i.price}
+                    photo={i.photo}
+                    cutPrice={i.cutPrice}
+                  />
+                )
+                ))
+              : <h1 className="text-2xl font-semibold mb-4">No Products Yet</h1>}
+          </div>
         </div>
 
         {searchedData && searchedData.totalPage > 1 && (
           <article className="flex justify-center items-center mt-4">
             <button
               disabled={!isPrevPage}
-              onClick={() => setPage((prev) => prev - 1)}
+              onClick={() => { setPage((prev) => prev - 1); handleSearchClick(); window.scroll(0, 0) }}
               className={`px-4 py-2 ${isPrevPage ? 'bg-violet-500' : 'bg-gray-400'} text-white rounded mr-2`}
             >
               Prev
@@ -138,7 +152,7 @@ const Search = () => {
             </span>
             <button
               disabled={isNextPage}
-              onClick={() => setPage((prev) => prev + 1)}
+              onClick={() => { setPage((prev) => prev + 1); handleSearchClick(); window.scroll(0, 0) }}
               className={`px-4 py-2 ${!isNextPage ? 'bg-violet-500' : 'bg-gray-400'} text-white rounded ml-2`}
             >
               Next

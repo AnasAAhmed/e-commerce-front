@@ -77,7 +77,7 @@ const ProductDetails = () => {
               <img src={`${server}/${photo}`} alt={name} className="w-full shadow-md  md:h-[400px] h-[320px] object-cover" />
             </section>
             <article className="sec2 flex-1 w-full  md:w-96">
-              <p className="min-h-20 text-2xl font-semibold">{name}</p>
+              <p className="min-h-16 text-2xl font-semibold mb-4">{name}</p>
               {sizeArray.length >1 &&
                 <div className="flex mb-4">
                   {sizeArray.map((item, index) => (
@@ -136,7 +136,7 @@ const ProductDetails = () => {
               <p >{description}</p>
               <h3 className="text-2xl">
                 ${price}
-                <span className="cutPrice">{cutPrice > 0 ? `$${cutPrice}` : ""}</span>
+                <span className="text-lg line-through text-red-500">{cutPrice > 0 ? `$${cutPrice}` : ""}</span>
               </h3>
               <button
                 className='cart-button w-full mt-4 px-4 py-2 bg-yellow-500 rounded-md text-white text-lg font-semibold transition duration-300 ease-in-out hover:bg-yellow-600'
