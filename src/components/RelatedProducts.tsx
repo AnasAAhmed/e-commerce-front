@@ -6,11 +6,10 @@ import { ProductCardLoader } from './loader';
 type CategoryProductsProps = {
   category: string;
   heading?: string;
-  handleRelatedProductClick?: any;
   filteredProductId?: string;
 };
 
-const RelatedProducts = ({ category, heading, handleRelatedProductClick, filteredProductId }: CategoryProductsProps) => {
+const RelatedProducts = ({ category, heading,  filteredProductId }: CategoryProductsProps) => {
   const { data, isLoading, isError } = useLatestCategoryProductsQuery({ category: category }); // Pass the category name
 
   if (isError) return <div>Error: Cannot Fetch the Products</div>;
@@ -35,7 +34,6 @@ const RelatedProducts = ({ category, heading, handleRelatedProductClick, filtere
               price={product.price}
               photo={product.photo}
               cutPrice={product.cutPrice}
-              handleRelatedProductClick={handleRelatedProductClick}
             />
           ))
         )}

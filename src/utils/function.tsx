@@ -12,7 +12,7 @@ const CopyText = ({text,heading}:{text:any,heading?:string}) => {
 
     return (
         <div>
-            <button className="" onClick={copyToClipboard}><p>{heading && heading} {text}</p></button>
+            <button className="" onClick={copyToClipboard}><p className="text-red-500">{heading && heading} {text}</p></button>
         </div>
     );
 }

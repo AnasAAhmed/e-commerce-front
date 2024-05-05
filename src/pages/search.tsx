@@ -117,14 +117,12 @@ const Search = () => {
         />
         <div className="my-5">
           <div className="flex flex-wrap justify-center gap-16 min-h-[90vh]">
-            {searchedData?.products.length > 0 ?
-              loading || productLoading ? (
+              {loading || productLoading ? (
                 <div className="flex items-center justify-center h-[25.4rem]">
                   <FaSpinner className="animate-spin h-36 w-36 text-gray-500" />
                 </div>
-              ) : (
-                searchedData?.products.map((i) => (
-                  <ProductCard
+              ) : ( searchedData?.products.map((i) => ( 
+                <ProductCard
                     key={i._id}
                     productId={i._id}
                     name={i.name}
@@ -133,8 +131,7 @@ const Search = () => {
                     cutPrice={i.cutPrice}
                   />
                 )
-                ))
-              : <h1 className="text-2xl font-semibold mb-4">No Products Yet</h1>}
+                ))}
           </div>
         </div>
 

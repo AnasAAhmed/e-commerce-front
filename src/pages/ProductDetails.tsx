@@ -50,20 +50,18 @@ const ProductDetails = () => {
   };
 
   useEffect(() => {
-    window.scroll(0, 0)
-    setSize(sizeArray[0]);//seting default values
-    setColor(colorArray[0]);//seting default values
-    setStyle(styleArray[0]);//seting default values
-  }, [params.id, isLoading, data])
-
-  if (isError) return <Navigate to={"/404"} />;
-
-  const handleRelatedProductClick = () => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
     }, 300);
-  };
+    window.scroll(0, 0)
+    setSize(sizeArray[0]);//seting default values
+    setColor(colorArray[0]);//seting default values
+    setStyle(styleArray[0]);//seting default values
+  }, [params.id])
+
+  if (isError) return <Navigate to={"/404"} />;
+
 
   return (
     <div>
@@ -151,7 +149,7 @@ const ProductDetails = () => {
         )}
       </main>
       <div>
-        <RelatedProducts filteredProductId={productId} handleRelatedProductClick={handleRelatedProductClick} category={category} heading="Related Products" />
+        <RelatedProducts filteredProductId={productId} category={category} heading="Related Products" />
       </div>
     </div>
   );

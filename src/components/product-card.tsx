@@ -7,7 +7,6 @@ type ProductsProps = {
   name: string;
   price: number;
   cutPrice: number;
-  handleRelatedProductClick?: any;
 };
 
 const ProductCard = ({
@@ -16,12 +15,9 @@ const ProductCard = ({
   cutPrice,
   name,
   photo,
-  handleRelatedProductClick
 }: ProductsProps) => {
   return (
-    <Link to={`/product/${productId}`} className="w-[220px] flex flex-col gap-2 " 
-    // onClick={handleRelatedProductClick}
-    >
+    <Link to={`/product/${productId}`} className="w-[220px] flex flex-col gap-2">
       <img src={`${server}/${photo}`} alt={name} width={250} height={300} className="h-[250px] rounded-lg object-cover" />
       <p className="line-clamp-2 min-h-[3rem] w-full font-semibold mx-2">{name}</p>
       <span className="text-lg font-semibold mx-2">${price}{" "}<span className="text-sm line-through text-red-500 ">{cutPrice > 0 ? `$${cutPrice}` : ""}</span></span>

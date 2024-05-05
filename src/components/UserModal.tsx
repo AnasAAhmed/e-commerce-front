@@ -28,7 +28,7 @@ const UserModal = ({ user, logoutHandler, heading, children }: UserModalType) =>
 
     return (
         <>
-            <button onClick={openModal} className="focus:outline-none ">
+            <button onClick={openModal} className="focus:outline-none ml-1 ">
                 {heading ? (
                     <span className="text-blue-500">{heading}</span>
                 ) : (

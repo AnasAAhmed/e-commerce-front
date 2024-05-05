@@ -62,13 +62,13 @@ const Login = () => {
   };
 
   return (
-    <>
-      <div className={toggler ? "hidden" : "mt-24 flex flex-col items-center justify-center"}>
+    <div className="h-[90vh] pt-24" >
+      <div className={toggler ? "hidden" : "flex flex-col items-center justify-center"}>
         <main className=" w-full h-80 max-w-md p-8 flex flex-col items-center">
-          <h1 className="text-2xl font-bold mb-4">Login</h1>
+          <h1 className="text-3xl font-bold mb-8">Login</h1>
           <div className="w-full flex flex-col items-center">
             <button onClick={loginHandler} className="w-3/4 h-12 bg-white border border-gray-400 rounded-md flex items-center justify-center">
-              <FcGoogle className="w-1/3 h-full bg-white" />
+            <FcGoogle className="w-1/3 h-full bg-white" />
               <span>Sign in with Google</span>
             </button>
             <p className="cursor-pointer text-blue-500 mt-8" onClick={() => setToggler(true)}>Don't have an Account!</p>
@@ -78,17 +78,17 @@ const Login = () => {
 
       <div className={toggler ? " h-80vh flex flex-col items-center justify-center" : "hidden"}>
         <main className="w-full h-80 max-w-md p-8 flex flex-col items-center ">
-          <h1 className="text-2xl font-bold mb-4">Sign up</h1>
+          <h1 className="text-3xl font-bold mb-4">Sign up</h1>
           <div className="w-full flex flex-col items-center">
-            <label className="mb-2">Gender</label>
+            <label className="mb-2 text-2xl font-semibold">Gender</label>
             <select value={gender} onChange={(e) => setGender(e.target.value)} className="w-full h-12 border border-gray-400 px-2 rounded-md mb-4">
               <option value="">Select Gender</option>
               <option value="male">Male</option>
               <option value="female">Female</option>
             </select>
-            <label className="mb-2">Phone Number</label>
+            <label className="mb-2  text-2xl font-semibold">Phone Number</label>
             <input type="number" value={phone} onChange={(e) => setPhone(Number(e.target.value))} className="w-full h-12 border border-gray-400 px-2 rounded-md mb-4" />
-            <label className="mb-2">Date of birth</label>
+            <label className="mb-2  text-2xl font-semibold">Date of birth</label>
             <input type="date" value={date} onChange={(e) => setDate(e.target.value)} className="w-full h-12 border border-gray-400 px-2 rounded-md mb-4" />
             <button onClick={loginHandler} className="w-3/4 h-12 mt-8 bg-white border border-gray-400 rounded-md flex items-center justify-center">
               <FcGoogle className="w-1/3 h-full bg-white" />
@@ -99,7 +99,7 @@ const Login = () => {
         </main>
       </div>
 
-    </>
+    </div>
   );
 };
 

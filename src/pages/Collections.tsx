@@ -14,7 +14,7 @@ const Collections = () => {
     if (isError) toast.error("Cannot Fetch the Products");
 
     return (
-        <div>
+        <div className="min-h-[100vh]">
             <h1 className="text-4xl my-8 flex items-center justify-center">{params.collection!.toUpperCase()}'s</h1>
             {isLoading ? (
                 <div className="flex items-center justify-center h-[20.4rem]">

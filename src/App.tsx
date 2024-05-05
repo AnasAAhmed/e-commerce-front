@@ -103,6 +103,7 @@ const App = () => {
                 />
               }
             >
+
               <Route path="/admin/dashboard" element={<Dashboard />} />
               <Route path="/admin/product" element={<Products />} />
               <Route path="/admin/customer" element={<Customers />} />
@@ -124,7 +125,7 @@ const App = () => {
               <Route
                 path="/admin/transaction/:id"
                 element={<TransactionManagement />}
-              />
+                />
             </Route>
 
             <Route path="*" element={<NotFound />} />

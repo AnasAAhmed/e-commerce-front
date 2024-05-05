@@ -69,7 +69,7 @@ const Cart = () => {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 my-8 mx-auto max-w-7xl px-4">
-      <main className="lg:col-span-2">
+      <main className="lg:col-span-2 min-h-[80vh]">
         {cartItems.length > 0 ? (
           cartItems.map((i, idx) => (
             <CartItemCard

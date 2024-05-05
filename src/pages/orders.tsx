@@ -92,7 +92,7 @@ const Orders = () => {
     rows.length > 6
   )();
   return (
-    <div className="container">
+    <div className="container min-h-[90vh]">
       {isLoading ? <Skeleton length={20} /> : Table}
     </div>
   );
