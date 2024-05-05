@@ -21,7 +21,7 @@ const CollectionsList = () => {
         <div>
             {isLoading ? (
                 <ul className="flex flex-wrap justify-center mx-8 mt-3">
-               { Array.from({ length:import.meta.env.VITE_COLLECTION_LIST_COUNT }, (_,i) => (
+               { Array.from({ length:import.meta.env.VITE_COLLECTION_LIST_COUNT ||4}, (_,i) => (
                     <div key={i} className="mx-2 bg-gray-300 rounded-md py-4 px-8 hover:bg-gray-200 animate-pulse"></div>
                 ))}
                 </ul>
