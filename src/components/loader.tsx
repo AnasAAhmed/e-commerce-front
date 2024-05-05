@@ -1,6 +1,6 @@
 const Loader = () => {
   return (
-    <section className="loader">
+    <section className="loader min-h-[90vh]">
       <div></div>
     </section>
   );
