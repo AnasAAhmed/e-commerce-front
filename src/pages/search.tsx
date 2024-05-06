@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProductCard from "../components/product-card";
 import {
   useCategoriesQuery,
@@ -19,12 +19,13 @@ const Search = () => {
     error,
   } = useCategoriesQuery("");
 
+
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("");
   const [maxPrice, setMaxPrice] = useState(100000);
-  const [loading, setLoading] = useState(false);
   const [category, setCategory] = useState(params.category!);
   const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(false);
 
   const {
     isLoading: productLoading,
@@ -41,14 +42,14 @@ const Search = () => {
 
   const isPrevPage = page > 1;
   const isNextPage = searchedData?.totalPage === page;
-
-  const handleSearchClick = () => {
+  
+  useEffect(()=>{
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 300);
-  };
-
+    },400);
+  },[sort,category,maxPrice,search,page])
+  
   if (isError) {
     const err = error as CustomError;
     toast.error(err.data.message);
@@ -60,7 +61,7 @@ const Search = () => {
 
   return (
     <div className="flex flex-col  ">
-      <h2 className="text-lg text-center font-semibold mb-2 mx-2">
+      <h2 className="text-center text-3xl font-semibold mt-10 mb-4 mx-2">
         Filters <RiFilterFill className="inline-block mb-2" />
       </h2>
       <div className="flex flex-wrap justify-center gap-4">
@@ -69,7 +70,7 @@ const Search = () => {
           <select
             className="w-60 p-2 border border-gray-300 rounded"
             value={sort}
-            onChange={(e) => { setSort(e.target.value); handleSearchClick() }}
+            onChange={(e) => setSort(e.target.value)}
           >
             <option value="">None</option>
             <option value="asc">Price (Low to High)</option>
@@ -84,7 +85,7 @@ const Search = () => {
             min={1}
             max={100000}
             value={maxPrice}
-            onChange={(e) => { setMaxPrice(Number(e.target.value)); handleSearchClick() }}
+            onChange={(e) =>  setMaxPrice(Number(e.target.value))}
             className="w-60"
           />
         </div>
@@ -94,7 +95,7 @@ const Search = () => {
           <select
             className="w-60 p-2 border border-gray-300 rounded"
             value={category}
-            onChange={(e) => { setCategory(e.target.value); handleSearchClick() }}
+            onChange={(e) =>  setCategory(e.target.value)}
           >
             <option value="">ALL</option>
             {!loadingCategories &&
@@ -112,15 +113,15 @@ const Search = () => {
           type="text"
           placeholder="Search by brand or name..."
           value={search}
-          onChange={(e) => { setSearch(e.target.value); handleSearchClick() }}
+          onChange={(e) => setSearch(e.target.value)}
           className="w-[90vw] p-2 border border-gray-300 rounded-lg mb-12 "
         />
         <div className="my-5">
           <div className="flex flex-wrap justify-center gap-16 min-h-[90vh]">
-              {loading || productLoading ? (
-                <div className="flex items-center justify-center h-[25.4rem]">
-                  <FaSpinner className="animate-spin h-36 w-36 text-gray-500" />
-                </div>
+              {loading||productLoading? (
+                 <div className="flex items-center justify-center h-[25.4rem]">
+                   <FaSpinner className="animate-spin h-36 w-36 text-gray-500" /> 
+                 </div> 
               ) : ( searchedData?.products.map((i) => ( 
                 <ProductCard
                     key={i._id}
@@ -139,7 +140,7 @@ const Search = () => {
           <article className="flex justify-center items-center mt-4">
             <button
               disabled={!isPrevPage}
-              onClick={() => { setPage((prev) => prev - 1); handleSearchClick(); window.scroll(0, 0) }}
+              onClick={() => { setPage((prev) => prev - 1);window.scroll(0, 0) }}
               className={`px-4 py-2 ${isPrevPage ? 'bg-violet-500' : 'bg-gray-400'} text-white rounded mr-2`}
             >
               Prev
@@ -149,7 +150,7 @@ const Search = () => {
             </span>
             <button
               disabled={isNextPage}
-              onClick={() => { setPage((prev) => prev + 1); handleSearchClick(); window.scroll(0, 0) }}
+              onClick={() => { setPage((prev) => prev + 1);window.scroll(0, 0) }}
               className={`px-4 py-2 ${!isNextPage ? 'bg-violet-500' : 'bg-gray-400'} text-white rounded ml-2`}
             >
               Next

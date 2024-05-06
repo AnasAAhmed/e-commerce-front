@@ -17,15 +17,15 @@ const Collections = () => {
         <div className="min-h-[100vh]">
             <h1 className="text-4xl my-8 flex items-center justify-center">{params.collection!.toUpperCase()}'s</h1>
             {isLoading ? (
-                <div className="flex items-center justify-center h-[20.4rem]">
-                    <FaSpinner className="animate-spin h-20 w-20 text-gray-500" />
+                <div className="flex items-center justify-center h-[30.4rem]">
+                    <FaSpinner className="animate-spin h-36 w-36 text-gray-500" />
                 </div>
             ) : (
-                <div className="flex flex-col items-center gap-10 py-8 px-5">
+                <div className="flex flex-col gap-10 py-8 px-5">
                     {!data?.productCollection || data?.productCollection.length === 0 ? (
                         <p className="text-body-bold">No products found</p>
                     ) : (
-                        <div className="flex flex-wrap justify-start gap-16">
+                        <div className="flex flex-wrap justify-center gap-16">
                             {data?.productCollection.map((i) => (
                                 <ProductCard
                                     key={i._id}

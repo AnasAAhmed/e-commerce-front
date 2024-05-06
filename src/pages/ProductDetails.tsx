@@ -58,7 +58,7 @@ const ProductDetails = () => {
     setSize(sizeArray[0]);//seting default values
     setColor(colorArray[0]);//seting default values
     setStyle(styleArray[0]);//seting default values
-  }, [params.id,data])
+  }, [data])
 
   if (isError) return <Navigate to={"/404"} />;
 

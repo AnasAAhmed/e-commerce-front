@@ -30,7 +30,7 @@ export const ProductCardLoader = ({numOfArr}:{numOfArr?:number}) => {
   return (
     Array.from({ length: numOfArr||4 }, (_,i) => (
       <div key={i}
-        className="w-[220px] flex flex-col gap-2  bg-white rounded-md transition-transform object-cover duration-300 transform hover:-translate-y-2">
+        className="w-[220px] flex flex-col gap-2  bg-white rounded-md  object-cover ">
         <div className="animate-pulse h-[250px] rounded-lg bg-gray-300"></div>
         <div className="animate-pulse h-6 bg-gray-300 rounded-md"></div>
         <div className="animate-pulse h-6 bg-gray-300 rounded-md"></div>

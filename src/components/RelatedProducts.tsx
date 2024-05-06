@@ -14,10 +14,7 @@ const RelatedProducts = ({ category, heading,  filteredProductId }: CategoryProd
 
   if (isError) return <div>Error: Cannot Fetch the Products</div>;
 
-  // Filter out product if filteredProductId is provided
-  const filteredProducts = filteredProductId
-    ? data?.products.filter(product => product._id !== filteredProductId)
-    : data?.products;
+  const filteredProducts = data?.products.filter(product => product._id !== filteredProductId)
 
   return (
     <div>
