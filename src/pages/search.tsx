@@ -64,36 +64,27 @@ const Search = () => {
       <h2 className="text-center text-3xl font-semibold mt-10 mb-4 mx-2">
         Filters <RiFilterFill className="inline-block mb-2" />
       </h2>
-      <div className="flex flex-wrap justify-center gap-4">
-        <div className="mb-4">
-          <h4 className="text-base mb-2">Sort</h4>
+      <div className="flex flex-col sm:flex-row mx-3 items-center">
+        <input
+          type="text"
+          placeholder="Search by brand or name..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="w-full h-9 px-2 border-none mb-4 sm:mb-0 max-sm:rounded-md sm:rounded-l-md  bg-gray-200 "
+        />
+        <div className="flex flex-row">
+
           <select
-            className="w-60 p-2 border border-gray-300 rounded"
+            className=" h-9 px-2 max-sm:rounded-l-md border-none bg-gray-200 "
             value={sort}
             onChange={(e) => setSort(e.target.value)}
           >
-            <option value="">None</option>
+            <option value="">Sort</option>
             <option value="asc">Price (Low to High)</option>
             <option value="dsc">Price (High to Low)</option>
           </select>
-        </div>
-
-        <div className="mb-4">
-          <h4 className="text-base mb-2">Max Price: {maxPrice || ""}</h4>
-          <input
-            type="range"
-            min={1}
-            max={100000}
-            value={maxPrice}
-            onChange={(e) => setMaxPrice(Number(e.target.value))}
-            className="w-60"
-          />
-        </div>
-
-        <div>
-          <h4 className="text-base mb-2">Category</h4>
           <select
-            className="w-60 p-2 border border-gray-300 rounded"
+            className=" h-9 px-2 border-none rounded-r-md bg-gray-200 "
             value={category}
             onChange={(e) => setCategory(e.target.value)}
           >
@@ -108,22 +99,26 @@ const Search = () => {
         </div>
       </div>
       <main className="p-4 flex flex-col items-center ">
-        <h1 className="text-2xl font-semibold mb-4">Products</h1>
-        <input
-          type="text"
-          placeholder="Search by brand or name..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="w-[90vw] p-2 border border-gray-300 rounded-lg mb-12 "
-        />
+        <div className="mb-4">
+          <h4 className="text-base mb-2">Max Price: {maxPrice || ""}</h4>
+          <input
+            type="range"
+            min={1}
+            max={100000}
+            value={maxPrice}
+            onChange={(e) => setMaxPrice(Number(e.target.value))}
+            className="w-60 h-[35px]"
+          />
+        </div>
+        <h1 className="text-2xl font-semibold ">Products</h1>
         <div className="my-5">
-          <div className="sm:flex sm:flex-wrap grid grid-cols-2 justify-center gap-4 sm:gap-16 min-h-[90vh]">
           {loading || productLoading ? (
-               <div className="flex items-center justify-center h-[25.4rem]">
-               <FaSpinner className="animate-spin h-36 w-36 text-gray-500" />
-             </div>
-            ) : (
-              !searchedData?.products || searchedData?.products.length === 0 ? (
+            <div className="flex items-center justify-center h-[25.4rem]">
+              <FaSpinner className="animate-spin h-36 w-36 text-gray-500" />
+            </div>
+          ) : (
+            <div className="sm:flex sm:flex-wrap grid grid-cols-2 justify-center gap-4 sm:gap-16 min-h-[90vh]">
+              {!searchedData?.products || searchedData?.products.length === 0 ? (
                 <p className="font-bold text-4xl">No products found</p>
               ) : (
                 searchedData?.products.map((i) => (
@@ -136,9 +131,9 @@ const Search = () => {
                     cutPrice={i.cutPrice}
                   />
                 ))
-              )
-            )}
-          </div>
+              )}
+            </div>
+          )}
         </div>
 
         {searchedData && searchedData.totalPage > 1 && (

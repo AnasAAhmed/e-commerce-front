@@ -25,7 +25,7 @@ const Collections = () => {
                     {!data?.productCollection || data?.productCollection.length === 0 ? (
                         <p className="text-body-bold">No products found</p>
                     ) : (
-                        <div className="flex flex-wrap justify-center gap-16">
+                        <div className="sm:flex sm:flex-wrap grid grid-cols-2 justify-center gap-4 sm:gap-16 ">
                             {data?.productCollection.map((i) => (
                                 <ProductCard
                                     key={i._id}
