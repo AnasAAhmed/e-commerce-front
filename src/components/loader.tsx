@@ -26,12 +26,12 @@ export const Skeleton = ({ width = "unset", length = 3 }: SkeletonProps) => {
 };
 
 
-export const ProductCardLoader = ({numOfArr}:{numOfArr?:number}) => {
+export const ProductCardLoader = ({ numOfArr }: { numOfArr?: number }) => {
   return (
-    Array.from({ length: numOfArr||4 }, (_,i) => (
+    Array.from({ length: numOfArr || 4 }, (_, i) => (
       <div key={i}
-        className="w-[220px] flex flex-col gap-2  bg-white rounded-md  object-cover ">
-        <div className="animate-pulse h-[250px] rounded-lg bg-gray-300"></div>
+        className="mt-8 w-[130px] xsm:w-[150px] sm:w-[220px] flex flex-col gap-2  bg-white rounded-md  object-cover ">
+        <div className="animate-pulse h-[150px] xsm:h-[180px] sm:h-[250px] rounded-lg bg-gray-300"></div>
         <div className="animate-pulse h-6 bg-gray-300 rounded-md"></div>
         <div className="animate-pulse h-6 bg-gray-300 rounded-md"></div>
         <div className="animate-pulse h-6 w-20 bg-gray-300 rounded-md"></div>

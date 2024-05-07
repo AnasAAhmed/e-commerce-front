@@ -50,11 +50,12 @@ const AdminSidebar = () => {
           phoneActive
             ? {
                 width: "20rem",
-                height: "100vh",
+                height: "110vh",
                 position: "fixed",
                 top: 0,
                 left: showModal ? "0" : "-20rem",
                 transition: "all 0.5s",
+                paddingBottom:"6rem"
               }
             : {}
         }

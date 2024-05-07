@@ -12,6 +12,7 @@ import { FaSpinner } from "react-icons/fa";
 
 const Search = () => {
   const params = useParams()
+
   const {
     data: categoriesResponse,
     isLoading: loadingCategories,
@@ -26,7 +27,6 @@ const Search = () => {
   const [category, setCategory] = useState(params.category!);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
-
   const {
     isLoading: productLoading,
     data: searchedData,
@@ -42,14 +42,14 @@ const Search = () => {
 
   const isPrevPage = page > 1;
   const isNextPage = searchedData?.totalPage === page;
-  
-  useEffect(()=>{
+
+  useEffect(() => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    },400);
-  },[sort,category,maxPrice,search,page])
-  
+    }, 400);
+  }, [sort, category, maxPrice, search, page])
+
   if (isError) {
     const err = error as CustomError;
     toast.error(err.data.message);
@@ -85,7 +85,7 @@ const Search = () => {
             min={1}
             max={100000}
             value={maxPrice}
-            onChange={(e) =>  setMaxPrice(Number(e.target.value))}
+            onChange={(e) => setMaxPrice(Number(e.target.value))}
             className="w-60"
           />
         </div>
@@ -95,7 +95,7 @@ const Search = () => {
           <select
             className="w-60 p-2 border border-gray-300 rounded"
             value={category}
-            onChange={(e) =>  setCategory(e.target.value)}
+            onChange={(e) => setCategory(e.target.value)}
           >
             <option value="">ALL</option>
             {!loadingCategories &&
@@ -117,13 +117,17 @@ const Search = () => {
           className="w-[90vw] p-2 border border-gray-300 rounded-lg mb-12 "
         />
         <div className="my-5">
-          <div className="flex flex-wrap justify-center gap-16 min-h-[90vh]">
-              {loading||productLoading? (
-                 <div className="flex items-center justify-center h-[25.4rem]">
-                   <FaSpinner className="animate-spin h-36 w-36 text-gray-500" /> 
-                 </div> 
-              ) : ( searchedData?.products.map((i) => ( 
-                <ProductCard
+          <div className="sm:flex sm:flex-wrap grid grid-cols-2 justify-center gap-4 sm:gap-16 min-h-[90vh]">
+          {loading || productLoading ? (
+               <div className="flex items-center justify-center h-[25.4rem]">
+               <FaSpinner className="animate-spin h-36 w-36 text-gray-500" />
+             </div>
+            ) : (
+              !searchedData?.products || searchedData?.products.length === 0 ? (
+                <p className="font-bold text-4xl">No products found</p>
+              ) : (
+                searchedData?.products.map((i) => (
+                  <ProductCard
                     key={i._id}
                     productId={i._id}
                     name={i.name}
@@ -131,8 +135,9 @@ const Search = () => {
                     photo={i.photo}
                     cutPrice={i.cutPrice}
                   />
-                )
-                ))}
+                ))
+              )
+            )}
           </div>
         </div>
 
@@ -140,7 +145,7 @@ const Search = () => {
           <article className="flex justify-center items-center mt-4">
             <button
               disabled={!isPrevPage}
-              onClick={() => { setPage((prev) => prev - 1);window.scroll(0, 0) }}
+              onClick={() => { setPage((prev) => prev - 1); window.scroll(0, 0) }}
               className={`px-4 py-2 ${isPrevPage ? 'bg-violet-500' : 'bg-gray-400'} text-white rounded mr-2`}
             >
               Prev
@@ -150,7 +155,7 @@ const Search = () => {
             </span>
             <button
               disabled={isNextPage}
-              onClick={() => { setPage((prev) => prev + 1);window.scroll(0, 0) }}
+              onClick={() => { setPage((prev) => prev + 1); window.scroll(0, 0) }}
               className={`px-4 py-2 ${!isNextPage ? 'bg-violet-500' : 'bg-gray-400'} text-white rounded ml-2`}
             >
               Next

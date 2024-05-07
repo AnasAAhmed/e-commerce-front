@@ -30,64 +30,63 @@ const Header = ({ user, cartItemsLength }: PropsType) => {
 
   return (
 
-      <nav className="flex items-center justify-between px-4 py-2 bg-gray-900">
-        <Link to={"/"} onClick={() => setIsOpen(false)} className="text-gray-300 ml-0 md:ml-2 hover:text-gray-500 text-2xl font-bold">LOGO.</Link>
+    <nav className="flex items-center justify-between px-4 py-2">
+      <Link to={"/"} onClick={() => setIsOpen(false)} className="text-gray-800 ml-0 md:ml-2 hover:text-gray-500 text-2xl font-bold">LOGO.</Link>
 
-        {/* Desltop Nav */}
-        <div className="flex items-center ">
-          {user?._id && (
-            <>
-              <div className="hidden sm:flex ml-3">
+      {/* Desltop Nav */}
+      <div className="flex items-center ">
+        {user?._id && (
+          <>
+            <div className="hidden sm:flex ml-3">
+              {user.role === "admin" && (
+                <Link className="hover:bg-gray-300 text-gray-800 rounded-md px-2 py-1 font-semibold text-lg" onClick={() => setIsOpen(false)} to="/admin/dashboard">Dashboard
+                </Link>
+              )}
+              <Link className="hover:bg-gray-300 text-gray-800 rounded-md px-2 py-1 mx-2 font-semibold text-lg" onClick={() => setIsOpen(false)} to="/orders">
+                My Orders
+              </Link>
+            </div>
+          </>
+        )}
+        <Link to={`/search`} className="px-3 items-center rounded-lg  hover:text-gray-800 text-gray-800" onClick={() => setIsOpen(false)} >
+          <FaSearch size={"1.2rem"} />
+        </Link>
+
+        <Link to={"/cart"} onClick={() => setIsOpen(false)} className="mr-2 hover:text-gray-800 text-gray-800 relative">
+          <FaShoppingBag size={"1.3rem"} className=" hover:text-gray-800 text-gray-800" />
+          <span className="absolute -top-1 -right-2 bg-red-500 text-white rounded-full px-1 text-xs">{cartItemsLength > 0 ? cartItemsLength : ""}</span>
+        </Link>
+
+        {/* Mobile Nav */}
+        {user?._id && (
+          <div className="flex sm:hidden relative">
+            <button
+              onClick={() => setIsOpen((prev) => !prev)}
+              className="mr-1 hover:text-gray-800 text-gray-800 "
+            >
+              <RiMenuLine size={"1.5rem"} />
+            </button>
+            <dialog className="top-8 py-2 px-4 rounded-lg bg-gray-100" open={isOpen} style={{ left: 'calc(100% - 100px)' }}>
+              <div className="flex flex-col">
                 {user.role === "admin" && (
-                  <Link className="hover:bg-gray-800 text-gray-300 rounded-md px-2 py-1 font-semibold text-lg" onClick={() => setIsOpen(false)} to="/admin/dashboard">Dashboard
+                  <Link className=" mb-1 hover:text-gray-800 text-gray-800 font-semibold" onClick={() => setIsOpen(false)} to="/admin/dashboard">
+                    Dashboard
                   </Link>
                 )}
-                <Link className="hover:bg-gray-800 text-gray-300 rounded-md px-2 py-1 mx-2 font-semibold text-lg" onClick={() => setIsOpen(false)} to="/orders">
+                <Link className=" hover:text-gray-800 text-gray-800 font-semibold" onClick={() => setIsOpen(false)} to="/orders">
                   My Orders
                 </Link>
               </div>
-            </>
-          )}
-
-          <Link to={"/search"} className="px-3 items-center rounded-lg  hover:text-gray-300 text-gray-300" onClick={() => setIsOpen(false)} >
-            <FaSearch size={"1.2rem"} />
+            </dialog>
+          </div>
+        )}
+        {user?._id ? (<UserModal user={user} logoutHandler={logoutHandler} />) : (
+          <Link to={"/login"} className=" ml-2 font-semibold inline-blockbg-indigo-500 bg-indigo-500 text-white px-4 py-1 rounded-lg hover:bg-indigo-600">
+            <p className="cursor-pointer">Login</p>
           </Link>
-
-          <Link to={"/cart"} onClick={() => setIsOpen(false)} className="mr-2 hover:text-gray-800 text-gray-300 relative">
-            <FaShoppingBag size={"1.3rem"} className=" hover:text-gray-300 text-gray-300" />
-            <span className="absolute -top-1 -right-2 bg-red-500 text-white rounded-full px-1 text-xs">{cartItemsLength > 0 ? cartItemsLength : ""}</span>
-          </Link>
-
-          {/* Mobile Nav */}
-          {user?._id && (
-            <div className="flex sm:hidden relative">
-              <button
-                onClick={() => setIsOpen((prev) => !prev)}
-                className="mr-3 "
-              >
-                <RiMenuLine size={"1.5rem"} />
-              </button>
-              <dialog className="top-8 py-2 px-4 rounded-lg bg-gray-100" open={isOpen} style={{ left: 'calc(100% - 100px)' }}>
-                <div className="flex flex-col">
-                  {user.role === "admin" && (
-                    <Link className=" mb-1 hover:text-gray-300 text-gray-300 font-semibold" onClick={() => setIsOpen(false)} to="/admin/dashboard">
-                      Dashboard
-                    </Link>
-                  )}
-                  <Link className=" hover:text-gray-300 text-gray-300 font-semibold" onClick={() => setIsOpen(false)} to="/orders">
-                    My Orders
-                  </Link>
-                </div>
-              </dialog>
-            </div>
-          )}
-          {user?._id ? (<UserModal user={user} logoutHandler={logoutHandler} />) : (
-            <Link to={"/login"} className=" ml-2 font-semibold inline-blockbg-indigo-500 bg-indigo-500 text-white px-4 py-1 rounded-lg hover:bg-indigo-600">
-              <p className="cursor-pointer">Login</p>
-            </Link>
-          )}
-        </div>
-      </nav>
+        )}
+      </div>
+    </nav>
   );
 };
 

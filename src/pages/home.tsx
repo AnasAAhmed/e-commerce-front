@@ -6,7 +6,9 @@ import heroImg from '../assets/Ecommerce.png'
 import CollectionsList from "../components/CollectionsList";
 import RelatedProducts from "../components/RelatedProducts";
 import { ProductCardLoader } from "../components/loader";
-
+import { Carousel } from 'react-responsive-carousel'
+import "react-responsive-carousel/lib/styles/carousel.min.css"
+import Services from "../components/Services";
 
 
 const Home = () => {
@@ -21,18 +23,31 @@ const Home = () => {
   return (
     <>
       <div>
-        <section className="bg-center bg-cover">
-          <img src={heroImg} className="w-full h-[60vh]" alt="heroImg" />
+        <section className="bg-center bg-cover ">
+          <Carousel
+            showArrows={false}
+            showIndicators={true}
+            showStatus={false}
+            showThumbs={false}
+            interval={2000}
+            infiniteLoop={true}
+            autoPlay={true}
+
+          >
+            <img src={heroImg} className="w-full h-[30vh] md:h-[65vh] sm:h-[40vh]" alt="heroImg" />
+            <img src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFDYCCsQ3MxbAXHCSu6cG77fLvhnakopvkFQ&s"} className="w-full h-[30vh] md:h-[65vh] sm:h-[40vh]" alt="heroImg" />
+            <img src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmxOruz0L6Y-Zn_Wt-ifVGR5aqKXSpZZg0HA&s"} className="w-full h-[30vh] md:h-[65vh] sm:h-[40vh]" alt="heroImg" />
+            </Carousel>
         </section>
         <CollectionsList />
         <h1 className="text-4xl my-8 flex items-center justify-center">Latest Products</h1>
-        <div className="flex flex-col items-center gap-10 py-8 px-5">
-          <div className="flex flex-wrap justify-center gap-16 ">
+        <div className="flex flex-col items-center sm:gap-10 py-8 px-2 sm:px-5">
+          <div className="sm:flex sm:flex-wrap grid grid-cols-2 justify-center gap-4 sm:gap-16 ">
             {isLoading ? (
-             <ProductCardLoader />
+              <ProductCardLoader />
             ) : (
               !data?.products || data?.products.length === 0 ? (
-                <p className="text-body-bold">No products found</p>
+                <p className="font-bold text-4xl">No products found</p>
               ) : (
                 data?.products.map((i) => (
                   <ProductCard
@@ -53,13 +68,17 @@ const Home = () => {
             More
           </Link>
         </h1>
-        <div className="flex flex-col items-center   px-5">
+        <img src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsX6tCdGyxoSyGCg_2ceCWrpkTs59KBEem4g&s"} className="w-full my-8 h-[30vh] md:h-[65vh] sm:h-[40vh]" alt="heroImg" />
+
+        <div className="flex flex-col items-center">
           <RelatedProducts category={"camera"} heading="Camera's" />
         </div>
-        <div className="flex flex-col items-center   px-5">
+        <img src={"https://img.freepik.com/premium-vector/flat-design-realistic-banner-template_23-2150102691.jpg?w=740"} className="w-full my-8 h-[30vh] md:h-[65vh] sm:h-[40vh]" alt="heroImg" />
+
+        <div className="flex flex-col items-center">
           <RelatedProducts category={"laptop"} heading="Laptop's" />
         </div>
-
+        <Services />
       </div>
     </>
   );

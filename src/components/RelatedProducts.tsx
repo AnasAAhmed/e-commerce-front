@@ -19,7 +19,7 @@ const RelatedProducts = ({ category, heading,  filteredProductId }: CategoryProd
   return (
     <div>
       <h1 className='text-4xl mb-12 flex items-center justify-center'>{heading}</h1>
-      <main className='flex flex-wrap justify-center gap-16 '>
+      <main className='sm:flex sm:flex-wrap grid grid-cols-2 justify-center gap-4 sm:gap-16'>
         {isLoading ? (
           <ProductCardLoader />
         ) : (
