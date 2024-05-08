@@ -8,13 +8,6 @@ export type User = {
   dob: string;
   _id: string;
 };
-export interface Review {
-  _id: string; // Unique identifier for the review
-  user: string; // ID of the user who left the review
-  name: string; // Name of the reviewer
-  rating: number; // Rating given in the review
-  comment: string; // Comment or review text
-}
 
 export type IShippingInfo ={
     address: string;
@@ -44,12 +37,22 @@ export type IOrder  ={
     orderItems: IOrderItem[];
 }
 
+export type Review= {
+  name: string;
+  userId: string;
+  email: string;
+  rating: number;
+  comment: string;
+};
+
 export type Product = {
   name: string;
   price: number;
   cutPrice: number;
   description:string;
   stock: number;
+  ratings: number;
+  numOfReviews: number;
   category: string;
   collections: string;
   size: string[];

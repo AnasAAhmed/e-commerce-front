@@ -9,7 +9,7 @@ type CategoryProductsProps = {
   filteredProductId?: string;
 };
 
-const RelatedProducts = ({ category, heading,  filteredProductId }: CategoryProductsProps) => {
+const RelatedProducts = ({ category, heading, filteredProductId }: CategoryProductsProps) => {
   const { data, isLoading, isError } = useLatestCategoryProductsQuery({ category: category }); // Pass the category name
 
   if (isError) return <div>Error: Cannot Fetch the Products</div>;
@@ -23,16 +23,26 @@ const RelatedProducts = ({ category, heading,  filteredProductId }: CategoryProd
         {isLoading ? (
           <ProductCardLoader />
         ) : (
-          filteredProducts?.map((product) => (
-            <ProductCard
-              key={product._id}
-              productId={product._id}
-              name={product.name}
-              price={product.price}
-              photo={product.photo}
-              cutPrice={product.cutPrice}
-            />
-          ))
+          filteredProducts?.length === 0 || data?.products.length === 0 ? (
+            <p className="font-bold text-4xl h-[260px]">No products found</p>
+          ) : (
+            filteredProducts?.map((product) => (
+              <ProductCard
+                key={product._id}
+                productId={product._id}
+                name={product.name}
+                price={product.price}
+                photo={product.photo}
+                numOfReviews={product.numOfReviews}
+                ratings={product.ratings}
+                cutPrice={product.cutPrice}
+                size={product.size ? product.size[0] : ""}
+                color={product.color ? product.color[0] : ""}
+                style={product.style ? product.style[0] : ""}
+                stock={product.stock}
+              />
+            ))
+          )
         )}
       </main>
       {heading && (

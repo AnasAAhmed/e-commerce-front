@@ -42,7 +42,7 @@ const UserModal = ({ user, logoutHandler, heading, children }: UserModalType) =>
                         <div>
                             <h3 className="text-xl font-semibold mb-4">User Details</h3>
                             <img src={user?.photo} alt="User" className="w-7 h-7 rounded-full" />
-                            <div className="grid grid-cols-2 gap-2">
+                            <div className="grid grid-cols-2 gap-2 sm:px-6">
 
                                 <span className="font-semibold">Name:</span>
                                 <span>{user.name}</span>

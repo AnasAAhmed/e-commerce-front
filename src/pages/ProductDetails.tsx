@@ -10,6 +10,7 @@ import { CartItem } from "../types/types";
 import { addToCart } from "../redux/reducer/cartReducer";
 import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
+import ProductReview from "../components/ProductReviews";
 
 const ProductDetails = () => {
   const [loading, setLoading] = useState(false);
@@ -22,7 +23,7 @@ const ProductDetails = () => {
   const params = useParams();
 
   const { data, isLoading, isError } = useProductDetailsQuery(params.id!);
-  const { _id: productId, price, cutPrice, description, photo, name, stock, category, size:sizes, color:colors, style:styles } = data?.product || {
+  const { _id: productId, price, cutPrice, description, photo,ratings,numOfReviews, name, stock, category, size:sizes, color:colors, style:styles } = data?.product || {
     _id: "",
     photo: "",
     category: "",
@@ -30,6 +31,8 @@ const ProductDetails = () => {
     name: "",
     stock: 0,
     price: 0,
+    ratings: 0,
+    numOfReviews: 0,
     cutPrice: 0,
     size: [],
     color: [],
@@ -100,11 +103,11 @@ const ProductDetails = () => {
                 </div>
               }
               {styleArray.length > 0 &&
-                <div className="flex mb-4">
+                <div className="flex flex-wrap mb-4">
                   {styleArray.map((item, index) => (
                     <button
                       key={index}
-                      className={`${style === item ? "bg-black text-white" : "bg-white text-gray-800"} text-gray-800 px-2 py-1 mr-2 rounded-md`}
+                      className={`${style === item ? "bg-black text-white" : "bg-white text-gray-800"} mt-2 text-gray-800 px-2 py-1 mr-2 rounded-md`}
                       onClick={() => setStyle(item)}
                     >{item}</button>
                   ))}
@@ -115,7 +118,8 @@ const ProductDetails = () => {
               <span className="fa fa-star  text-orange-500"></span>
               <span className="fa fa-star "></span>
               <span className="fa fa-star "></span>{"  "}
-              <span className="">Reviews (33)</span>
+              <span className="">Reviews {numOfReviews}</span>{"  "}
+              <span className="">Rating {ratings}</span>
 
               <br />
               {stock > 0 ? (
@@ -149,6 +153,9 @@ const ProductDetails = () => {
         )}
       </main>
       <div>
+        <ProductReview numOfReviews={numOfReviews} productId={productId}/>
+      </div>
+      <div className="flex justify-center items-center">
         <RelatedProducts filteredProductId={productId} category={category} heading="Related Products" />
       </div>
     </div>

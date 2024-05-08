@@ -34,9 +34,9 @@ const Home = () => {
             autoPlay={true}
 
           >
-            <img src={heroImg} className="w-full h-[30vh] md:h-[65vh] sm:h-[40vh]" alt="heroImg" />
-            <img src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFDYCCsQ3MxbAXHCSu6cG77fLvhnakopvkFQ&s"} className="w-full h-[30vh] md:h-[65vh] sm:h-[40vh]" alt="heroImg" />
-            <img src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmxOruz0L6Y-Zn_Wt-ifVGR5aqKXSpZZg0HA&s"} className="w-full h-[30vh] md:h-[65vh] sm:h-[40vh]" alt="heroImg" />
+            <img src={heroImg} className="w-full h-[40vh] md:h-[75vh] sm:h-[50vh]" alt="heroImg" />
+            <img src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFDYCCsQ3MxbAXHCSu6cG77fLvhnakopvkFQ&s"} className="w-full h-[40vh] md:h-[75vh] sm:h-[50vh]" alt="heroImg" />
+            <img src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmxOruz0L6Y-Zn_Wt-ifVGR5aqKXSpZZg0HA&s"} className="w-full h-[40vh] md:h-[75vh] sm:h-[50vh]" alt="heroImg" />
             </Carousel>
         </section>
         <CollectionsList />
@@ -47,7 +47,7 @@ const Home = () => {
               <ProductCardLoader />
             ) : (
               !data?.products || data?.products.length === 0 ? (
-                <p className="font-bold text-4xl">No products found</p>
+                <p className="font-bold text-4xl h-[260px]">No products found</p>
               ) : (
                 data?.products.map((i) => (
                   <ProductCard
@@ -56,7 +56,13 @@ const Home = () => {
                     name={i.name}
                     price={i.price}
                     photo={i.photo}
+                    numOfReviews={i.numOfReviews}
+                    ratings={i.ratings}
                     cutPrice={i.cutPrice}
+                    size={i.size?i.size[0]:""}
+                    color={i.color?i.color[0]:""}
+                    style={i.style?i.style[0]:""}
+                    stock={i.stock}
                   />
                 ))
               )

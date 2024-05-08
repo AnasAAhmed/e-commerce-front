@@ -72,6 +72,10 @@ export type ProductResponse = {
   success: boolean;
   product: Product;
 };
+export type ReviewsResponse = {
+  success: boolean;
+  reviews:Review;
+};
 
 export type AllOrdersResponse = {
   success: boolean;
@@ -111,7 +115,15 @@ export type UpdateProductRequest = {
   productId: string;
   formData: FormData;
 };
+export type ReviewRequest = {
+  productId:string
+  formData: FormData;
+};
 export type DeleteProductRequest = {
+  userId: string;
+  productId: string;
+};
+export type DeleteReviewRequest = {
   userId: string;
   productId: string;
 };

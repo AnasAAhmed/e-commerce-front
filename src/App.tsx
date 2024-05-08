@@ -63,7 +63,6 @@ const App = () => {
   return loading ? (
     <Loader />
   ) : (
-   
       <Router>
         <Header cartItemsLength={cartItemsLength} user={user} />
         <Suspense fallback={<Loader />}>
@@ -125,15 +124,16 @@ const App = () => {
               <Route
                 path="/admin/transaction/:id"
                 element={<TransactionManagement />}
-                />
+              />
             </Route>
 
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
         <Toaster position="bottom-center" />
-        <Footer/>
+        {/* <Footer /> */}
       </Router>
+     
   );
 };
 

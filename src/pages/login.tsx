@@ -62,8 +62,8 @@ const Login = () => {
   };
 
   return (
-    <div className="h-[90vh] pt-24" >
-      <div className={toggler ? "hidden" : "flex flex-col items-center justify-center"}>
+    <div className="h-[90vh] " >
+      <div className={toggler ? "hidden" : " mt-24 flex flex-col items-center justify-center"}>
         <main className=" w-full h-80 max-w-md p-8 flex flex-col items-center">
           <h1 className="text-3xl font-bold mb-8">Login</h1>
           <div className="w-full flex flex-col items-center">

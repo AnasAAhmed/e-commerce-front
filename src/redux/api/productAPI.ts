@@ -5,9 +5,12 @@ import {
   CollectionProductsResponse,
   CollectionsResponse,
   DeleteProductRequest,
+  DeleteReviewRequest,
   MessageResponse,
   NewProductRequest,
   ProductResponse,
+  ReviewRequest,
+  ReviewsResponse,
   SearchProductsRequest,
   SearchProductsResponse,
   UpdateProductRequest,
@@ -97,6 +100,25 @@ export const productAPI = createApi({
       }),
       invalidatesTags: ["product"],
     }),
+    reviews: builder.query<ReviewsResponse, string>({
+      query: (ProductId) =>`reviews/${ProductId}`,
+      providesTags: ["product"],
+    }),
+    createReview: builder.mutation<MessageResponse, ReviewRequest>({
+      query: ({ formData, productId }) => ({
+        url: `new-reviews/${productId}`,
+        method: "POST",
+        body: formData,
+      }),
+      invalidatesTags: ["product"],
+    }),
+    deleteReview: builder.mutation<MessageResponse, DeleteReviewRequest>({
+      query: ({ userId, productId }) => ({
+        url: `delete-review?productId=${productId}&id=${userId}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["product"],
+    }),
   }),
 });
 
@@ -112,4 +134,7 @@ export const {
   useProductDetailsQuery,
   useUpdateProductMutation,
   useDeleteProductMutation,
+  useReviewsQuery,
+  useCreateReviewMutation,
+  useDeleteReviewMutation,
 } = productAPI;

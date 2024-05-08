@@ -64,18 +64,18 @@ const Search = () => {
       <h2 className="text-center text-3xl font-semibold mt-10 mb-4 mx-2">
         Filters <RiFilterFill className="inline-block mb-2" />
       </h2>
-      <div className="flex flex-col sm:flex-row mx-3 items-center">
+      <div className="flex flex-col sm:flex-row mx-3 sm:mx-10 md:mx-20 items-center">
         <input
           type="text"
           placeholder="Search by brand or name..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full h-9 px-2 border-none mb-4 sm:mb-0 max-sm:rounded-md sm:rounded-l-md  bg-gray-200 "
+          className="w-full h-9 px-2 border-none mb-4 sm:mb-0 max-sm:rounded-lg sm:rounded-l-lg  bg-gray-200 "
         />
         <div className="flex flex-row">
 
           <select
-            className=" h-9 px-2 max-sm:rounded-l-md border-none bg-gray-200 "
+            className=" h-9 px-2 max-sm:rounded-l-lg border-none bg-gray-200 "
             value={sort}
             onChange={(e) => setSort(e.target.value)}
           >
@@ -84,7 +84,7 @@ const Search = () => {
             <option value="dsc">Price (High to Low)</option>
           </select>
           <select
-            className=" h-9 px-2 border-none rounded-r-md bg-gray-200 "
+            className=" h-9 px-2 border-none rounded-r-lg bg-gray-200 "
             value={category}
             onChange={(e) => setCategory(e.target.value)}
           >
@@ -128,7 +128,13 @@ const Search = () => {
                     name={i.name}
                     price={i.price}
                     photo={i.photo}
+                    numOfReviews={i.numOfReviews}
+                    ratings={i.ratings}
                     cutPrice={i.cutPrice}
+                    size={i.size?i.size[0]:""}
+                    color={i.color?i.color[0]:""}
+                    style={i.style?i.style[0]:""}
+                    stock={i.stock}
                   />
                 ))
               )}
