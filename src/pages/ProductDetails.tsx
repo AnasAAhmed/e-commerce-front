@@ -11,6 +11,7 @@ import { addToCart } from "../redux/reducer/cartReducer";
 import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
 import ProductReview from "../components/ProductReviews";
+import StarRatings from "../components/StarsRatings";
 
 const ProductDetails = () => {
   const [loading, setLoading] = useState(false);
@@ -23,7 +24,7 @@ const ProductDetails = () => {
   const params = useParams();
 
   const { data, isLoading, isError } = useProductDetailsQuery(params.id!);
-  const { _id: productId, price, cutPrice, description, photo,ratings,numOfReviews, name, stock, category, size:sizes, color:colors, style:styles } = data?.product || {
+  const { _id: productId, price, cutPrice, description, photo, ratings, numOfReviews, name, stock, category, size: sizes, color: colors, style: styles } = data?.product || {
     _id: "",
     photo: "",
     category: "",
@@ -79,7 +80,7 @@ const ProductDetails = () => {
             </section>
             <article className="sec2 flex-1 w-full  md:w-96">
               <p className="min-h-16 text-2xl font-semibold mb-4">{name}</p>
-              {sizeArray.length >1 &&
+              {sizeArray.length > 1 &&
                 <div className="flex mb-4">
                   {sizeArray.map((item, index) => (
                     <button
@@ -113,13 +114,10 @@ const ProductDetails = () => {
                   ))}
                 </div>
               }
-              <span className="fa fa-star text-orange-500"></span>
-              <span className="fa fa-star  text-orange-500"></span>
-              <span className="fa fa-star  text-orange-500"></span>
-              <span className="fa fa-star "></span>
-              <span className="fa fa-star "></span>{"  "}
-              <span className="">Reviews {numOfReviews}</span>{"  "}
-              <span className="">Rating {ratings}</span>
+              <span className="text-lg">
+             <StarRatings rating={ratings} />
+              </span>
+
 
               <br />
               {stock > 0 ? (
@@ -143,7 +141,7 @@ const ProductDetails = () => {
               <button
                 className='cart-button w-full mt-4 px-4 py-2 bg-yellow-500 rounded-md text-white text-lg font-semibold transition duration-300 ease-in-out hover:bg-yellow-600'
                 onClick={() =>
-                  addToCartHandler({ productId,  size,color, style, price, cutPrice, name, photo, stock, quantity: 1 })
+                  addToCartHandler({ productId, size, color, style, price, cutPrice, name, photo, stock, quantity: 1 })
                 }
               >
                 Add to Cart
@@ -153,7 +151,7 @@ const ProductDetails = () => {
         )}
       </main>
       <div>
-        <ProductReview numOfReviews={numOfReviews} productId={productId}/>
+        <ProductReview numOfReviews={numOfReviews} productId={productId} />
       </div>
       <div className="flex justify-center items-center">
         <RelatedProducts filteredProductId={productId} category={category} heading="Related Products" />

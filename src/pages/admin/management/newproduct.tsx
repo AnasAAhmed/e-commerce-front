@@ -15,7 +15,7 @@ const NewProduct = () => {
 
   const [name, setName] = useState<string>("");
   const [category, setCategory] = useState<string>("");
-  const [collections, Setcollections] = useState<string>("");
+  const [collections, SetCollections] = useState<string>("");
   const [price, setPrice] = useState<number>(1000);
   const [cutPrice, setCutPrice] = useState<number>(0);
   const [description, setDescription] = useState<string>("");
@@ -80,126 +80,147 @@ const NewProduct = () => {
   
   return (
     <div className="admin-container">
-      <AdminSidebar />
-      <main className="product-management">
-        <Link to={"/admin/transaction"}>
-          <FaArrowLeft />
-        </Link>
-        <article>
-          <form onSubmit={submitHandler} >
-            <h2>New Product</h2>
-            <div>
-              <label>Name</label>
-              <input
-                required
-                type="text"
-                placeholder="Name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </div>
-            <div>
-              <label>Description</label>
-              <textarea
-                required
-                rows={2}
-                className="w-full border-2 p-2 border-gray-300"
-                placeholder="Description"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-              />
-            </div>
-            <div>
-              <label>Price</label>
-              <input
-                required
-                type="number"
-                placeholder="Price"
-                value={price}
-                onChange={(e) => setPrice(Number(e.target.value))}
-              />
-            </div>
-            <div>
-              <label>cutPrice</label>
-              <input
-                required
-                type="number"
-                placeholder="Price"
-                value={cutPrice}
-                onChange={(e) => setCutPrice(Number(e.target.value))}
-              />
-            </div>
-            <div>
-              <label>Stock</label>
-              <input
-                required
-                type="number"
-                placeholder="Stock"
-                value={stock}
-                onChange={(e) => setStock(Number(e.target.value))}
-              />
-            </div>
-
-            <div>
-              <label>Category</label>
-              <input
-                required
-                type="text"
-                placeholder="eg. laptop, camera etc"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-              />
-            </div>
-            <div>
-              <label>collections</label>
-              <input
-                required
-                type="text"
-                placeholder="eg. electronic, crocrey, wearables etc"
-                value={collections}
-                onChange={(e) => Setcollections(e.target.value)}
-              />
-            </div>
-            <div>
-              <label>Size (comma-separated)</label>
-              <input
-                type="text"
-                placeholder="eg. S, M, L"
-                value={size.join(",")} // Join array elements with commas
-                onChange={(e) => setSize(e.target.value.split(",").map(item => item.trim()))} // Split input string by comma
-              />
-            </div>
-            <div>
-              <label>Color (comma-separated)</label>
-              <input
-                type="text"
-                placeholder="eg. Red, Blue, Green or hex: #000000"
-                value={color.join(",")}
-                onChange={(e) => setColor(e.target.value.split(",").map(item => item.trim()))}
-                
-              />
-            </div>
-            <div>
-              <label>Style (comma-separated)</label>
-              <input
-                type="text"
-                placeholder="eg. Casual, Formal, Sporty"
-                value={style.join(",")}
-                onChange={(e) => setStyle(e.target.value.split(",").map(item => item.trim()))}
-              />
-            </div>
-            <div>
-              <label>Photo</label>
-              <input required type="file" onChange={changeImageHandler} />
-            </div>
-
-            {photoPrev && <img src={photoPrev} alt="New Image" />}
-            <button type="submit">{load ? "Creating..." : "Create"}</button>
-
-          </form>
-        </article>
-      </main>
-    </div>
+  <AdminSidebar />
+  <main >
+    <Link to={"/admin/product"} className="flex items-center text-blue-500 mb-4">
+      <FaArrowLeft className="mr-1" /> Back
+    </Link>
+    <article >
+      <h2 className="heading">New Product</h2>
+      <form onSubmit={submitHandler} className="grid grid-cols-2 gap-2 sm:gap-4 mx-2">
+        <div>
+          <label htmlFor="name" className="font-semibold text-sm sm:text-lg block">Name</label>
+          <input
+            id="name"
+            required
+            type="text"
+            placeholder="Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="border border-gray-300 rounded-md w-[96%] px-3 py-3 "
+          />
+        </div>
+        <div>
+          <label htmlFor="description" className="font-semibold text-sm sm:text-lg block">Description</label>
+          <textarea
+            id="description"
+            required
+            rows={2}
+            placeholder="Description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            className="border border-gray-300 rounded-md w-[96%] px-3 py-3 "
+          />
+        </div>
+        <div>
+          <label htmlFor="price" className="font-semibold text-sm sm:text-lg block">Price</label>
+          <input
+            id="price"
+            required
+            type="number"
+            placeholder="Price"
+            value={price}
+            onChange={(e) => setPrice(Number(e.target.value))}
+            className="border border-gray-300 rounded-md w-[96%] px-3 py-3 "
+          />
+        </div>
+        <div>
+          <label htmlFor="cutPrice" className="font-semibold text-sm sm:text-lg block">Cut Price</label>
+          <input
+            id="cutPrice"
+            required
+            type="number"
+            placeholder="Cut Price"
+            value={cutPrice}
+            onChange={(e) => setCutPrice(Number(e.target.value))}
+            className="border border-gray-300 rounded-md w-[96%] px-3 py-3 "
+          />
+        </div>
+        <div>
+          <label htmlFor="stock" className="font-semibold text-sm sm:text-lg block">Stock</label>
+          <input
+            id="stock"
+            required
+            type="number"
+            placeholder="Stock"
+            value={stock}
+            onChange={(e) => setStock(Number(e.target.value))}
+            className="border border-gray-300 rounded-md w-[96%] px-3 py-3 "
+          />
+        </div>
+        <div>
+          <label htmlFor="category" className="font-semibold text-sm sm:text-lg block">Category</label>
+          <input
+            id="category"
+            required
+            type="text"
+            placeholder="eg. Laptop, Camera etc."
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            className="border border-gray-300 rounded-md w-[96%] px-3 py-3 "
+          />
+        </div>
+        <div>
+          <label htmlFor="collections" className="font-semibold text-sm sm:text-lg block">Collections</label>
+          <input
+            id="collections"
+            required
+            type="text"
+            placeholder="eg. Electronic, Crocrey, Wearables etc."
+            value={collections}
+            onChange={(e) => SetCollections(e.target.value)}
+            className="border border-gray-300 rounded-md w-[96%] px-3 py-3 "
+          />
+        </div>
+        <div>
+          <label htmlFor="size" className="font-semibold text-sm sm:text-lg block">Size (comma-separated)</label>
+          <input
+            id="size"
+            type="text"
+            placeholder="eg. S, M, L"
+            value={size.join(",")} // Join array elements with commas
+            onChange={(e) => setSize(e.target.value.split(",").map(item => item.trim()))} // Split input string by comma
+            className="border border-gray-300 rounded-md w-[96%] px-3 py-3 "
+          />
+        </div>
+        <div>
+          <label htmlFor="color" className="font-semibold text-sm sm:text-lg block">Color (comma-separated)</label>
+          <input
+            id="color"
+            type="text"
+            placeholder="eg. Red, Blue, Green or hex: #000000"
+            value={color.join(",")}
+            onChange={(e) => setColor(e.target.value.split(",").map(item => item.trim()))}
+            className="border border-gray-300 rounded-md w-[96%] px-3 py-3 "
+          />
+        </div>
+        <div>
+          <label htmlFor="style" className="font-semibold text-sm sm:text-lg block">Style (comma-separated)</label>
+          <input
+            id="style"
+            type="text"
+            placeholder="eg. Casual, Formal, Sporty"
+            value={style.join(",")}
+            onChange={(e) => setStyle(e.target.value.split(",").map(item => item.trim()))}
+            className="border border-gray-300 rounded-md w-[96%] px-3 py-3 "
+          />
+        </div>
+        <div>
+          <label htmlFor="photo" className="font-semibold text-sm sm:text-lg block">Photo</label>
+          <input 
+            id="photo"
+            required 
+            type="file" 
+            onChange={changeImageHandler} 
+            className="border border-gray-300 rounded-md w-[96%] px-3 py-3 "
+          />
+        </div>
+         <img src={photoPrev?photoPrev:"https://raw.githubusercontent.com/AnasAAhmed/Imagerator/main/frontend/src/assets/preview.png"} alt="New Image" className="w-24 h-24 object-cover" />
+        <button type="submit" className="bg-blue-500 w-56 h-10 text-white text-lg rounded-md font-semibold">{load ? "Creating..." : "Create"}</button>
+      </form>
+    </article>
+  </main>
+</div>
   );
 };
 

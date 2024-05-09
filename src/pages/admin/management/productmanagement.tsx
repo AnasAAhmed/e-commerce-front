@@ -45,7 +45,7 @@ const Productmanagement = () => {
   const [colorUpdate, setColorUpdate] = useState<string[]>(color);
   const [styleUpdate, setStyleUpdate] = useState<string[]>(style);
   const [photoUpdate, setPhotoUpdate] = useState<string>("");
-  const [photoFile, setPhotoFile] = useState<File>();
+  const [photoFile, setPhotoFile] = useState<File | null>(null);
 
   const [load, setLoad] = useState<boolean>(false);
 
@@ -136,92 +136,95 @@ const Productmanagement = () => {
   return (
     <div className="admin-container">
       <AdminSidebar />
-      <main className="product-management">
-        <Link to={"/admin/transaction"}>
-          <FaArrowLeft />
+      <main className="">
+        <Link to={"/admin/product"} className="flex items-center text-blue-500 mb-4">
+          <FaArrowLeft className="mr-1" /> Back
         </Link>
+        <h2 className="heading">Manage-Product</h2>
         {isLoading ? (
           <Skeleton length={20} />
         ) : (
           <>
-            <section>
-              <strong>ID - {data?.product._id}</strong>
-              <img src={`${server}/${photo}`} alt="Product" />
-              <p>{name}</p>
+            <section className="flex flex-wrap justify-between items-center mx-2">
+            <strong className="my-3 sm:my-0">ProductID - {data?.product._id}</strong>
               {stock > 0 ? (
                 <>
                   {stock < 6 ? (
-                    <span className="red">{stock} Low Stock</span>
+                    <span className="red my-3 sm:my-0">{stock} Low Stock</span>
                   ) : (
-                    <span className="green">{stock} Available</span>
+                    <span className="green my-3 sm:my-0">{stock} Available</span>
                   )}
                 </>) : (
-                <span className="red">Not Available</span>
+                <span className="red my-3 sm:my-0">Not Available</span>
 
               )}
-              <h3>${price}</h3>
-              <h2 className="text-lg font-bold text-red-500 line-through">${cutPrice}</h2>
+
+              <button className="bg-red-500 my-3 sm:my-0 w-24 mt-2 h-10 text-white text-lg rounded-md mx-2 font-semibold" onClick={deleteHandler}>
+                Delete
+              </button>
             </section>
             <article>
-              <button className="product-delete-btn" onClick={deleteHandler}>
-                <FaTrash />
-              </button>
-              <form onSubmit={submitHandler}>
-                <h2>Manage</h2>
+              <form onSubmit={submitHandler} className="grid grid-cols-2 gap-2 sm:gap-4 mx-2">
+
                 <div>
-                  <label>Name</label>
+                  <label className="font-semibold text-sm sm:text-lg block">Name</label>
                   <input
                     type="text"
                     placeholder="Name"
                     value={nameUpdate}
                     onChange={(e) => setNameUpdate(e.target.value)}
+                    className="border border-gray-300 rounded-md w-[96%] px-3 py-3 "
                   />
                 </div>
                 <div>
-                  <label>Description</label>
+                  <label className="font-semibold text-sm sm:text-lg block">Description</label>
                   <textarea
                     required
                     rows={2}
-                    className="w-full border-2 p-2 border-gray-300"
                     placeholder="Description"
                     value={descriptionUpdate}
                     onChange={(e) => setDescriptionUpdate(e.target.value)}
+                    className="border border-gray-300 rounded-md w-[96%] px-3 py-3 "
                   />
                 </div>
                 <div>
-                  <label>Price</label>
+                  <label className="font-semibold text-sm sm:text-lg block">Price</label>
                   <input
                     type="number"
                     placeholder="Price"
                     value={priceUpdate}
                     onChange={(e) => setPriceUpdate(Number(e.target.value))}
+                    className="border border-gray-300 rounded-md w-[96%] px-3 py-3 "
                   />
                 </div>
                 <div>
-                  <label>Cut Price</label>
+                  <label className="font-semibold text-sm sm:text-lg block">Cut Price</label>
                   <input
                     type="number"
                     placeholder="Cut Price"
                     value={cutpriceUpdate}
                     onChange={(e) => setCutPriceUpdate(Number(e.target.value))}
+                    className="border border-gray-300 rounded-md w-[96%] px-3 py-3 "
                   />
                 </div>
                 <div>
-                  <label>Stock</label>
+                  <label className="font-semibold text-sm sm:text-lg block">Stock</label>
                   <input
                     type="number"
                     placeholder="Stock"
                     value={stockUpdate}
                     onChange={(e) => setStockUpdate(Number(e.target.value))}
+                    className="border border-gray-300 rounded-md w-[96%] px-3 py-3 "
                   />
                 </div>
                 <div>
-                  <label>Category</label>
+                  <label className="font-semibold text-sm sm:text-lg block">Category</label>
                   <input
                     type="text"
                     placeholder="eg. laptop, camera etc"
                     value={categoryUpdate}
                     onChange={(e) => setCategoryUpdate(e.target.value)}
+                    className="border border-gray-300 rounded-md w-[96%] px-3 py-3 "
                   />
                 </div>
                 <div>
@@ -231,47 +234,62 @@ const Productmanagement = () => {
                     placeholder="eg. laptop, camera etc"
                     value={collectionsUpdate}
                     onChange={(e) => setCollectionsUpdate(e.target.value)}
+                    className="border border-gray-300 rounded-md w-[96%] px-3 py-3 "
                   />
                 </div>
                 <div>
-                  <label>Size (comma-separated)</label>
+                  <label className="font-semibold text-sm sm:text-lg block">Size (comma-separated)</label>
                   <input
                     type="text"
                     placeholder="eg. S, M, L"
                     value={sizeUpdate.join(",")}
                     onChange={(e) => setSizeUpdate(e.target.value.split(",").map(item => item.trim()))}
+                    className="border border-gray-300 rounded-md w-[96%] px-3 py-3 "
                   />
                 </div>
                 <div>
-                  <label>Color (comma-separated)</label>
+                  <label className="font-semibold text-sm sm:text-lg block">Color (comma-separated)</label>
                   <input
                     type="text"
                     placeholder="eg. Red, Blue, Green"
                     value={colorUpdate.join(",")}
                     onChange={(e) => setColorUpdate(e.target.value.split(",").map(item => item.trim()))}
+                    className="border border-gray-300 rounded-md w-[96%] px-3 py-3 "
                   />
                 </div>
                 <div>
-                  <label>Style (comma-separated)</label>
+                  <label className="font-semibold text-sm sm:text-lg block">Style (comma-separated)</label>
                   <input
                     type="text"
                     placeholder="eg. Casual, Formal, Sporty"
                     value={styleUpdate.join(",")}
                     onChange={(e) => setStyleUpdate(e.target.value.split(",").map(item => item.trim()))}
+                    className="border border-gray-300 rounded-md w-[96%] px-3 py-3 "
                   />
                 </div>
                 <div>
-                  <label>Photo</label>
+                  <label className="font-semibold text-sm sm:text-lg block">Update Photo</label>
                   <input type="file" onChange={changeImageHandler} />
                 </div>
-                {photoUpdate && <img src={photoUpdate} alt="New Image" />}
-                <button type="submit">{load ? "Updating..." : "Update"}</button>
+
+                <div className="relative">
+                  <img src={`${server}/${photo}`} alt="New Image" className="w-24 border-2 h-24 object-cover" />
+                  <span className="absolute top-1  bg-blue-500 text-white rounded-full px-2 text-xs">Old</span>
+                </div>
+
+                <div className="relative">
+                  <img src={photoUpdate ? photoUpdate : "https://raw.githubusercontent.com/AnasAAhmed/Imagerator/main/frontend/src/assets/preview.png"} alt="New Image" className="w-24 border-2 sm:ml-6 h-24 object-cover" />
+                  <span className="absolute top-1 bg-blue-500 text-white rounded-full px-2 text-xs">New</span>
+                  {photoUpdate?<span className="absolute top-1 right-1 bg-red-500 text-white rounded-full px-4 py-2 text-xs cursor-pointer"onClick={()=>{setPhotoUpdate("");setPhotoFile(null)}}><FaTrash/></span>:""}
+                </div>
+                <button type="submit" className="bg-blue-500 w-full sm:w-[50%] h-10 text-white text-lg rounded-md font-semibold">{load ? "Updating..." : "Update"}</button>
               </form>
+
             </article>
           </>
         )}
       </main>
-    </div>
+    </div >
   );
 };
 

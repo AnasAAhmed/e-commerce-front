@@ -66,7 +66,7 @@ const Header = ({ user, cartItemsLength }: PropsType) => {
             >
               <RiMenuLine size={"1.5rem"} />
             </button>
-            <dialog className="top-8 py-2 px-4 rounded-lg bg-gray-100" open={isOpen} style={{ left: 'calc(100% - 100px)' }}>
+            <dialog className="top-8 py-2 z-30 px-4 rounded-lg bg-gray-100" open={isOpen} style={{ left: 'calc(100% - 100px)' }}>
               <div className="flex flex-col">
                 {user.role === "admin" && (
                   <Link className=" mb-1 hover:text-gray-800 text-gray-800 font-semibold" onClick={() => setIsOpen(false)} to="/admin/dashboard">
