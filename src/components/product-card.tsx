@@ -4,7 +4,6 @@ import { addToCart } from "../redux/reducer/cartReducer";
 import { useDispatch } from "react-redux";
 import { CartItem } from "../types/types";
 import toast from "react-hot-toast";
-import { FaShoppingCart } from "react-icons/fa";
 
 
 type ProductsProps = {

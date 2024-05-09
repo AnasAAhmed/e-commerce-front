@@ -33,7 +33,13 @@ const Collections = () => {
                                     name={i.name}
                                     price={i.price}
                                     photo={i.photo}
+                                    numOfReviews={i.numOfReviews}
+                                    ratings={i.ratings}
                                     cutPrice={i.cutPrice}
+                                    stock={i.stock}
+                                    size={i.size ? i.size[0] : ""}
+                                    color={i.color ? i.color[0] : ""}
+                                    style={i.style ? i.style[0] : ""}
                                 />
                             ))}
                         </div>

@@ -131,7 +131,7 @@ const App = () => {
           </Routes>
         </Suspense>
         <Toaster position="bottom-center" />
-        {/* <Footer /> */}
+        <Footer />
       </Router>
      
   );
