@@ -8,6 +8,7 @@ import { FetchBaseQueryError } from "@reduxjs/toolkit/query/react";
 import { MessageResponse } from "../types/api-types";
 import { userExist, userNotExist } from "../redux/reducer/userReducer";
 import { useDispatch } from "react-redux";
+import Footer from "../components/Footer";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -62,6 +63,7 @@ const Login = () => {
   };
 
   return (
+    <>
     <div className="h-[90vh] " >
       <div className={toggler ? "hidden" : " mt-24 flex flex-col items-center justify-center"}>
         <main className=" w-full h-80 max-w-md p-8 flex flex-col items-center">
@@ -100,6 +102,8 @@ const Login = () => {
       </div>
 
     </div>
+    <Footer />
+    </>
   );
 };
 

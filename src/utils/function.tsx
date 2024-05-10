@@ -1,5 +1,5 @@
 import toast from "react-hot-toast";
-const CopyText = ({text,heading}:{text:any,heading?:string}) => {
+const CopyText = ({ text, heading }: { text: any, heading?: string }) => {
     const copyToClipboard = () => {
         navigator.clipboard.writeText(text)
             .then(() => {
@@ -11,8 +11,14 @@ const CopyText = ({text,heading}:{text:any,heading?:string}) => {
     }
 
     return (
-        <div>
-            <button className="" onClick={copyToClipboard}><p className="text-red-500">{heading && heading} {text}</p></button>
+        <div className="flex flex-row">
+            <span className="text-black">{heading && heading} </span>
+            <button className="copy-text-btn" onClick={copyToClipboard}>
+                {text}
+                <span>
+                 Copy Text
+                </span>
+            </button>
         </div>
     );
 }

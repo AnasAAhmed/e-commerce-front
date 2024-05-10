@@ -30,8 +30,8 @@ export const ProductCardLoader = ({ numOfArr }: { numOfArr?: number }) => {
   return (
     Array.from({ length: numOfArr || 4 }, (_, i) => (
       <div key={i}
-        className="mt-8 w-[120px] xsm:w-[170px] sm:w-[240px] flex flex-col gap-2  bg-white rounded-md  object-cover ">
-        <div className="animate-pulse  h-[150px] xsm:h-[200px]  sm:h-[260px]  rounded-lg bg-gray-300"></div>
+        className="mt-8 w-full sm:w-[220px] flex flex-col gap-2  bg-white rounded-md  object-cover ">
+        <div className="animate-pulse h-[160px] xsm:h-[200px] sm:h-[260px]  rounded-lg bg-gray-300"></div>
         <div className="animate-pulse h-6 bg-gray-300 rounded-md"></div>
         <div className="animate-pulse h-6 bg-gray-300 rounded-md"></div>
         <div className="animate-pulse h-6 w-20 bg-gray-300 rounded-md"></div>
@@ -39,6 +39,7 @@ export const ProductCardLoader = ({ numOfArr }: { numOfArr?: number }) => {
           <div className="animate-pulse h-6 w-12 bg-gray-300 rounded-md"></div>
           <div className="animate-pulse h-6 w-20 bg-gray-300 rounded-md"></div>
         </div>
+        <div className="animate-pulse h-10 w-full bg-gray-300 rounded-mdw-full rounded-md  hover:bg-yellow-600"></div>
       </div>
     ))
   )

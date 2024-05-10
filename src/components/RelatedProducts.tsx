@@ -19,32 +19,35 @@ const RelatedProducts = ({ category, heading, filteredProductId }: CategoryProdu
   return (
     <div>
       <h1 className='text-4xl mb-12 flex items-center justify-center'>{heading}</h1>
-      <main className='sm:flex sm:flex-wrap grid grid-cols-2 justify-center gap-4 sm:gap-16'>
-        {isLoading ? (
-          <ProductCardLoader />
-        ) : (
-          filteredProducts?.length === 0 || data?.products.length === 0 ? (
-            <p className="font-bold text-4xl h-[260px]">No products found</p>
+      <div className="flex flex-col items-center sm:gap-10 py-8 px-2 sm:px-5">
+
+        <main className='md:flex md:flex-wrap grid grid-cols-2 justify-center gap-4 md:gap-16'>
+          {isLoading ? (
+            <ProductCardLoader />
           ) : (
-            filteredProducts?.map((product) => (
-              <ProductCard
-                key={product._id}
-                productId={product._id}
-                name={product.name}
-                price={product.price}
-                photo={product.photo}
-                numOfReviews={product.numOfReviews}
-                ratings={product.ratings}
-                cutPrice={product.cutPrice}
-                size={product.size ? product.size[0] : ""}
-                color={product.color ? product.color[0] : ""}
-                style={product.style ? product.style[0] : ""}
-                stock={product.stock}
-              />
-            ))
-          )
-        )}
-      </main>
+            filteredProducts?.length === 0 || data?.products.length === 0 ? (
+              <p className="font-bold text-4xl h-[260px]">No products found</p>
+            ) : (
+              filteredProducts?.map((product) => (
+                <ProductCard
+                  key={product._id}
+                  productId={product._id}
+                  name={product.name}
+                  price={product.price}
+                  photo={product.photo}
+                  numOfReviews={product.numOfReviews}
+                  ratings={product.ratings}
+                  cutPrice={product.cutPrice}
+                  size={product.size ? product.size[0] : ""}
+                  color={product.color ? product.color[0] : ""}
+                  style={product.style ? product.style[0] : ""}
+                  stock={product.stock}
+                />
+              ))
+            )
+          )}
+        </main>
+      </div>
       {heading && (
         <h1 className='text-2xl my-6 flex items-center justify-center'>
           <Link to={`/search/${category}`} onClick={() => window.scrollTo(0, 0)}>

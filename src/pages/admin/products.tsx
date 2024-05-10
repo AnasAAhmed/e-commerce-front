@@ -79,8 +79,8 @@ const Products = () => {
     <div className="admin-container">
       <AdminSidebar />
       <main>{isLoading ? <Skeleton length={20} /> : Table}</main>
-      <Link to="/admin/product/new" className="create-product-btn">
-        <FaPlus />
+      <Link to="/admin/product/new" className="fixed right-8 top-20 w-40 gap-2 h-10 flex items-center justify-center rounded-full bg-red-500 text-white hover:opacity-80">
+        Create Product <FaPlus />
       </Link>
     </div>
   );

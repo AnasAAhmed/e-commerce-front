@@ -13,6 +13,7 @@ import {
 import { RootState, server } from "../redux/store";
 import { CartItem } from "../types/types";
 import { toast } from "react-hot-toast";
+import Footer from "../components/Footer";
 
 const Cart = () => {
 
@@ -68,55 +69,58 @@ const Cart = () => {
   }, [cartItems]);
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 my-8 mx-auto max-w-7xl px-4">
-      <main className="lg:col-span-2 min-h-[80vh]">
-        {cartItems.length > 0 ? (
-          cartItems.map((i, idx) => (
-            <CartItemCard
-              incrementHandler={incrementHandler}
-              decrementHandler={decrementHandler}
-              removeHandler={removeHandler}
-              key={idx}
-              cartItem={i}
-            />
-          ))
-        ) : (
-          <h1 className="text-2xl font-bold text-gray-800">No Items Added</h1>
-        )}
-      </main>
-      <aside>
-        <div className="bg-white p-6 rounded-lg shadow-lg lg:fixed">
-          <p className="text-lg font-semibold text-gray-800">Order Summary</p>
-          <p className="mt-4">Subtotal: <span className="font-semibold">${subtotal}</span></p>
-          <p>Shipping Charges: <span className="font-semibold">${shippingCharges}</span></p>
-          <p>Tax: <span className="font-semibold">${tax}</span></p>
-          <p>Discount: <span className="font-semibold text-red-500">-${discount}</span></p>
-          <p className="mt-4"><b>Total: <span className="font-semibold">${total}</span></b></p>
+    <>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 my-8 mx-auto max-w-7xl px-4">
+        <main className="lg:col-span-2 min-h-[80vh]">
+          {cartItems.length > 0 ? (
+            cartItems.map((i, idx) => (
+              <CartItemCard
+                incrementHandler={incrementHandler}
+                decrementHandler={decrementHandler}
+                removeHandler={removeHandler}
+                key={idx}
+                cartItem={i}
+              />
+            ))
+          ) : (
+            <h1 className="text-2xl font-bold text-gray-800">No Items Added</h1>
+          )}
+        </main>
+        <aside>
+          <div className="bg-white p-6 rounded-lg shadow-lg lg:fixed">
+            <p className="text-lg font-semibold text-gray-800">Order Summary</p>
+            <p className="mt-4">Subtotal: <span className="font-semibold">${subtotal}</span></p>
+            <p>Shipping Charges: <span className="font-semibold">${shippingCharges}</span></p>
+            <p>Tax: <span className="font-semibold">${tax}</span></p>
+            <p>Discount: <span className="font-semibold text-red-500">-${discount}</span></p>
+            <p className="mt-4"><b>Total: <span className="font-semibold">${total}</span></b></p>
 
 
-          <div className="flex flex-row justify-center items-center">
+            <div className="flex flex-row justify-center items-center">
 
-            <input
-              type="text"
-              placeholder="Coupon Code"
-              value={couponCode}
-              onChange={(e) => setCouponCode(e.target.value)}
-              className="h-11 px-2 border border-gray-300 rounded-lg"
-            />
+              <input
+                type="text"
+                placeholder="Coupon Code"
+                value={couponCode}
+                onChange={(e) => setCouponCode(e.target.value)}
+                className="h-11 px-2 border border-gray-300 rounded-lg"
+              />
 
-            {couponCode && (
-              isValidCouponCode ? (
-                <span className="text-green-500 mt-2 block">-${discount} off using the <code>{couponCode}</code></span>
-              ) : (
-                <span className="text-red-500 mt-2 block">Invalid Coupon <VscError /></span>
-              )
-            )}
+              {couponCode && (
+                isValidCouponCode ? (
+                  <span className="text-green-500 mt-2 block">-${discount} off using the <code>{couponCode}</code></span>
+                ) : (
+                  <span className="text-red-500 mt-2 block">Invalid Coupon <VscError /></span>
+                )
+              )}
 
-            <Link to={`${cartItems.length > 0 ? "/shipping" : "/cart"}`} className={`${cartItems.length > 0 ? "" : "cursor-not-allowed"} my-6 mx-2 inline-blockbg-indigo-500 bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-500`}>Checkout</Link>
+              <Link to={`${cartItems.length > 0 ? "/shipping" : "/cart"}`} className={`${cartItems.length > 0 ? "" : "cursor-not-allowed"} my-6 mx-2 inline-blockbg-indigo-500 bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-500`}>Checkout</Link>
+            </div>
           </div>
-        </div>
-      </aside>
-    </div>
+        </aside>
+      </div>
+      <Footer />
+    </>
   );
 };
 

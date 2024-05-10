@@ -4,7 +4,6 @@ import { Toaster } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Header from "./components/header";
-import Footer from "./components/Footer";
 import Loader from "./components/loader";
 import Home from "./pages/home";
 import ProtectedRoute from "./components/protected-route";
@@ -131,7 +130,6 @@ const App = () => {
           </Routes>
         </Suspense>
         <Toaster position="bottom-center" />
-        <Footer />
       </Router>
      
   );

@@ -11,6 +11,7 @@ import {
 } from "../../../redux/api/productAPI";
 import { RootState, server } from "../../../redux/store";
 import { responseToast } from "../../../utils/features";
+import CopyText from "../../../utils/function";
 
 const Productmanagement = () => {
   const { user } = useSelector((state: RootState) => state.userReducer);
@@ -146,8 +147,9 @@ const Productmanagement = () => {
         ) : (
           <>
             <section className="flex flex-wrap justify-between items-center mx-2">
-            <strong className="my-3 sm:my-0">ProductID - {data?.product._id}</strong>
-              {stock > 0 ? (
+              
+            <strong className="my-3 sm:my-0"><CopyText text={data?.product._id} heading={"ProductID -"}/></strong>
+             {stock > 0 ? (
                 <>
                   {stock < 6 ? (
                     <span className="red my-3 sm:my-0">{stock} Low Stock</span>
@@ -164,7 +166,7 @@ const Productmanagement = () => {
               </button>
             </section>
             <article>
-              <form onSubmit={submitHandler} className="grid grid-cols-2 gap-2 sm:gap-4 mx-2">
+              <form onSubmit={submitHandler} className="grid grid-cols-2 gap-2 sm:gap-4 mx-2 mb-12">
 
                 <div>
                   <label className="font-semibold text-sm sm:text-lg block">Name</label>

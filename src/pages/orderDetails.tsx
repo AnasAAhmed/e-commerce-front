@@ -51,102 +51,86 @@ const OrderDetails = () => {
 
     return (
         <div className="user-container ">
-            <Link to={"/orders"}>
-                <FaArrowLeft />
-            </Link>
+        <Link to={"/orders"} className="flex items-center text-blue-500 mb-4">
+          <FaArrowLeft className="mr-1" /> Back
+        </Link>
 
-            <main className="product-management ">
-                {isLoading ? (
-                    <Skeleton />
-                ) : (
-                    <>
-                        <section
-                            style={{
-                                padding: "2rem",
-                            }}
-                        >
-                            <h2>Order Items</h2>
+            <main className="flex flex-col items-start">
+        {isLoading ? (
+          <Skeleton />
+        ) : (
+          <>
+            <section className="w-full px-2 md:px-8 ">
+              <h2 className="text-2xl font-bold mb-4">Order Items</h2>
+              <div className="">
+                {orderItems.map((i) => (
+                  <OrderProductCard
+                    key={i._id}
+                    name={i.name}
+                    photo={`${server}/${i.photo}`}
+                    productId={i.productId}
+                    _id={i._id}
+                    quantity={i.quantity}
+                    price={i.price}
+                    cutPrice={i.cutPrice}
+                    size={i.size}
+                    style={i.style}
+                    color={i.color}
+                  />
+                ))}
+              </div>
+            </section>
 
-                            {orderItems.map((i) => (
-                                <OrderProductCard
-                                    key={i._id}
-                                    name={i.name}
-                                    photo={`${server}/${i.photo}`}
-                                    productId={i.productId}
-                                    _id={i._id}
-                                    quantity={i.quantity}
-                                    price={i.price}
-                                    cutPrice={i.cutPrice}
-                                    size={i.size}
-                                    style={i.style}
-                                    color={i.color}
-                                />
-                            ))}
-                        </section>
-
-                        <article className="shipping-info-card">
-                            <h1>Order Info</h1>
-                            <h5>User Info</h5>
-                            <p>Name: {name}</p>
-                            <p>Email: {email}</p>
-                            <p>Phone: {phone}</p>
-                            <p>
-                                Address:{" "}
-                                {`${address}, ${city}, ${state}, ${country} ${pinCode}`}
-                            </p>
-                            <h5>Amount Info</h5>
-                            <p>Subtotal: {subtotal}</p>
-                            <p>Shipping Charges: {shippingCharges}</p>
-                            <p>Tax: {tax}</p>
-                            <p>Discount: {discount}</p>
-                            <p>Total: {total}</p>
-
-                            <h5>Status Info</h5>
-                            <p>
-                                Status:{" "}
-                                <span
-                                    className={
-                                        status === "Delivered"
-                                            ? "purple"
-                                            : status === "Shipped"
-                                                ? "green"
-                                                : "red"
-                                    }
-                                >
-                                    {status}
-                                </span>
-                            </p>
-
-                        </article>
-                    </>
-                )}
-            </main>
-        </div>
-    );
+            <article className="p-8">
+              <h1 className="text-2xl font-bold mb-4">Order Info</h1>
+              <h5 className="font-bold mb-2">User Info</h5>
+              <p>Name: {name}</p>
+              <p>Email: {email}</p>
+              <p>Phone: {phone}</p>
+              <p>
+                Address: {`${address}, city: ${city}, state: ${state}, country: ${country} pinCode: ${pinCode}`}
+              </p>
+              <h5 className="font-bold mt-4">Amount Info</h5>
+              <p>Subtotal: {subtotal}</p>
+              <p>Shipping Charges: {shippingCharges}</p>
+              <p>Tax: {tax}</p>
+              <p>Discount: {discount}</p>
+              <p className="font-bold mt-4">Total: {total}</p>
+              <h5 className="font-bold mt-4">Status Info</h5>
+              <p className={status === "Delivered" ? "text-purple-500" : status === "Shipped" ? "text-green-500" : "text-red-500"}>
+                Status: {status}
+              </p>
+            </article>
+          </>
+        )}
+      </main>
+    </div>
+  );
 };
 
 const OrderProductCard = ({
-    name,
-    photo,
-    price,
-    quantity,
-    productId,
-    color,
-    size,
-    style,
+  name,
+  photo,
+  price,
+  quantity,
+  productId,
+  size,
+  style,
+  color,
 }: OrderItem) => (
-    <div className="transaction-product-card">
-        <img src={photo} alt={name} />
-        <Link to={`/product/${productId}`}className="line-clamp-2 w-50" >{name}</Link>
-        <span>
-            ${price} X {quantity} =${price * quantity}
-        </span>
-        {size !== '' && <span className="text-gray-500 ">Size: {size}</span>}
+  <div className="flex flex-row justify-between items-center">
+  <img src={photo} className="w-16 h-16 rounded-md mr-1 xsm:w-24 xsm:h-24" alt={name} />
+  <Link to={`/product/${productId}`} className="line-clamp-2 w-[60%]">{name}</Link>
+    <span>
+      ${price} X {quantity} =${price * quantity}
+    </span>
+  <div className="flex flex-wrap justify-between items-center ml-2">
+    {size !== '' && <span className="text-gray-500 ">Size: {size}</span>}
 
-          {color !== '' && <span className="text-gray-500 "><span className="rounded-full px-[11px] py-[0.5px] " style={{ backgroundColor: color }}></span></span>}
+    {color !== '' && <span className="text-gray-500 ">Color:<span className="rounded-full ml-2 px-[11px] py-[0.5px] " style={{ backgroundColor: color }}></span></span>}
 
-          {style !== '' && <span className="text-gray-500 ">Style: {style}</span>}
-    </div>
+    {style !== '' && <span className="text-gray-500 ">Style: {style}</span>}
+  </div>
+</div>
 );
-
 export default OrderDetails

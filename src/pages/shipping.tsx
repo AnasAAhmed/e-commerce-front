@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { saveShippingInfo } from "../redux/reducer/cartReducer";
 import { RootState, server } from "../redux/store";
+import Footer from "../components/Footer";
 
 const Shipping = () => {
   const { cartItems, total } = useSelector(
@@ -61,63 +62,71 @@ const Shipping = () => {
   }, [cartItems]);
 
   return (
-    <div className="shipping">
-      <button className="back-btn" onClick={() => navigate("/cart")}>
-        <BiArrowBack />
-      </button>
+    <>
+      <div className="flex justify-center min-h-[80vh]">
+        <button className="back-btn " onClick={() => navigate("/cart")}>
+          <BiArrowBack />
+        </button>
 
-      <form onSubmit={submitHandler}>
-        <h1>Shipping Address</h1>
+        <form onSubmit={submitHandler} className="flex flex-col items-center mt-6 justify-stretch py-8 px-4 w-full max-w-[450px]">
+          <h1 className="text-4xl font-semibold mb-8 text-center">Shipping Address</h1>
 
-        <input
-          required
-          type="text"
-          placeholder="Address"
-          name="address"
-          value={shippingInfo.address}
-          onChange={changeHandler}
-        />
+          <input
+            required
+            type="text"
+            placeholder="Address"
+            name="address"
+            className="border border-gray-300 rounded-lg py-3 px-4 mb-4 w-full focus:outline-none text-lg"
+            value={shippingInfo.address}
+            onChange={changeHandler}
+          />
 
-        <input
-          required
-          type="text"
-          placeholder="City"
-          name="city"
-          value={shippingInfo.city}
-          onChange={changeHandler}
-        />
+          <input
+            required
+            type="text"
+            placeholder="City"
+            name="city"
+            className="border border-gray-300 rounded-lg py-3 px-4 mb-4 w-full focus:outline-none text-lg"
+            value={shippingInfo.city}
+            onChange={changeHandler}
+          />
 
-        <input
-          required
-          type="text"
-          placeholder="State"
-          name="state"
-          value={shippingInfo.state}
-          onChange={changeHandler}
-        />
+          <input
+            required
+            type="text"
+            placeholder="State"
+            name="state"
+            className="border border-gray-300 rounded-lg py-3 px-4 mb-4 w-full focus:outline-none text-lg"
+            value={shippingInfo.state}
+            onChange={changeHandler}
+          />
 
-        <select
-          name="country"
-          required
-          value={shippingInfo.country}
-          onChange={changeHandler}
-        >
-          <option value="">Choose Country</option>
-          <option value="pakistan">Pakistan</option>
-        </select>
+          <select
+            name="country"
+            required
+            className="border  border-gray-300 rounded-lg py-3 px-4 mb-4 w-full focus:outline-none text-lg"
+            value={shippingInfo.country}
+            onChange={changeHandler}
+          >
+            <option value="">Choose Country</option>
+            <option value="pakistan">Pakistan</option>
+          </select>
 
-        <input
-          required
-          type="number"
-          placeholder="Pin Code"
-          name="pinCode"
-          value={shippingInfo.pinCode}
-          onChange={changeHandler}
-        />
+          <input
+            required
+            type="number"
+            placeholder="Pin Code"
+            name="pinCode"
+            className="border border-gray-300 rounded-lg py-3 px-4 mb-4 w-full focus:outline-none text-lg"
+            value={shippingInfo.pinCode}
+            onChange={changeHandler}
+          />
 
-        <button type="submit">Pay Now</button>
-      </form>
-    </div>
+          <button type="submit" className="py-3 px-6 rounded-lg uppercase text-lg font-semibold bg-blue-500 text-white shadow-md transition duration-300 ease-in-out hover:opacity-80">Pay Now</button>
+        </form>
+      </div>
+      <Footer />
+    </>
   );
 };
 

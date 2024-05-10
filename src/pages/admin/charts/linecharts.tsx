@@ -29,7 +29,7 @@ const Linecharts = () => {
     <div className="admin-container">
       <AdminSidebar />
       <main className="chart-container">
-        <h1>Line Charts</h1>
+        <h1 className="heading">Line Charts</h1>
 
         {isLoading ? (
           <Skeleton length={15} />
@@ -43,7 +43,7 @@ const Linecharts = () => {
                 labels={months}
                 backgroundColor="rgba(53, 162, 255, 0.5)"
               />
-              <h2>Active Users</h2>
+              <h2 className="heading">Active Users</h2>
             </section>
 
             <section>
@@ -65,7 +65,7 @@ const Linecharts = () => {
                 label="Revenue"
                 labels={months}
               />
-              <h2>Total Revenue </h2>
+              <h2 className="heading">Total Revenue </h2>
             </section>
 
             <section>
@@ -76,7 +76,7 @@ const Linecharts = () => {
                 label="Discount"
                 labels={months}
               />
-              <h2>Discount Allotted </h2>
+              <h2 className="heading">Discount Allotted </h2>
             </section>
           </>
         )}

@@ -46,9 +46,9 @@ const ProductCard = ({
   return (
     <div>
 
-      <Link to={`/product/${productId}`} className="mt-8 w-[120px] xsm:w-[170px] sm:w-[240px] flex flex-col gap-2">
-        <img src={`${server}/${photo}`} alt={name} className="w-[150px] h-[150px] xsm:h-[200px] xsm:w-[200px] sm:h-[260px] sm:w-[260px] rounded-lg object-cover" />
-        <p className="line-clamp-2 min-h-[3rem] text-sm xsm:text-lg w-full font-semibold mx-2">{name}</p>
+      <Link to={`/product/${productId}`} className="mt-8 w-full sm:w-[220px] flex flex-col gap-2">
+        <img src={`${server}/${photo}`} alt={name} className="w-full h-[150px] xsm:h-[200px] sm:h-[260px] rounded-lg object-cover" />
+        <p className="line-clamp-2 min-h-[3rem] text-sm xsm:text-lg w-[90%] font-semibold mx-2">{name}</p>
         <span className="xsm:text-2xl mt-2 font-semibold mx-2">${price}{" "}<span className="text-sm line-through text-red-500 ">{cutPrice > 0 ? `$${cutPrice}` : ""}</span></span>
         <div className="flex flex-row items-center justify-between xsm:mx-2">
           <p className="fa fa-star text-orange-500 text-clip">({ratings})</p>

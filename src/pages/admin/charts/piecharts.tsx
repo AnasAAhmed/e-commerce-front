@@ -24,7 +24,7 @@ const PieCharts = () => {
     <div className="admin-container">
       <AdminSidebar />
       <main className="chart-container">
-        <h1>Pie & Doughnut Charts</h1>
+        <h1 className="heading">Pie & Doughnut Charts</h1>
 
         {isLoading ? (
           <Skeleton length={20} />
@@ -43,7 +43,7 @@ const PieCharts = () => {
                   offset={[0, 0, 50]}
                 />
               </div>
-              <h2>Order Fulfillment Ratio</h2>
+              <h2 className="heading">Order Fulfillment Ratio</h2>
             </section>
 
             <section>
@@ -61,7 +61,7 @@ const PieCharts = () => {
                   offset={[0, 0, 0, 80]}
                 />
               </div>
-              <h2>Product Categories Ratio</h2>
+              <h2 className="heading">Product Categories Ratio</h2>
             </section>
 
             <section>
@@ -75,7 +75,7 @@ const PieCharts = () => {
                   cutout={"70%"}
                 />
               </div>
-              <h2> Stock Availability</h2>
+              <h2 className="heading"> Stock Availability</h2>
             </section>
 
             <section>
@@ -106,7 +106,7 @@ const PieCharts = () => {
                   offset={[20, 30, 20, 30, 80]}
                 />
               </div>
-              <h2>Revenue Distribution</h2>
+              <h2 className="heading">Revenue Distribution</h2>
             </section>
 
             <section>
@@ -126,7 +126,7 @@ const PieCharts = () => {
                   offset={[0, 0, 50]}
                 />
               </div>
-              <h2>Users Age Group</h2>
+              <h2 className="heading">Users Age Group</h2>
             </section>
 
             <section>

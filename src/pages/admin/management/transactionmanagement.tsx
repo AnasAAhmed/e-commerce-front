@@ -28,7 +28,7 @@ const defaultData: Order = {
   tax: 0,
   total: 0,
   orderItems: [],
-  user: { name: "", _id: "",email:"",phone:0 },
+  user: { name: "", _id: "", email: "", phone: 0 },
   _id: "",
 };
 
@@ -43,7 +43,7 @@ const TransactionManagement = () => {
   const {
     shippingInfo: { address, city, state, country, pinCode },
     orderItems,
-    user: { name, _id,email,phone },
+    user: { name, _id, email, phone },
     status,
     tax,
     subtotal,
@@ -74,84 +74,132 @@ const TransactionManagement = () => {
   if (isError) return <Navigate to={"/404"} />;
 
   return (
-    <div className="admin-container">
-      <AdminSidebar />
-      <main className="product-management">
-        <Link to={"/admin/transaction"}>
-          <FaArrowLeft />
-        </Link>
-        {isLoading ? (
-          <Skeleton />
-        ) : (
-          <>
-            <section
-              style={{
-                padding: "2rem",
-              }}
-            >
-              <h2>Order Items</h2>
+    // <div className="admin-container">
+    //   <AdminSidebar />
+    //   <main className="flex flex-col items-start">
+    //     <Link to={"/admin/transaction"} className="flex items-center text-blue-500 mb-4">
+    //       <FaArrowLeft className="mr-1" /> Back
+    //     </Link>
+    //     {isLoading ? (
+    //       <Skeleton />
+    //     ) : (
+    //       <>
+    //         <section className="w-full px-2">
+    //           <h2 className="text-2xl font-bold mb-4">Order Items</h2>
+    //           <button className="text-white bg-black p-2 rounded-full mb-4" onClick={deleteHandler}>
+    //             <FaTrash />
+    //           </button>
+    //           <div className="">
+    //             {orderItems.map((i) => (
+    //               <OrderProductCard
+    //                 key={i._id}
+    //                 name={i.name}
+    //                 photo={`${server}/${i.photo}`}
+    //                 productId={i.productId}
+    //                 _id={i._id}
+    //                 quantity={i.quantity}
+    //                 price={i.price}
+    //                 cutPrice={i.cutPrice}
+    //                 size={i.size}
+    //                 style={i.style}
+    //                 color={i.color}
+    //               />
+    //             ))}
+    //           </div>
 
-              {orderItems.map((i) => (
-                <OrderProductCard
-                  key={i._id}
-                  name={i.name}
-                  photo={`${server}/${i.photo}`}
-                  productId={i.productId}
-                  _id={i._id}
-                  quantity={i.quantity}
-                  price={i.price}
-                  cutPrice={i.cutPrice}
-                  size={i.size}
-                  style={i.style}
-                  color={i.color}
-                />
-              ))}
-            </section>
+    //         </section>
 
-            <article className="shipping-info-card">
-              <button className="product-delete-btn" onClick={deleteHandler}>
-                <FaTrash />
-              </button>
-              <h1>Order Info</h1>
-              <h5>User Info</h5>
-              <p>Name: {name}</p>
-              <CopyText text={_id} heading={"UserId:"}/>
-              <p>Email: {email}</p>
-              <CopyText text={phone} heading={"Phone:"}/>
-              <p>
-                Address:{" "}
-                {`${address}, city: ${city}, state: ${state}, country: ${country} pinCode: ${pinCode}`}
-              </p>
-              <h5>Amount Info</h5>
-              <p>Subtotal: {subtotal}</p>
-              <p>Shipping Charges: {shippingCharges}</p>
-              <p>Tax: {tax}</p>
-              <p>Discount: {discount}</p>
-              <p>Total: {total}</p>
+    //         <article className="p-8 w-full">
+    //           <h1 className="text-2xl font-bold mb-4">Order Info</h1>
+    //           <h5 className="font-bold mb-2">User Info</h5>
+    //           <p>Name: {name}</p>
+    //           <CopyText text={_id} heading={"UserId:"} />
+    //           <p>Email: {email}</p>
+    //           <CopyText text={phone} heading={"Phone:"} />
+    //           <p>
+    //             Address: {`${address}, city: ${city}, state: ${state}, country: ${country} pinCode: ${pinCode}`}
+    //           </p>
+    //           <h5 className="font-bold mt-4">Amount Info</h5>
+    //           <p>Subtotal: {subtotal}</p>
+    //           <p>Shipping Charges: {shippingCharges}</p>
+    //           <p>Tax: {tax}</p>
+    //           <p>Discount: {discount}</p>
+    //           <p className="font-bold mt-4">Total: {total}</p>
+    //           <h5 className="font-bold mt-4">Status Info</h5>
+    //           <p className={status === "Delivered" ? "text-purple-500" : status === "Shipped" ? "text-green-500" : "text-red-500"}>
+    //             Status: {status}
+    //           </p>
+    //           <button className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600" onClick={updateHandler}>
+    //             Process Status
+    //           </button>
+    //         </article>
+    //       </>
+    //     )}
+    //   </main>
+    // </div>
+    <div className="admin-container flex">
+  <AdminSidebar />
+  <main className="flex flex-col items-start w-full">
+    <Link to={"/admin/transaction"} className="flex items-center text-blue-500 mb-4">
+      <FaArrowLeft className="mr-1" /> Back
+    </Link>
+    {isLoading ? (
+      <Skeleton />
+    ) : (
+      <>
+        <section className="w-full px-2">
+          <h2 className="text-2xl font-bold mb-4">Order Items</h2>
+          <button className="text-white bg-black p-2 rounded-full mb-4" onClick={deleteHandler}>
+            <FaTrash />
+          </button>
+          <div className="space-y-4">
+            {orderItems.map((i) => (
+              <OrderProductCard
+                key={i._id}
+                name={i.name}
+                photo={`${server}/${i.photo}`}
+                productId={i.productId}
+                _id={i._id}
+                quantity={i.quantity}
+                price={i.price}
+                cutPrice={i.cutPrice}
+                size={i.size}
+                style={i.style}
+                color={i.color}
+              />
+            ))}
+          </div>
+        </section>
 
-              <h5>Status Info</h5>
-              <p>
-                Status:{" "}
-                <span
-                  className={
-                    status === "Delivered"
-                      ? "purple"
-                      : status === "Shipped"
-                        ? "green"
-                        : "red"
-                  }
-                >
-                  {status}
-                </span>
-              </p>
-              <button className="shipping-btn" onClick={updateHandler}>
-                Process Status
-              </button>
-            </article>
-          </>
-        )}
-      </main>
-    </div>
+        <article className="p-8 w-full bg-gray-100 rounded-lg">
+          <h1 className="text-2xl font-bold mb-4">Order Info</h1>
+          <h5 className="font-bold mb-2">User Info</h5>
+          <p>Name: {name}</p>
+          <CopyText text={_id} heading={"UserId:"} />
+          <p>Email: {email}</p>
+          <CopyText text={phone} heading={"Phone:"} />
+          <p className="text-gray-700">
+            Address: {`${address}, city: ${city}, state: ${state}, country: ${country} pinCode: ${pinCode}`}
+          </p>
+          <h5 className="font-bold mt-4">Amount Info</h5>
+          <p>Subtotal: ${subtotal}</p>
+          <p>Shipping Charges: ${shippingCharges}</p>
+          <p>Tax: ${tax}</p>
+          <p>Discount: ${discount}</p>
+          <p className="font-bold mt-4">Total: ${total}</p>
+          <h5 className="font-bold mt-4">Status Info</h5>
+          <p className={status === "Delivered" ? "text-purple-500" : status === "Shipped" ? "text-green-500" : "text-red-500"}>
+            Status: {status}
+          </p>
+          <button className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600" onClick={updateHandler}>
+            Process Status
+          </button>
+        </article>
+      </>
+    )}
+  </main>
+</div>
+
   );
 };
 
@@ -165,18 +213,21 @@ const OrderProductCard = ({
   style,
   color,
 }: OrderItem) => (
-  <div className="transaction-product-card">
-    <img src={photo} alt={name} />
-    <Link to={`/product/${productId}`} className="line-clamp-2 w-50">{name}</Link>
-    <span>
-      ${price} X {quantity} =${price * quantity}
-    </span>
-    {size !== '' && <span className="text-gray-500 ">Size: {size}</span>}
-
-    {color !== '' && <span className="text-gray-500 "><span className="rounded-full px-[11px] py-[0.5px] " style={{ backgroundColor: color }}></span></span>}
-
-    {style !== '' && <span className="text-gray-500 ">Style: {style}</span>}
+  <div className="flex flex-row justify-between items-center">
+  <img src={photo} className="w-16 h-16 rounded-md mr-1 sm:w-24 sm:h-24" alt={name} />
+  <Link to={`/product/${productId}`} className="line-clamp-2 w-full">{name}</Link>
+  <span>${price} X {quantity} = ${price * quantity}</span>
+  <div className="flex flex-wrap justify-between items-center ml-2">
+    {size !== '' && <span className="text-gray-500 mr-2">Size: {size}</span>}
+    {color !== '' && (
+      <span className="text-gray-500 mr-2">Color:
+        <span className="rounded-full ml-1 px-2 py-0.5" style={{ backgroundColor: color }}></span>
+      </span>
+    )}
+    {style !== '' && <span className="text-gray-500">Style: {style}</span>}
   </div>
+</div>
+
 );
 
 export default TransactionManagement;

@@ -50,7 +50,7 @@ const AdminSidebar = () => {
           phoneActive
             ? {
                 width: "20rem",
-                height: "110vh",
+                height: "100vh",
                 position: "fixed",
                 top: 0,
                 left: showModal ? "0" : "-20rem",

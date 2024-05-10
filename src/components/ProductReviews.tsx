@@ -122,7 +122,7 @@ const ProductReviews = ({ productId, numOfReviews }: { productId: string, numOfR
                     </div>
                 </div>
             )}
-            <div className='sm:mx-44'>
+            <div className='md:mx-24'>
 
                 <h3 className="text-xl font-semibold mt-8 ">Reviews {numOfReviews}</h3>
                 {loading ? (
@@ -140,17 +140,17 @@ const ProductReviews = ({ productId, numOfReviews }: { productId: string, numOfR
                                             <StarRatings rating={review.rating} />
                                         </span>
                                     </div>
-                                    <div>
-                                        <p>{calculateTimeDifference(review.date)}</p>
+                                    <div className='flex flex-col'>
+                                        <p className='text-[0.5rem] xsm:text-[0.7rem] sm:text-sm font-semibold'>{calculateTimeDifference(review.date)}</p>
                                         {review.userId === user?._id && (
-                                            <>
-                                                <button onClick={() => { handleDeleteReview(); location.reload() }} className="px-2 py-1 rounded-md mt-2"><FaTrash /></button>
-                                                <button onClick={() => { openModal(); setRating(review.rating); setComment(review.comment) }} className="mx-2 px-2 py-1 rounded-md mt-2"><FaEdit /></button>
-                                            </>
+                                            <div className='text-center'>
+                                                <button onClick={() => { handleDeleteReview(); location.reload() }} className="px-1 text-[0.7rem] sm:text-sm py-1 rounded-md mt-2"><FaTrash /></button>
+                                                <button onClick={() => { openModal(); setRating(review.rating); setComment(review.comment) }} className="mr-2 text-[0.7rem] sm:text-sm px-1 py-1 rounded-md mt-2"><FaEdit /></button>
+                                            </div>
                                         )}
                                     </div>
                                 </div>
-                                <p> {review.email}</p>
+                                <p className='text-[0.7rem] sm:text-sm'> {review.email}</p>
                                 <p><strong>Comment:</strong> {review.comment}</p>
                             </li>
                         ))}

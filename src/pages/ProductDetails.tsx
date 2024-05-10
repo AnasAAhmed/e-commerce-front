@@ -12,6 +12,7 @@ import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
 import ProductReview from "../components/ProductReviews";
 import StarRatings from "../components/StarsRatings";
+import Footer from "../components/Footer";
 
 const ProductDetails = () => {
   const [loading, setLoading] = useState(false);
@@ -68,95 +69,97 @@ const ProductDetails = () => {
 
 
   return (
-    <div>
-
-      <main className="product-details flex flex-col md:flex-row px-6 md:px-3  justify-center mt-8">
-        {isLoading || loading ? (
-          <ProductDetailsSkeleton />
-        ) : (
-          <>
-            <section className="sec1 flex-1 flex-shrink-0 w-full md:w-72 mr-10 mb-10">
-              <img src={`${server}/${photo}`} alt={name} className="w-full shadow-md  md:h-[400px] h-[320px] object-cover" />
-            </section>
-            <article className="sec2 flex-1 w-full  md:w-96">
-              <p className="min-h-16 text-2xl font-semibold mb-4">{name}</p>
-              {sizeArray.length > 1 &&
-                <div className="flex mb-4">
-                  {sizeArray.map((item, index) => (
-                    <button
-                      key={index}
-                      className={`${size === item ? "bg-black text-white" : "bg-white text-gray-800"} text-gray-800 px-2 py-1 mr-2 rounded-md`}
-                      onClick={() => setSize(item)}
-                    >{item}</button>
-                  ))}
-                </div>
-              }
-              {colorArray.length > 1 &&
-                <div className="flex mb-4">
-                  {colorArray.map((item, index) => (
-                    <button
-                      key={index}
-                      className={`${color === item ? "ring-4" : ""} rounded-full h-6 w-6 mx-1`}
-                      style={{ backgroundColor: item }}
-                      onClick={() => setColor(item)}
-                    ></button>
-                  ))}
-                </div>
-              }
-              {styleArray.length > 0 &&
-                <div className="flex flex-wrap mb-4">
-                  {styleArray.map((item, index) => (
-                    <button
-                      key={index}
-                      className={`${style === item ? "bg-black text-white" : "bg-white text-gray-800"} mt-2 text-gray-800 px-2 py-1 mr-2 rounded-md`}
-                      onClick={() => setStyle(item)}
-                    >{item}</button>
-                  ))}
-                </div>
-              }
-              <span className="text-lg">
-             <StarRatings rating={ratings} />
-              </span>
-
-
-              <br />
-              {stock > 0 ? (
-                <>
-                  {stock < 6 ? (
-                    <span className="text-red-500">Low Stock</span>
-                  ) : (
-                    <span className="text-green-500"> Available</span>
-                  )}
-                </>
-              ) : (
-                <span className="text-red-500">Not Available</span>
-              )}
-              <br />
-              <h3 className="text-lg font-semibold my-2">Description:</h3>
-              <p >{description}</p>
-              <h3 className="text-2xl">
-                ${price}
-                <span className="text-lg line-through text-red-500">{cutPrice > 0 ? `$${cutPrice}` : ""}</span>
-              </h3>
-              <button
-                className='cart-button w-full mt-4 px-4 py-2 bg-yellow-500 rounded-md text-white text-lg font-semibold transition duration-300 ease-in-out hover:bg-yellow-600'
-                onClick={() =>
-                  addToCartHandler({ productId, size, color, style, price, cutPrice, name, photo, stock, quantity: 1 })
-                }
-              >
-                Add to Cart
-              </button>
-            </article>
-          </>
-        )}
-      </main>
+    <>
       <div>
-        <ProductReview numOfReviews={numOfReviews} productId={productId} />
+        <main className="product-details flex flex-col md:flex-row px-6 md:px-3  justify-center mt-8">
+          {isLoading || loading ? (
+            <ProductDetailsSkeleton />
+          ) : (
+            <>
+              <section className="sec1 flex-1 flex-shrink-0 w-full md:w-72 mr-10 mb-10">
+                <img src={`${server}/${photo}`} alt={name} className="w-full shadow-md  md:h-[400px] h-[320px] object-cover" />
+              </section>
+              <article className="sec2 flex-1 w-full  md:w-96">
+                <p className="min-h-16 text-2xl font-semibold mb-4">{name}</p>
+                {sizeArray.length > 1 &&
+                  <div className="flex mb-4">
+                    {sizeArray.map((item, index) => (
+                      <button
+                        key={index}
+                        className={`${size === item ? "bg-black text-white" : "bg-white text-gray-800"} text-gray-800 px-2 py-1 mr-2 rounded-md`}
+                        onClick={() => setSize(item)}
+                      >{item}</button>
+                    ))}
+                  </div>
+                }
+                {colorArray.length > 1 &&
+                  <div className="flex mb-4">
+                    {colorArray.map((item, index) => (
+                      <button
+                        key={index}
+                        className={`${color === item ? "ring-4" : ""} rounded-full h-6 w-6 mx-1`}
+                        style={{ backgroundColor: item }}
+                        onClick={() => setColor(item)}
+                      ></button>
+                    ))}
+                  </div>
+                }
+                {styleArray.length > 0 &&
+                  <div className="flex flex-wrap mb-4">
+                    {styleArray.map((item, index) => (
+                      <button
+                        key={index}
+                        className={`${style === item ? "bg-black text-white" : "bg-white text-gray-800"} mt-2 text-gray-800 px-2 py-1 mr-2 rounded-md`}
+                        onClick={() => setStyle(item)}
+                      >{item}</button>
+                    ))}
+                  </div>
+                }
+                <span className="text-lg">
+                  <StarRatings rating={ratings} />
+                </span>
+
+
+                <br />
+                {stock > 0 ? (
+                  <>
+                    {stock < 6 ? (
+                      <span className="text-red-500">Low Stock</span>
+                    ) : (
+                      <span className="text-green-500"> Available</span>
+                    )}
+                  </>
+                ) : (
+                  <span className="text-red-500">Not Available</span>
+                )}
+                <br />
+                <h3 className="text-lg font-semibold my-2">Description:</h3>
+                <p >{description}</p>
+                <h3 className="text-2xl">
+                  ${price}
+                  <span className="text-lg line-through text-red-500">{cutPrice > 0 ? `$${cutPrice}` : ""}</span>
+                </h3>
+                <button
+                  className='cart-button w-full mt-4 px-4 py-2 bg-yellow-500 rounded-md text-white text-lg font-semibold transition duration-300 ease-in-out hover:bg-yellow-600'
+                  onClick={() =>
+                    addToCartHandler({ productId, size, color, style, price, cutPrice, name, photo, stock, quantity: 1 })
+                  }
+                >
+                  Add to Cart
+                </button>
+              </article>
+            </>
+          )}
+        </main>
+        <div>
+          <ProductReview numOfReviews={numOfReviews} productId={productId} />
+        </div>
+        <div className="flex justify-center items-center">
+          <RelatedProducts filteredProductId={productId} category={category} heading="Related Products" />
+        </div>
       </div>
-      <div className="flex justify-center items-center">
-        <RelatedProducts filteredProductId={productId} category={category} heading="Related Products" />
-      </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 

@@ -9,6 +9,7 @@ import { ProductCardLoader } from "../components/loader";
 import { Carousel } from 'react-responsive-carousel'
 import "react-responsive-carousel/lib/styles/carousel.min.css"
 import Services from "../components/Services";
+import Footer from "../components/Footer";
 
 
 const Home = () => {
@@ -22,7 +23,7 @@ const Home = () => {
 
   return (
     <>
-      <div>
+      <div className="bg-gray-100">
         <section className="bg-center bg-cover ">
           <Carousel
             showArrows={false}
@@ -42,7 +43,7 @@ const Home = () => {
         <CollectionsList />
         <h1 className="text-4xl my-8 flex items-center justify-center">Latest Products</h1>
         <div className="flex flex-col items-center sm:gap-10 py-8 px-2 sm:px-5">
-          <div className="sm:flex sm:flex-wrap grid grid-cols-2 justify-center gap-4 sm:gap-16 ">
+          <div className="md:flex md:flex-wrap grid grid-cols-2 justify-center gap-4 md:gap-16 ">
             {isLoading ? (
               <ProductCardLoader />
             ) : (
@@ -86,6 +87,7 @@ const Home = () => {
         </div>
         <Services />
       </div>
+      <Footer />
     </>
   );
 };
