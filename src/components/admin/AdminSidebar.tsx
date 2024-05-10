@@ -14,6 +14,7 @@ import {
   RiDashboardFill,
   RiShoppingBag3Fill,
 } from "react-icons/ri";
+import {FaStar} from 'react-icons/fa'
 import { Link, Location, useLocation } from "react-router-dom";
 import { IconType } from "react-icons";
 
@@ -100,6 +101,12 @@ const DivOne = ({ location }: { location: Location }) => (
         url="/admin/transaction"
         text="Transaction"
         Icon={AiFillFileText}
+        location={location}
+      />
+      <Li
+        url="/admin/reviews"
+        text="Reviews"
+        Icon={FaStar}
         location={location}
       />
     </ul>

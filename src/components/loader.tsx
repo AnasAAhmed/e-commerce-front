@@ -1,3 +1,5 @@
+import { AiOutlineStar } from "react-icons/ai";
+
 const Loader = () => {
   return (
     <section className="loader min-h-[90vh]">
@@ -66,9 +68,12 @@ export const ProductDetailsSkeleton = () => {
           <div className="h-6 w-6 bg-gray-300 rounded-full mx-1"></div>
         </div>
         <div className="animate-pulse flex mb-4">
-          <div className="h-8 w-16 bg-gray-300 rounded-md mr-2"></div>
-          <div className="h-8 w-16 bg-gray-300 rounded-md mr-2"></div>
-          <div className="h-8 w-16 bg-gray-300 rounded-md"></div>
+        <AiOutlineStar className="text-gray-300 text-[1.3rem]" />
+        <AiOutlineStar className="text-gray-300 text-[1.3rem]" />
+        <AiOutlineStar className="text-gray-300 text-[1.3rem]" />
+        <AiOutlineStar className="text-gray-300 text-[1.3rem]" />
+        <AiOutlineStar className="text-gray-300 text-[1.3rem]" />
+
         </div>
         <div className="animate-pulse mb-1 h-6 w-40 bg-gray-300"></div>
         <div className="animate-pulse mb-4 h-6 w-20 bg-gray-300"></div>

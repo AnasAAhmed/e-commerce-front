@@ -6,7 +6,7 @@ import { IoCloseSharp } from "react-icons/io5";
 import { FaEdit, FaSpinner, FaTrash } from 'react-icons/fa';
 import StarRatings from './StarsRatings';
 
-const ProductReviews = ({ productId, numOfReviews }: { productId: string, numOfReviews: number }) => {
+const ProductReviews = ({ productId, numOfReviews }: { productId: string, numOfReviews?: number }) => {
 
     const { user } = useSelector((state: RootState) => state.userReducer);
 
@@ -99,7 +99,7 @@ const ProductReviews = ({ productId, numOfReviews }: { productId: string, numOfR
         <div className="container  mx-auto p-4">
             <div className='flex flex-col items-center'>
                 <h2 className="text-2xl font-semibold mb-4">Product Reviews</h2>
-                <button onClick={openModal} className="bg-blue-500 text-white px-4 py-2 rounded-full mb-4">{isReviewed ? "Edit Review" : "Submit Review"}</button>
+                {user && <button onClick={openModal} className="bg-blue-500 text-white px-4 py-2 rounded-full mb-4">{isReviewed ? "Edit Review" : "Submit Review"}</button>}
             </div>
             {modalOpen && (
                 <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50" onClick={handleBackdropClick}>

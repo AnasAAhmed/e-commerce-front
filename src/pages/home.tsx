@@ -5,11 +5,11 @@ import { useLatestProductsQuery } from "../redux/api/productAPI";
 import heroImg from '../assets/Ecommerce.png'
 import CollectionsList from "../components/CollectionsList";
 import RelatedProducts from "../components/RelatedProducts";
-import { ProductCardLoader } from "../components/loader";
 import { Carousel } from 'react-responsive-carousel'
 import "react-responsive-carousel/lib/styles/carousel.min.css"
 import Services from "../components/Services";
 import Footer from "../components/Footer";
+import { FaSpinner } from "react-icons/fa";
 
 
 const Home = () => {
@@ -45,7 +45,9 @@ const Home = () => {
         <div className="flex flex-col items-center sm:gap-10 py-8 px-2 sm:px-5">
           <div className="md:flex md:flex-wrap grid grid-cols-2 justify-center gap-4 md:gap-16 ">
             {isLoading ? (
-              <ProductCardLoader />
+               <div className="flex items-center justify-center h-[30rem]">
+               <FaSpinner className="animate-spin h-28 w-28 text-gray-500" />
+             </div>
             ) : (
               !data?.products || data?.products.length === 0 ? (
                 <p className="font-bold text-4xl h-[260px]">No products found</p>

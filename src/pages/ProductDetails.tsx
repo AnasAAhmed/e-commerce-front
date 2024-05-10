@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import {
   useProductDetailsQuery,
 } from "../redux/api/productAPI";
-import { server } from "../redux/store";
+import {  server } from "../redux/store";
 import { CartItem } from "../types/types";
 import { addToCart } from "../redux/reducer/cartReducer";
 import toast from "react-hot-toast";
@@ -23,7 +23,6 @@ const ProductDetails = () => {
 
 
   const params = useParams();
-
   const { data, isLoading, isError } = useProductDetailsQuery(params.id!);
   const { _id: productId, price, cutPrice, description, photo, ratings, numOfReviews, name, stock, category, size: sizes, color: colors, style: styles } = data?.product || {
     _id: "",
@@ -55,7 +54,7 @@ const ProductDetails = () => {
   };
 
   useEffect(() => {
-    setLoading(true);
+    setLoading(true)
     setTimeout(() => {
       setLoading(false);
     }, 300);
@@ -63,7 +62,7 @@ const ProductDetails = () => {
     setSize(sizeArray[0]);//seting default values
     setColor(colorArray[0]);//seting default values
     setStyle(styleArray[0]);//seting default values
-  }, [data])
+  }, [params.id,data])
 
   if (isError) return <Navigate to={"/404"} />;
 
@@ -72,7 +71,7 @@ const ProductDetails = () => {
     <>
       <div>
         <main className="product-details flex flex-col md:flex-row px-6 md:px-3  justify-center mt-8">
-          {isLoading || loading ? (
+          {isLoading ||loading  ? (
             <ProductDetailsSkeleton />
           ) : (
             <>
