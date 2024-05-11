@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import {
   useProductDetailsQuery,
 } from "../redux/api/productAPI";
-import {  server } from "../redux/store";
+import { server } from "../redux/store";
 import { CartItem } from "../types/types";
 import { addToCart } from "../redux/reducer/cartReducer";
 import toast from "react-hot-toast";
@@ -54,15 +54,13 @@ const ProductDetails = () => {
   };
 
   useEffect(() => {
-    setLoading(true)
-    setTimeout(() => {
-      setLoading(false);
-    }, 300);
+    setLoading(true);
     window.scroll(0, 0)
-    setSize(sizeArray[0]);//seting default values
-    setColor(colorArray[0]);//seting default values
-    setStyle(styleArray[0]);//seting default values
-  }, [params.id,data])
+    setSize(sizeArray[0]);
+    setColor(colorArray[0]);
+    setStyle(styleArray[0]);
+    setLoading(false);
+  }, [data])
 
   if (isError) return <Navigate to={"/404"} />;
 
@@ -70,8 +68,9 @@ const ProductDetails = () => {
   return (
     <>
       <div>
+        {loading && <progress className="absolute top-0 h-1 w-full bg-blue-500" />}
         <main className="product-details flex flex-col md:flex-row px-6 md:px-3  justify-center mt-8">
-          {isLoading ||loading  ? (
+          {isLoading ? (
             <ProductDetailsSkeleton />
           ) : (
             <>

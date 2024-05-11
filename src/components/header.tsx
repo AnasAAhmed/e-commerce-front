@@ -78,6 +78,12 @@ const Header = ({ user, cartItemsLength }: PropsType) => {
               <Link className=" mb-1 hover:text-gray-800 text-gray-800 font-semibold" onClick={() => setIsOpen(false)} to="/">
                 Home
               </Link>
+              <Link className="mb-1 hover:text-gray-800 text-gray-800 font-semibold" to="/">
+                About
+              </Link>
+              <Link className="mb-1 hover:text-gray-800 text-gray-800 font-semibold" to="/">
+                Contact
+              </Link>
               {user?._id &&
                 <>
                   {user.role === "admin" && (

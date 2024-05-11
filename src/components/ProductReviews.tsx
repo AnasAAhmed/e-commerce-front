@@ -71,6 +71,7 @@ const ProductReviews = ({ productId, numOfReviews }: { productId: string, numOfR
         }
     };
 
+
     const calculateTimeDifference = (reviewDate: number) => {
         const currentDate = new Date().getTime();
         const reviewDateTime = new Date(reviewDate).getTime();
@@ -78,7 +79,10 @@ const ProductReviews = ({ productId, numOfReviews }: { productId: string, numOfR
 
         // Calculate time difference in minutes
         const minutesDifference = Math.floor(difference / (1000 * 60));
-
+        // If difference is less than 0 minutes, show in minutes
+        if (minutesDifference === 0) {
+            return `just now`;
+        }
         // If difference is less than 60 minutes, show in minutes
         if (minutesDifference < 60) {
             return `${minutesDifference} minutes ago`;
@@ -91,7 +95,7 @@ const ProductReviews = ({ productId, numOfReviews }: { productId: string, numOfR
         }
 
         // Otherwise, show in days
-        const daysDifference = Math.floor(hoursDifference / 24);
+        const daysDifference = Math.floor(hoursDifference / 24 /7);
         return `${daysDifference} days ago`;
     }
 
@@ -124,7 +128,7 @@ const ProductReviews = ({ productId, numOfReviews }: { productId: string, numOfR
             )}
             <div className='md:mx-24'>
 
-                <h3 className="text-xl font-semibold mt-8 ">Reviews {numOfReviews}</h3>
+                <h3 className="text-2xl font-semibold mt-8 ">Reviews {numOfReviews}</h3>
                 {loading ? (
                     <div className="flex items-center justify-center h-[15.4rem]">
                         <FaSpinner className="animate-spin h-24 w-24 text-gray-500" />
@@ -156,7 +160,7 @@ const ProductReviews = ({ productId, numOfReviews }: { productId: string, numOfR
                         ))}
                     </ul>
                 ) : (
-                    <p>No reviews Yet</p>
+      <h1 className='text-4xl mb-12 flex items-center justify-center'>No reviews Yet</h1>
                 ))}
             </div>
         </div>

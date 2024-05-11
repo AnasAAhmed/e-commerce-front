@@ -38,18 +38,18 @@ const Home = () => {
             <img src={heroImg} className="w-full h-[40vh] md:h-[75vh] sm:h-[50vh]" alt="heroImg" />
             <img src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFDYCCsQ3MxbAXHCSu6cG77fLvhnakopvkFQ&s"} className="w-full h-[40vh] md:h-[75vh] sm:h-[50vh]" alt="heroImg" />
             <img src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmxOruz0L6Y-Zn_Wt-ifVGR5aqKXSpZZg0HA&s"} className="w-full h-[40vh] md:h-[75vh] sm:h-[50vh]" alt="heroImg" />
-            </Carousel>
+          </Carousel>
         </section>
         <CollectionsList />
         <h1 className="text-4xl my-8 flex items-center justify-center">Latest Products</h1>
         <div className="flex flex-col items-center sm:gap-10 py-8 px-2 sm:px-5">
-          <div className="md:flex md:flex-wrap grid grid-cols-2 justify-center gap-4 md:gap-16 ">
-            {isLoading ? (
-               <div className="flex items-center justify-center h-[30rem]">
-               <FaSpinner className="animate-spin h-28 w-28 text-gray-500" />
-             </div>
-            ) : (
-              !data?.products || data?.products.length === 0 ? (
+          {isLoading ? (
+            <div className="flex items-center justify-center h-[30rem]">
+              <FaSpinner className="animate-spin h-28 w-28 text-gray-500" />
+            </div>
+          ) : (
+            <div className="md:flex md:flex-wrap grid grid-cols-2 justify-center gap-4 md:gap-16 ">
+              {!data?.products || data?.products.length === 0 ? (
                 <p className="font-bold text-4xl h-[260px]">No products found</p>
               ) : (
                 data?.products.map((i) => (
@@ -62,15 +62,15 @@ const Home = () => {
                     numOfReviews={i.numOfReviews}
                     ratings={i.ratings}
                     cutPrice={i.cutPrice}
-                    size={i.size?i.size[0]:""}
-                    color={i.color?i.color[0]:""}
-                    style={i.style?i.style[0]:""}
+                    size={i.size ? i.size[0] : ""}
+                    color={i.color ? i.color[0] : ""}
+                    style={i.style ? i.style[0] : ""}
                     stock={i.stock}
                   />
                 ))
-              )
-            )}
-          </div>
+              )}
+            </div>
+          )}
         </div>
         <h1 className="text-2xl my-6 flex items-center justify-center">
           <Link to="/search" >
