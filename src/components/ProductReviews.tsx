@@ -95,8 +95,14 @@ const ProductReviews = ({ productId, numOfReviews }: { productId: string, numOfR
         }
 
         // Otherwise, show in days
-        const daysDifference = Math.floor(hoursDifference / 24 /7);
-        return `${daysDifference} days ago`;
+        const daysDifference = Math.floor(hoursDifference / 24);
+        if (daysDifference < 7) {
+            return `${daysDifference} day${daysDifference<2?"":"s"} ago`;
+        }
+        // Otherwise, show in weeks
+
+        const weekDifference = Math.floor(daysDifference / 7);
+        return `${weekDifference} week${weekDifference<2?"":"s"} ago`;
     }
 
     return (
@@ -160,7 +166,7 @@ const ProductReviews = ({ productId, numOfReviews }: { productId: string, numOfR
                         ))}
                     </ul>
                 ) : (
-      <h1 className='text-4xl mb-12 flex items-center justify-center'>No reviews Yet</h1>
+                    <h1 className='text-4xl mb-12 flex items-center justify-center'>No reviews Yet</h1>
                 ))}
             </div>
         </div>
