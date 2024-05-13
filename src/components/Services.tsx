@@ -2,7 +2,7 @@ import { FaBox, FaDollarSign, FaHeadphones, FaStripe, FaWallet } from "react-ico
 
 const Services = () => {
     return (
-        <div className='sm:mx-12 my-32 flex flex-wrap justify-center'>
+        <div className='sm:mx-12 mb-32 mt-8 sm:mt-16 flex flex-wrap justify-center'>
             <div className='h-40 rounded-lg w-56 mx-4 mt-8 bg-gray-200'>
                 <FaBox className="text-3xl m-5" />
                 <p className="font-bold text-sm mx-4">Free Shipping</p>

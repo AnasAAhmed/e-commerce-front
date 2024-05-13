@@ -13,7 +13,7 @@ const CopyText = ({ text, heading }: { text: any, heading?: string }) => {
     return (
         <div className="flex flex-row">
             <span className="text-black">{heading && heading} </span>
-            <button className="copy-text-btn" onClick={copyToClipboard}>
+            <button className="copy-text-btn truncate text-ellipsis" onClick={copyToClipboard}>
                 {text}
                 <span>
                  Copy Text

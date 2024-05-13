@@ -65,7 +65,7 @@ const App = () => {
   ) : (
       <Router>
         <Header cartItemsLength={cartItemsLength} user={user} />
-        <Suspense fallback={<Loader />}>
+        <Suspense fallback={<Loader/>}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/search" element={<Search />} />

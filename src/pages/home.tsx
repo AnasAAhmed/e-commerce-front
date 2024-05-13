@@ -23,7 +23,7 @@ const Home = () => {
 
   return (
     <>
-      <div className="bg-gray-100">
+      <div className="">
         <section className="bg-center bg-cover ">
           <Carousel
             showArrows={false}

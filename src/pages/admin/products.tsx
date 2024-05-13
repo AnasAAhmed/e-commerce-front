@@ -10,10 +10,12 @@ import { Skeleton } from "../../components/loader";
 import { useAllProductsQuery } from "../../redux/api/productAPI";
 import { RootState, server } from "../../redux/store";
 import { CustomError } from "../../types/api-types";
+import CopyText from "../../utils/function";
 
 interface DataType {
   photo: ReactElement;
   name: ReactElement;
+  productId: ReactElement;
   price: number;
   stock: number;
   action: ReactElement;
@@ -27,6 +29,10 @@ const columns: Column<DataType>[] = [
   {
     Header: "Name",
     accessor: "name",
+  },
+  {
+    Header: "ID",
+    accessor: "productId",
   },
   {
     Header: "Price",
@@ -59,7 +65,8 @@ const Products = () => {
       setRows(
         data.products.map((i) => ({
           photo: <img src={`${server}/${i.photo}`} />,
-          name: <Link to={`/product/${i._id}`} className="text-md font-medium line-clamp-2 w-70 hover:text-indigo-500">{i.name}</Link>,
+          name: <Link to={`/product/${i._id}`} className="text-md font-medium line-clamp-2  hover:text-indigo-500">{i.name}</Link>,
+          productId: <div className=""><CopyText text={i._id}/>...</div>,
           price: i.price,
           stock: i.stock,
           action: <Link className="text-md font-medium py-1 px-2 rounded-md hover:bg-black hover:text-white" to={`/admin/product/${i._id}`}>Manage</Link>,

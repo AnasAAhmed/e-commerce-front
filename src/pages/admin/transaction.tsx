@@ -69,7 +69,7 @@ const Transaction = () => {
       setRows(
         data.orders.map((i) => ({
           user: i.user.name,
-          userId: <div className="truncate"><CopyText text={i.user._id}/></div>,
+          userId: <div className="truncate"><CopyText text={i.user._id}/>...</div>,
           amount: i.total,
           discount: i.discount,
           quantity: i.orderItems.length,
