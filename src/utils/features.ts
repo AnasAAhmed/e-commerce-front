@@ -28,6 +28,18 @@ export const responseToast = (
   }
 };
 
+export const onlyResponseToast = (
+  res: ResType,
+) => {
+  if ("data" in res) {
+    toast.success(res.data.message);
+  } else {
+    const error = res.error as FetchBaseQueryError;
+    const messageResponse = error.data as MessageResponse;
+    toast.error(messageResponse.message);
+  }
+};
+
 export const getLastMonths = () => {
   const currentDate = moment();
 

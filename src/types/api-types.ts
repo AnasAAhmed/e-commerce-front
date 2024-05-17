@@ -116,8 +116,12 @@ export type UpdateProductRequest = {
   formData: FormData;
 };
 export type ReviewRequest = {
-  productId:string
-  formData: FormData;
+  productId: string; 
+  rating: number;
+  comment: string; 
+  email: string; 
+  name: string; 
+  userId: string;
 };
 export type DeleteProductRequest = {
   userId: string;

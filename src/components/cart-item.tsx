@@ -1,7 +1,19 @@
 import { Link } from "react-router-dom";
 import { FaTrash } from "react-icons/fa";
 import { server } from "../redux/store";
-import { CartItem } from "../types/types";
+
+ type CartItem = {
+  productId: string;
+  photo: string;
+  name: string;
+  price: number;
+  cutPrice: number;
+  quantity: number;
+  stock: number;
+  size?: string;
+  color?: string;
+  style?: string;
+};
 
 type CartItemProps = {
   cartItem: CartItem;
@@ -27,11 +39,11 @@ const CartItem = ({
           <Link to={`/product/${productId}`} className="text-lg font-medium line-clamp-1 w-70 text-gray-800 hover:text-indigo-500">
             {name}
           </Link>
-          {size !== '' && <span className="text-gray-500 ">Size: {size}</span>}
+          {!size ?"" :<span className="text-gray-500 ">Size: {size}</span>}
 
-          {color !== '' && <span className="text-gray-500 "><span className="rounded-full px-[11px] py-[0.5px] " style={{ backgroundColor: color }}></span></span>}
+          {!color ?"" :<span className="text-gray-500 ">Colour:<span className="rounded-full ml-2 px-[11px] py-[0.5px] " style={{ backgroundColor: color }}></span></span>}
 
-          {style !== '' && <span className="text-gray-500 ">Style: {style}</span>}
+          {!style  ?"" :<span className="text-gray-500 ">Style: {style}</span>}
           <p className="text-gray-500">{`${stock < 6 ? `Only ${stock} items left` : ""}`}</p>
         </div>
       </div>

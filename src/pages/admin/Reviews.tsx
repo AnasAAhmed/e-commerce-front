@@ -29,7 +29,7 @@ const Reviews = () => {
                     <button onClick={()=>setProductId(productIdValue)} ><BsSearch size="1.5rem" /></button>
                 </div>
                    <h2 className='heading'>Reviews</h2>
-               {productId !=="" ? <AllReviews productId={productId} />:<h2 className='mt-24 text-center text-4xl font-light'>Search By Product - Id To See Its Revies</h2>}
+               {productId !=="" ? <AllReviews productId={productId} />:<h2 className='mt-24 text-center text-4xl font-light'>Search By Product - Id To See Its Reviews</h2>}
             </main>
         </div>
     )

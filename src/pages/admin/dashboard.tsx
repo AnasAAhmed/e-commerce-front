@@ -8,7 +8,7 @@ import Table from "../../components/admin/DashboardTable";
 import { useStatsQuery } from "../../redux/api/dashboardAPI";
 import { RootState } from "../../redux/store";
 import { getLastMonths } from "../../utils/features";
-import { DashboardSkeleton } from "../../components/admin/Loader";
+import { DashboardSkeleton } from "../../components/loader";
 
 
 const { last6Months: months } = getLastMonths();
@@ -28,7 +28,6 @@ const Dashboard = () => {
       <main className="dashboard">
         {isLoading ? (
          <DashboardSkeleton/>
-        // <Skeleton/>
         ) : (
           <>
             <section className="widget-container">

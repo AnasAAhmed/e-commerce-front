@@ -100,19 +100,22 @@ export const productAPI = createApi({
       }),
       invalidatesTags: ["product"],
     }),
-    reviews: builder.query<ReviewsResponse, string>({
-      query: (ProductId) =>`reviews/${ProductId}`,
+    //Reviews
+    fetchProductReviews: builder.query<ReviewsResponse, string>({
+      query: (productId) => `reviews/${productId}`,
       providesTags: ["product"],
     }),
-    createReview: builder.mutation<MessageResponse, ReviewRequest>({
-      query: ({ formData, productId }) => ({
+
+    createProductReview: builder.mutation<MessageResponse, ReviewRequest>({
+      query: ({ rating, comment, email, name, userId, productId }) => ({
         url: `new-reviews/${productId}`,
         method: "POST",
-        body: formData,
+        body: { rating, comment, email, name, userId },
       }),
       invalidatesTags: ["product"],
     }),
-    deleteReview: builder.mutation<MessageResponse, DeleteReviewRequest>({
+
+    deleteProductReview: builder.mutation<MessageResponse, DeleteReviewRequest>({
       query: ({ userId, productId }) => ({
         url: `delete-review?productId=${productId}&id=${userId}`,
         method: "DELETE",
@@ -133,8 +136,8 @@ export const {
   useNewProductMutation,
   useProductDetailsQuery,
   useUpdateProductMutation,
-  useDeleteProductMutation,
-  useReviewsQuery,
-  useCreateReviewMutation,
-  useDeleteReviewMutation,
+  useDeleteProductMutation, 
+  useFetchProductReviewsQuery,
+  useCreateProductReviewMutation,
+  useDeleteProductReviewMutation,
 } = productAPI;

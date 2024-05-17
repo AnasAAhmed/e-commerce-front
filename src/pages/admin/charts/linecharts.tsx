@@ -2,11 +2,11 @@ import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import AdminSidebar from "../../../components/admin/AdminSidebar";
 import { LineChart } from "../../../components/admin/Charts";
-import { Skeleton } from "../../../components/loader";
 import { useLineQuery } from "../../../redux/api/dashboardAPI";
 import { RootState } from "../../../redux/store";
 import { CustomError } from "../../../types/api-types";
 import { getLastMonths } from "../../../utils/features";
+import { FaSpinner } from "react-icons/fa";
 
 const { last12Months: months } = getLastMonths();
 
@@ -32,7 +32,7 @@ const Linecharts = () => {
         <h1 className="heading">Line Charts</h1>
 
         {isLoading ? (
-          <Skeleton length={15} />
+          <FaSpinner className="animate-spin  my-44 mx-auto h-44 w-44 text-gray-500" />
         ) : (
           <>
             <section>

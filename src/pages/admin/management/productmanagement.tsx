@@ -1,5 +1,5 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import { FaArrowLeft, FaTrash } from "react-icons/fa";
+import { FaArrowLeft, FaSpinner, FaTrash } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import AdminSidebar from "../../../components/admin/AdminSidebar";
@@ -11,7 +11,7 @@ import {
 } from "../../../redux/api/productAPI";
 import { RootState, server } from "../../../redux/store";
 import { responseToast } from "../../../utils/features";
-import CopyText from "../../../utils/function";
+import { CopyText } from "../../../utils/function";
 
 const Productmanagement = () => {
   const { user } = useSelector((state: RootState) => state.userReducer);
@@ -147,9 +147,9 @@ const Productmanagement = () => {
         ) : (
           <>
             <section className="flex flex-wrap justify-between items-center mx-2">
-              
-            <strong className="my-3 sm:my-0"><CopyText text={data?.product._id} heading={"ProductID -"}/></strong>
-             {stock > 0 ? (
+
+              <strong className="my-3 sm:my-0"><CopyText text={data?.product._id} heading={"ProductID -"} /></strong>
+              {stock > 0 ? (
                 <>
                   {stock < 6 ? (
                     <span className="red my-3 sm:my-0">{stock} Low Stock</span>
@@ -282,9 +282,10 @@ const Productmanagement = () => {
                 <div className="relative">
                   <img src={photoUpdate ? photoUpdate : "https://raw.githubusercontent.com/AnasAAhmed/Imagerator/main/frontend/src/assets/preview.png"} alt="New Image" className="w-24 border-2 sm:ml-6 h-24 object-cover" />
                   <span className="absolute top-1 bg-blue-500 text-white rounded-full px-2 text-xs">New</span>
-                  {photoUpdate?<span className="absolute top-1 right-1 bg-red-500 text-white rounded-full px-4 py-2 text-xs cursor-pointer"onClick={()=>{setPhotoUpdate("");setPhotoFile(null)}}><FaTrash/></span>:""}
+                  {photoUpdate ? <span className="absolute top-1 right-1 bg-red-500 text-white rounded-full px-4 py-2 text-xs cursor-pointer" onClick={() => { setPhotoUpdate(""); setPhotoFile(null) }}><FaTrash /></span> : ""}
                 </div>
-                <button type="submit" className="bg-blue-500 w-full sm:w-[50%] h-10 text-white text-lg rounded-md font-semibold">{load ? "Updating..." : "Update"}</button>
+                <button type="submit" className="bg-blue-500 w-56 h-10 my-11 flex justify-center items-center text-white text-lg rounded-md font-semibold">{load ? <FaSpinner className='animate-spin text-2xl mx-3 ' /> : "Update"}</button>
+
               </form>
 
             </article>

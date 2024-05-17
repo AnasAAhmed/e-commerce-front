@@ -26,7 +26,13 @@
     padding: 2rem;
   }
 
-
+  .dashboard-skeleton {
+    .graph-container {
+      .revenue-chart {
+        margin-left: 1.5rem;
+      }
+    }
+  }
 }
 
 @media screen and (width<=1100px) {
@@ -111,10 +117,12 @@
       @include square(calc(14.75rem - 3rem));
 
     }
-    .truncate-name{
-     max-width: 188px;
+
+    .truncate-name {
+      max-width: 188px;
     }
   }
+
   .productCard-skeleton {
     height: 14.75rem;
     width: 11.75rem

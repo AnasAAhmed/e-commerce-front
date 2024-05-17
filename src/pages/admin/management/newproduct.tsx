@@ -5,7 +5,7 @@ import AdminSidebar from "../../../components/admin/AdminSidebar";
 import { useNewProductMutation } from "../../../redux/api/productAPI";
 import { RootState } from "../../../redux/store";
 import { responseToast } from "../../../utils/features";
-import { FaArrowLeft } from "react-icons/fa";
+import { FaArrowLeft, FaSpinner } from "react-icons/fa";
 
 
 
@@ -216,7 +216,7 @@ const NewProduct = () => {
           />
         </div>
          <img src={photoPrev?photoPrev:"https://raw.githubusercontent.com/AnasAAhmed/Imagerator/main/frontend/src/assets/preview.png"} alt="New Image" className="w-24 h-24 object-cover" />
-        <button type="submit" className="bg-blue-500 w-56 h-10 text-white text-lg rounded-md font-semibold">{load ? "Creating..." : "Create"}</button>
+        <button type="submit" className="bg-blue-500 w-56 h-10 mb-24 text-white text-lg rounded-md font-semibold flex justify-center items-center">{load ? <FaSpinner className='animate-spin text-2xl mx-3' /> : "Create"}</button>
       </form>
     </article>
   </main>

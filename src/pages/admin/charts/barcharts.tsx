@@ -5,8 +5,8 @@ import { RootState } from "../../../redux/store";
 import { useBarQuery } from "../../../redux/api/dashboardAPI";
 import { CustomError } from "../../../types/api-types";
 import toast from "react-hot-toast";
-import { Skeleton } from "../../../components/loader";
 import { getLastMonths } from "../../../utils/features";
+import { FaSpinner } from "react-icons/fa";
 
 const { last12Months, last6Months } = getLastMonths();
 
@@ -30,7 +30,7 @@ const Barcharts = () => {
       <main className="chart-container">
         <h1 className="heading">Bar Charts</h1>
         {isLoading ? (
-          <Skeleton length={20} />
+          <FaSpinner className="animate-spin  my-44 mx-auto h-44 w-44 text-gray-500" />
         ) : (
           <>
             <section>

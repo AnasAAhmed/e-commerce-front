@@ -1,11 +1,10 @@
 import { ReactElement, useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { FaTrash, FaEdit } from "react-icons/fa";
+import { FaTrash, FaEdit, FaSpinner } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { Column } from "react-table";
 import AdminSidebar from "../../components/admin/AdminSidebar";
 import TableHOC from "../../components/admin/TableHOC";
-import { Skeleton } from "../../components/loader";
 import {
   useAllUsersQuery,
   useDeleteUserMutation,
@@ -146,7 +145,7 @@ const Customers = () => {
             placeholder="Search By email"
           />
         </div>
-        {isLoading ? <Skeleton length={20} /> : Table}
+        {isLoading ? <FaSpinner className="animate-spin h-44 w-44 my-40 mx-auto text-gray-500" /> : Table}
       </main>
     </div>
   );

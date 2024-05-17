@@ -2,9 +2,9 @@ import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import AdminSidebar from "../../../components/admin/AdminSidebar";
 import { DoughnutChart, PieChart } from "../../../components/admin/Charts";
-import { Skeleton } from "../../../components/loader";
 import { usePieQuery } from "../../../redux/api/dashboardAPI";
 import { RootState } from "../../../redux/store";
+import { FaSpinner } from "react-icons/fa";
 
 const PieCharts = () => {
   const { user } = useSelector((state: RootState) => state.userReducer);
@@ -27,7 +27,7 @@ const PieCharts = () => {
         <h1 className="heading">Pie & Doughnut Charts</h1>
 
         {isLoading ? (
-          <Skeleton length={20} />
+         <FaSpinner className="animate-spin  my-44 mx-auto h-44 w-44 text-gray-500" />
         ) : (
           <>
             <section>

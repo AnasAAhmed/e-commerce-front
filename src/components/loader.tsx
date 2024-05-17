@@ -28,24 +28,6 @@ export const Skeleton = ({ width = "unset", length = 3 }: SkeletonProps) => {
 };
 
 
-export const ProductCardLoader = ({ numOfArr }: { numOfArr?: number }) => {
-  return (
-    Array.from({ length: numOfArr || 4 }, (_, i) => (
-      <div key={i}
-        className="mt-8 w-full sm:w-[220px] flex flex-col gap-2  bg-white rounded-md  object-cover ">
-        <div className="animate-pulse h-[160px] xsm:h-[200px] sm:h-[260px]  rounded-lg bg-gray-300"></div>
-        <div className="animate-pulse h-6 bg-gray-300 rounded-md"></div>
-        <div className="animate-pulse h-6 bg-gray-300 rounded-md"></div>
-        <div className="animate-pulse h-6 w-20 bg-gray-300 rounded-md"></div>
-        <div className="flex flex-row items-center justify-between">
-          <div className="animate-pulse h-6 w-12 bg-gray-300 rounded-md"></div>
-          <div className="animate-pulse h-6 w-20 bg-gray-300 rounded-md"></div>
-        </div>
-        <div className="animate-pulse h-10 w-full bg-gray-300 rounded-mdw-full rounded-md  hover:bg-yellow-600"></div>
-      </div>
-    ))
-  )
-}
 export const ProductDetailsSkeleton = () => {
   return (
     <>
@@ -84,3 +66,45 @@ export const ProductDetailsSkeleton = () => {
     </>
   )
 }
+export const DashboardSkeleton = () => {
+  return (
+    <div className="admin-conftainer">
+      <main className="dashboard-skeleton">
+        <section className="widget-container">
+          {Array.from({ length: 4 }).map((_, index) => (
+            <WidgetSkeleton key={index} />
+          ))}
+        </section>
+
+        <section className="graph-container">
+          <div className="revenue-chart">
+            <div className="chart-skeleton"></div> 
+          </div>
+
+          <div className="dashboard-categories">
+            <div className="categories-skeleton"></div> 
+          </div>
+        </section>
+
+        <section className="transaction-container">
+          <div className="gender-chart">
+            <div className="gender-chart-skeleton"></div> 
+          </div>
+          <div className="transaction-box">
+            <div className="transaction-skeleton"></div> 
+          </div>
+        </section>
+      </main>
+    </div>
+  );
+};
+
+const WidgetSkeleton = () => {
+  return (
+    <article className="widget widget-skeleton">
+      <div className="widget-info-skeleton"></div> 
+      <div className="widget-circle-skeleton"></div>
+    </article>
+  );
+};
+

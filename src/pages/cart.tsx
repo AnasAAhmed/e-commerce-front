@@ -9,6 +9,7 @@ import {
   calculatePrice,
   discountApplied,
   removeCartItem,
+  resetCart,
 } from "../redux/reducer/cartReducer";
 import { RootState, server } from "../redux/store";
 import { CartItem } from "../types/types";
@@ -16,7 +17,6 @@ import { toast } from "react-hot-toast";
 import Footer from "../components/Footer";
 
 const Cart = () => {
-
   const { cartItems, subtotal, tax, total, shippingCharges, discount } =
     useSelector((state: RootState) => state.cartReducer);
   const dispatch = useDispatch();
@@ -37,6 +37,7 @@ const Cart = () => {
   const removeHandler = (productId: string) => {
     dispatch(removeCartItem(productId));
   };
+
   useEffect(() => {
     const { token: cancelToken, cancel } = axios.CancelToken.source();
 
@@ -66,7 +67,20 @@ const Cart = () => {
 
   useEffect(() => {
     dispatch(calculatePrice());
-  }, [cartItems]);
+  }, [cartItems, dispatch]);
+
+  // Clear cart if expired
+  useEffect(() => {
+    const timestamp = localStorage.getItem("cartTimestamp");
+    if (timestamp) {
+      const cartTimestamp = new Date(JSON.parse(timestamp));
+      const now = new Date();
+      const differenceInDays = (now.getTime() - cartTimestamp.getTime()) / (1000 * 3600 * 24);
+      if (differenceInDays >= 15) {
+        dispatch(resetCart());
+      }
+    }
+  }, [dispatch]);
 
   return (
     <>
@@ -95,9 +109,7 @@ const Cart = () => {
             <p>Discount: <span className="font-semibold text-red-500">-${discount}</span></p>
             <p className="mt-4"><b>Total: <span className="font-semibold">${total}</span></b></p>
 
-
             <div className="flex flex-row justify-center items-center">
-
               <input
                 type="text"
                 placeholder="Coupon Code"
@@ -105,7 +117,6 @@ const Cart = () => {
                 onChange={(e) => setCouponCode(e.target.value)}
                 className="h-11 px-2 border border-gray-300 rounded-lg"
               />
-
               {couponCode && (
                 isValidCouponCode ? (
                   <span className="text-green-500 mt-2 block">-${discount} off using the <code>{couponCode}</code></span>
@@ -113,7 +124,6 @@ const Cart = () => {
                   <span className="text-red-500 mt-2 block">Invalid Coupon <VscError /></span>
                 )
               )}
-
               <Link to={`${cartItems.length > 0 ? "/shipping" : "/cart"}`} className={`${cartItems.length > 0 ? "" : "cursor-not-allowed"} my-6 mx-2 inline-blockbg-indigo-500 bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-500`}>Checkout</Link>
             </div>
           </div>

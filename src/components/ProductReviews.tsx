@@ -1,52 +1,45 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState, useEffect, FormEvent, } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 import { IoCloseSharp } from "react-icons/io5";
 import { FaEdit, FaSpinner, FaTrash } from 'react-icons/fa';
 import StarRatings from './StarsRatings';
+import { calculateTimeDifference } from '../utils/function';
+import { useCreateProductReviewMutation, useDeleteProductReviewMutation, useFetchProductReviewsQuery } from '../redux/api/productAPI';
+import { onlyResponseToast } from '../utils/features';
+import { Review } from '../types/types';
+
+
+
 
 const ProductReviews = ({ productId, numOfReviews }: { productId: string, numOfReviews?: number }) => {
 
     const { user } = useSelector((state: RootState) => state.userReducer);
-
-
-    const [reviews, setReviews] = useState<{ _id: string; date: number; rating: number; comment: string; email: string; name: string; userId: string; }[]>([]);
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState('');
     const [modalOpen, setModalOpen] = useState(false);
-    const [loading, setLoading] = useState(false);
     const [isReviewed, setIsReviewed] = useState(false);
 
+    const { data, isLoading, error } = useFetchProductReviewsQuery(productId);
+    const reviews: Review[] = Array.isArray(data?.reviews) ? data!.reviews : [];
+
+    const [createReview, { isLoading: isCreatingReview }] = useCreateProductReviewMutation();
+    const [deleteReview, { isLoading: isDeletingReview }] = useDeleteProductReviewMutation();
+
     useEffect(() => {
-        const fetchReviews = async () => {
-            try {
-                setLoading(true)
-                if (!productId) return;
-                const response = await axios.get(`${import.meta.env.VITE_SERVER}/api/v1/product/reviews/${productId}`);
-                setReviews(response.data.reviews);
-                const userReview = response.data.reviews.find((review: any) => review.userId === user?._id);
-                setIsReviewed(userReview ? true : false);
-                setLoading(false)
-            } catch (error) {
-                console.error('Error fetching reviews:', error);
-            }
-        };
+        if (reviews) {
+            const userReview = reviews.find((review: Review) => review.userId === user?._id);
+            setIsReviewed(userReview ? true : false);
+        }
+    }, [reviews, user]);
 
-        fetchReviews();
-    }, [productId]);
-
-    const handleCreateReview = async () => {
+    const handleCreateReview = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
         try {
-            await axios.post(`${import.meta.env.VITE_SERVER}/api/v1/product/new-reviews/${productId}`, {
-                rating,
-                comment,
-                email: user?.email,
-                name: user?.name,
-                userId: user?._id,
-                productId,
-            });
-            console.error('Review submitted:');
+            const res = await createReview({ rating, comment, email: user!.email, name: user!.name, userId: user!._id, productId });
+
+            if (!isCreatingReview) setModalOpen(false);
+            onlyResponseToast(res);
 
         } catch (error) {
             console.error('Error creating review:', error);
@@ -55,8 +48,8 @@ const ProductReviews = ({ productId, numOfReviews }: { productId: string, numOfR
 
     const handleDeleteReview = async () => {
         try {
-            await axios.delete(`${import.meta.env.VITE_SERVER}/api/v1/product/delete-review?productId=${productId}&id=${user?._id}`);
-
+            const res = await deleteReview({ userId: user!._id, productId });
+            onlyResponseToast(res);
         } catch (error) {
             console.error('Error deleting review:', error);
         }
@@ -71,39 +64,7 @@ const ProductReviews = ({ productId, numOfReviews }: { productId: string, numOfR
         }
     };
 
-
-    const calculateTimeDifference = (reviewDate: number) => {
-        const currentDate = new Date().getTime();
-        const reviewDateTime = new Date(reviewDate).getTime();
-        const difference = currentDate - reviewDateTime;
-
-        // Calculate time difference in minutes
-        const minutesDifference = Math.floor(difference / (1000 * 60));
-        // If difference is less than 0 minutes, show in minutes
-        if (minutesDifference === 0) {
-            return `just now`;
-        }
-        // If difference is less than 60 minutes, show in minutes
-        if (minutesDifference < 60) {
-            return `${minutesDifference} minutes ago`;
-        }
-
-        // If difference is less than 24 hours, show in hours
-        const hoursDifference = Math.floor(minutesDifference / 60);
-        if (hoursDifference < 24) {
-            return `${hoursDifference} hours ago`;
-        }
-
-        // Otherwise, show in days
-        const daysDifference = Math.floor(hoursDifference / 24);
-        if (daysDifference < 7) {
-            return `${daysDifference} day${daysDifference<2?"":"s"} ago`;
-        }
-        // Otherwise, show in weeks
-
-        const weekDifference = Math.floor(daysDifference / 7);
-        return `${weekDifference} week${weekDifference<2?"":"s"} ago`;
-    }
+    if (error) return <p>Error Fetching review</p>;
 
     return (
         <div className="container  mx-auto p-4">
@@ -121,13 +82,13 @@ const ProductReviews = ({ productId, numOfReviews }: { productId: string, numOfR
                         <form className="space-y-4" onSubmit={handleCreateReview}>
                             <div>
                                 <label htmlFor="rating" className="block text-md mb-3 font-medium">Rating</label>
-                                <input id="rating" type="number" max={5} className="w-full" placeholder="Rating" value={rating} onChange={(e) => setRating(Number(e.target.value))} />
+                                <input id="rating" type="number" max={5} className="border px-1 rounded-md w-full" placeholder="Rating" value={rating} onChange={(e) => setRating(Number(e.target.value))} />
                             </div>
                             <div>
                                 <label htmlFor="comment" className="block text-md mb-3 font-medium">Comment</label>
-                                <textarea id="comment" rows={3} className="w-full" placeholder="Comment" value={comment} onChange={(e) => setComment(e.target.value)} />
+                                <textarea id="comment" rows={3} className="border px-1 rounded-md w-full" placeholder="Comment" value={comment} onChange={(e) => setComment(e.target.value)} />
                             </div>
-                            <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md">Submit</button>
+                            <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md" >{isCreatingReview ? <FaSpinner className='animate-spin text-2xl mx-3' /> : "Submit"}</button>
                         </form>
                     </div>
                 </div>
@@ -135,14 +96,15 @@ const ProductReviews = ({ productId, numOfReviews }: { productId: string, numOfR
             <div className='md:mx-24'>
 
                 <h3 className="text-2xl font-semibold mt-8 ">Reviews {numOfReviews}</h3>
-                {loading ? (
+                <p className="text-sm text-gray-500 mb-4">Scroll to see more reviews</p>
+                {isLoading ? (
                     <div className="flex items-center justify-center h-[15.4rem]">
                         <FaSpinner className="animate-spin h-24 w-24 text-gray-500" />
                     </div>
                 ) : (reviews.length > 0 ? (
-                    <ul className="mt-4 ">
-                        {reviews.map((review) => (
-                            <li key={review._id} className="border pb-4 mb-4 py-3 px-6">
+                    <ul className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4 overflow-y-scroll max-h-[400px] scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-300">
+                        {reviews.map((review, i) => (
+                            <li key={i} className="border pb-4 mb-4 py-3 px-2">
                                 <div className='flex flex-row justify-between items-center'>
                                     <div className='flex flex-row items-center gap-3'>
                                         <p><strong>{review.name}</strong></p>
@@ -154,7 +116,7 @@ const ProductReviews = ({ productId, numOfReviews }: { productId: string, numOfR
                                         <p className='text-[0.5rem] xsm:text-[0.7rem] sm:text-sm font-semibold'>{calculateTimeDifference(review.date)}</p>
                                         {review.userId === user?._id && (
                                             <div className='text-center'>
-                                                <button onClick={() => { handleDeleteReview(); location.reload() }} className="px-1 text-[0.7rem] sm:text-sm py-1 rounded-md mt-2"><FaTrash /></button>
+                                                <button onClick={handleDeleteReview} className="px-1 text-[0.7rem] sm:text-sm py-1 rounded-md mt-2">{isDeletingReview ? <FaSpinner className='animate-spin' /> : <FaTrash />}</button>
                                                 <button onClick={() => { openModal(); setRating(review.rating); setComment(review.comment) }} className="mr-2 text-[0.7rem] sm:text-sm px-1 py-1 rounded-md mt-2"><FaEdit /></button>
                                             </div>
                                         )}
@@ -163,6 +125,7 @@ const ProductReviews = ({ productId, numOfReviews }: { productId: string, numOfR
                                 <p className='text-[0.7rem] sm:text-sm'> {review.email}</p>
                                 <p><strong>Comment:</strong> {review.comment}</p>
                             </li>
+
                         ))}
                     </ul>
                 ) : (

@@ -21,7 +21,6 @@ const ProductDetails = () => {
   const [color, setColor] = useState("");
   const [style, setStyle] = useState("");
 
-
   const params = useParams();
   const { data, isLoading, isError } = useProductDetailsQuery(params.id!);
   const { _id: productId, price, cutPrice, description, photo, ratings, numOfReviews, name, stock, category, size: sizes, color: colors, style: styles } = data?.product || {
@@ -53,12 +52,13 @@ const ProductDetails = () => {
     toast.success("Added to cart");
   };
 
+
   useEffect(() => {
     setLoading(true);
     setTimeout(()=>{
       setLoading(false);
-    },400)
-    window.scroll(0, 0)
+    },500)
+    window.scroll(0, 0);
     setSize(sizeArray[0]);
     setColor(colorArray[0]);
     setStyle(styleArray[0]);

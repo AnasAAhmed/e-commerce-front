@@ -5,11 +5,11 @@ import { Link } from "react-router-dom";
 import { Column } from "react-table";
 import AdminSidebar from "../../components/admin/AdminSidebar";
 import TableHOC from "../../components/admin/TableHOC";
-import { Skeleton } from "../../components/loader";
 import { useAllOrdersQuery } from "../../redux/api/orderAPI";
 import { RootState } from "../../redux/store";
 import { CustomError } from "../../types/api-types";
-import CopyText from "../../utils/function";
+import {CopyText} from "../../utils/function";
+import { FaSpinner } from "react-icons/fa";
 
 interface DataType {
   user: string;
@@ -69,7 +69,7 @@ const Transaction = () => {
       setRows(
         data.orders.map((i) => ({
           user: i.user.name,
-          userId: <div className="truncate"><CopyText text={i.user._id}/>...</div>,
+          userId: <div className="line-clamp-2"><CopyText text={i.user._id}/>...</div>,
           amount: i.total,
           discount: i.discount,
           quantity: i.orderItems.length,
@@ -101,7 +101,7 @@ const Transaction = () => {
   return (
     <div className="admin-container">
       <AdminSidebar />
-      <main>{isLoading ? <Skeleton length={20} /> : Table}</main>
+      <main>{isLoading ? <FaSpinner className="animate-spin h-44 w-44 my-40 mx-auto text-gray-500" /> : Table}</main>
     </div>
   );
 };

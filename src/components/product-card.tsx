@@ -51,7 +51,7 @@ const ProductCard = ({
         <p className="line-clamp-2 min-h-[3rem] text-sm xsm:text-lg w-[90%] font-semibold mx-2">{name}</p>
         <span className="xsm:text-2xl mt-2 font-semibold mx-2">${price}{" "}<span className="text-sm line-through text-red-500 ">{cutPrice > 0 ? `$${cutPrice}` : ""}</span></span>
         <div className="flex flex-row items-center justify-between xsm:mx-2">
-          <p className="fa fa-star text-orange-500 text-clip">({ratings})</p>
+          <p className="fa fa-star text-orange-500 text-clip">({ratings}/5)</p>
           <p className=" text-sm font-semibold ">Reviews ({numOfReviews})</p>
         </div>
       </Link>

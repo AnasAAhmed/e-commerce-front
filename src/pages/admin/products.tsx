@@ -1,16 +1,15 @@
 import { ReactElement, useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { FaPlus } from "react-icons/fa";
+import { FaPlus, FaSpinner } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Column } from "react-table";
 import AdminSidebar from "../../components/admin/AdminSidebar";
 import TableHOC from "../../components/admin/TableHOC";
-import { Skeleton } from "../../components/loader";
 import { useAllProductsQuery } from "../../redux/api/productAPI";
 import { RootState, server } from "../../redux/store";
 import { CustomError } from "../../types/api-types";
-import CopyText from "../../utils/function";
+import {CopyText} from "../../utils/function";
 
 interface DataType {
   photo: ReactElement;
@@ -65,8 +64,8 @@ const Products = () => {
       setRows(
         data.products.map((i) => ({
           photo: <img src={`${server}/${i.photo}`} />,
-          name: <Link to={`/product/${i._id}`} className="text-md font-medium line-clamp-2  hover:text-indigo-500">{i.name}</Link>,
-          productId: <div className=""><CopyText text={i._id}/>...</div>,
+          name: <Link to={`/product/${i._id}`} className="text-md font-medium line-clamp-2 hover:text-indigo-500">{i.name}</Link>,
+          productId: <div className="line-clamp-2"><CopyText text={i._id}/>...</div>,
           price: i.price,
           stock: i.stock,
           action: <Link className="text-md font-medium py-1 px-2 rounded-md hover:bg-black hover:text-white" to={`/admin/product/${i._id}`}>Manage</Link>,
@@ -85,12 +84,13 @@ const Products = () => {
   return (
     <div className="admin-container">
       <AdminSidebar />
-      <main>{isLoading ? <Skeleton length={20} /> : Table}</main>
-      <Link to="/admin/product/new" className="fixed right-8 top-20 w-40 gap-2 h-10 flex items-center justify-center rounded-full bg-red-500 text-white hover:opacity-80">
-        Create Product <FaPlus />
+      <main >{isLoading ? <FaSpinner className="animate-spin  my-44 mx-auto h-44 w-44 text-gray-500" /> : Table}</main>
+      <Link to="/admin/product/new" className="fixed right-8 top-20 w-24 gap-2 h-10 flex items-center justify-center rounded-full bg-red-500 text-white hover:opacity-80">
+        Create <FaPlus />
       </Link>
     </div>
   );
 };
 
 export default Products;
+

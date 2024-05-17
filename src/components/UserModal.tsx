@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { User } from "../types/types";
 import { useSelector } from 'react-redux';
 import { RootState } from "../redux/store";
-import CopyText from '../utils/function';
+import {CopyText} from '../utils/function';
 
 interface UserModalType {
     user: User;
