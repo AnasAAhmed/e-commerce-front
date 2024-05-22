@@ -43,7 +43,7 @@ export const calculateTimeDifference = (reviewDate: number) => {
     // If difference is less than 24 hours, show in hours
     const hoursDifference = Math.floor(minutesDifference / 60);
     if (hoursDifference < 24) {
-        return `${hoursDifference} hrs ago`;
+        return `${hoursDifference} hr ago`;
     }
 
     // Otherwise, show in days

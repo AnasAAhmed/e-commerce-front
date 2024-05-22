@@ -122,8 +122,8 @@ const ProductReviews = ({ productId, numOfReviews }: { productId: string, numOfR
                                         )}
                                     </div>
                                 </div>
-                                <p className='text-[0.7rem] sm:text-sm'> {review.email}</p>
-                                <p><strong>Comment:</strong> {review.comment}</p>
+                                {/* <p className='text-[0.7rem] sm:text-sm'> {review.email}</p> */}
+                                <p>{review.comment}</p>
                             </li>
 
                         ))}

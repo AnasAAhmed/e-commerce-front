@@ -29,9 +29,9 @@ export type AllUsersResponse = {
   users: User[];
 };
 export type AllUsersRequest = {
-  email?:string;
-  id?:string;
-  searchId?:string;
+  email?: string;
+  id?: string;
+  searchId?: string;
 };
 
 export type UserResponse = {
@@ -74,7 +74,7 @@ export type ProductResponse = {
 };
 export type ReviewsResponse = {
   success: boolean;
-  reviews:Review;
+  reviews: Review;
 };
 
 export type AllOrdersResponse = {
@@ -115,12 +115,21 @@ export type UpdateProductRequest = {
   productId: string;
   formData: FormData;
 };
+
+export type UpdateUserRequest = {
+  id: string;
+  gender: string;
+  name: string;
+  phone: number;
+  dob: string;
+}
+
 export type ReviewRequest = {
-  productId: string; 
+  productId: string;
   rating: number;
-  comment: string; 
-  email: string; 
-  name: string; 
+  comment: string;
+  email: string;
+  name: string;
   userId: string;
 };
 export type DeleteProductRequest = {
@@ -156,4 +165,7 @@ export type UpdateOrderRequest = {
 export type DeleteUserRequest = {
   userId: string;
   adminUserId: string;
+};
+export type DeleteSingleUserRequest = {
+  userId: string;
 };

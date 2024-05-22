@@ -3,8 +3,10 @@ import axios from "axios";
 import {
   AllUsersRequest,
   AllUsersResponse,
+  DeleteSingleUserRequest,
   DeleteUserRequest,
   MessageResponse,
+  UpdateUserRequest,
   UserResponse,
 } from "../../types/api-types";
 import { User } from "../../types/types";
@@ -32,7 +34,13 @@ export const userAPI = createApi({
       }),
       invalidatesTags: ["users"],
     }),
-
+    deleteSingleUser: builder.mutation<MessageResponse, DeleteSingleUserRequest>({
+      query: ({ userId }) => ({
+        url: `/delete/${userId}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["users"],
+    }),
     allUsers: builder.query<AllUsersResponse, AllUsersRequest>({
       query: ({id,email,searchId}) => {
         let base = `all?id=${id}`;
@@ -43,6 +51,14 @@ export const userAPI = createApi({
         return base;
       },
       providesTags: ["users"],
+    }),
+    updateUser: builder.mutation<MessageResponse, UpdateUserRequest>({
+      query: (userData) => ({
+        url: "update",
+        method: "PUT",
+        body: userData,
+      }),
+      invalidatesTags: ["users"],
     }),
   }),
 });
@@ -59,5 +75,5 @@ export const getUser = async (id: string) => {
   }
 };
 
-export const { useLoginMutation, useAllUsersQuery, useDeleteUserMutation } =
+export const { useLoginMutation, useAllUsersQuery, useDeleteUserMutation,useDeleteSingleUserMutation,useUpdateUserMutation, } =
   userAPI;

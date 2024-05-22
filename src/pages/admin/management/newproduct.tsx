@@ -22,7 +22,6 @@ const NewProduct = () => {
   const [stock, setStock] = useState<number>(1);
   const [size, setSize] = useState<string[]>(["s","m","l","xl","xxl"]);
   const [color, setColor] = useState<string[]>([]);
-  const [style, setStyle] = useState<string[]>([]);
   const [photoPrev, setPhotoPrev] = useState<string>("");
   const [photo, setPhoto] = useState<File>();
   const [load, setLoad] = useState<boolean>(false);
@@ -66,9 +65,6 @@ const NewProduct = () => {
     });
     color.forEach((c, index) => {
       formData.append(`color[${index}]`, c);
-    });
-    style.forEach((st, index) => {
-      formData.append(`style[${index}]`, st);
     });
 
     const res = await newProduct({ id: user?._id!, formData });
@@ -191,17 +187,6 @@ const NewProduct = () => {
             placeholder="eg. Red, Blue, Green or hex: #000000"
             value={color.join(",")}
             onChange={(e) => setColor(e.target.value.split(",").map(item => item.trim()))}
-            className="border border-gray-300 rounded-md w-[96%] px-3 py-3 "
-          />
-        </div>
-        <div>
-          <label htmlFor="style" className="font-semibold text-sm sm:text-lg block">Style (comma-separated)</label>
-          <input
-            id="style"
-            type="text"
-            placeholder="eg. Casual, Formal, Sporty"
-            value={style.join(",")}
-            onChange={(e) => setStyle(e.target.value.split(",").map(item => item.trim()))}
             className="border border-gray-300 rounded-md w-[96%] px-3 py-3 "
           />
         </div>

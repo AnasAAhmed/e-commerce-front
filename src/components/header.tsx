@@ -18,6 +18,7 @@ interface PropsType {
 const Header = ({ user, cartItemsLength }: PropsType) => {
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  // const [scrolled, setScrolled] = useState(false);
 
   const logoutHandler = async () => {
     try {
@@ -28,30 +29,47 @@ const Header = ({ user, cartItemsLength }: PropsType) => {
     }
   };
 
+
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     const scrollTop = window.scrollY;
+  //     if (scrollTop > 100) {
+  //       setScrolled(true);
+  //     } else {
+  //       setScrolled(false);
+  //     }
+  //   };
+
+  //   window.addEventListener("scroll", handleScroll);
+
+  //   return () => window.removeEventListener("scroll", handleScroll);
+  // }, [])
+
   return (
 
-    <nav className="flex items-center justify-between px-4 py-2">
-      <Link to={"/"} className="text-gray-800 ml-0 md:ml-2 hover:text-gray-500 text-2xl font-bold" onClick={() => setIsOpen(false)}>LOGO.</Link>
+    <nav className="flex bg-white transition-all duration-500 top-0 w-full z-30 items-center justify-between px-4 py-2">
+      {/* <nav className={`flex fixed ${scrolled ? "bg-gray-900" : "bg-transparent" } transition-all duration-500 top-0 w-full z-30 items-center justify-between px-4 py-2`}> */}
+      <Link to={"/"} className="text-gray-800 ml-0 md:ml-2 hover:text-gray-500 text-2xl font-bold" onClick={() => { setIsOpen(false); window.scroll(0, 0) }}>LOGO.</Link>
 
       {/* Desltop Nav */}
       <div className="flex items-center ">
         <div className="hidden sm:flex justify-between gap-1 md:gap-3 ml-3">
-          <Link className="hover:bg-gray-300 text-gray-800 rounded-md px-2 py-1  font-semibold text-lg" to="/">
+          <Link onClick={() => window.scroll(0, 0)} className="hover:bg-gray-200 text-gray-800 rounded-md px-2 py-1  font-semibold text-lg" to="/">
             Home
           </Link>
-          <Link className="hover:bg-gray-300 text-gray-800 rounded-md px-2 py-1  font-semibold text-lg" to="/">
+          <Link className="hover:bg-gray-200 text-gray-800 rounded-md px-2 py-1  font-semibold text-lg" to="/">
             About
           </Link>
-          <Link className="hover:bg-gray-300 text-gray-800 rounded-md px-2 py-1  font-semibold text-lg" to="/">
+          <Link className="hover:bg-gray-200 text-gray-800 rounded-md px-2 py-1  font-semibold text-lg" to="/">
             Contact
           </Link>
           {user?._id && (
             <>
-              <Link className="hover:bg-gray-300 text-gray-800 rounded-md px-2 py-1  font-semibold text-lg" to="/orders">
+              <Link className="hover:bg-gray-200 text-gray-800 rounded-md px-2 py-1  font-semibold text-lg" to="/orders">
                 Orders
               </Link>
               {user.role === "admin" && (
-                <Link className="hover:bg-gray-300 text-gray-800 rounded-md px-2 py-1 font-semibold text-lg" to="/admin/dashboard">Dashboard
+                <Link className="hover:bg-gray-200 text-gray-800 rounded-md px-2 py-1 font-semibold text-lg" to="/admin/dashboard">Dashboard
                 </Link>
               )}
             </>
@@ -63,7 +81,7 @@ const Header = ({ user, cartItemsLength }: PropsType) => {
 
         <Link to={"/cart"} onClick={() => setIsOpen(false)} className="mr-2 hover:text-gray-800 text-gray-800 relative">
           <FaShoppingBag size={"1.3rem"} className=" hover:text-gray-800 text-gray-800" />
-          <span className="absolute -top-1 -right-2 bg-red-500 text-white rounded-full px-1 text-xs">{cartItemsLength > 0 ? cartItemsLength : ""}</span>
+          <span className="absolute -top-1 -right-2 bg-red-500 text-gray-100 rounded-full px-1 text-xs">{cartItemsLength > 0 ? cartItemsLength : ""}</span>
         </Link>
 
         <div className="flex sm:hidden relative">
@@ -100,7 +118,7 @@ const Header = ({ user, cartItemsLength }: PropsType) => {
           </dialog>
         </div>
         {user?._id ? (<UserModal user={user} logoutHandler={logoutHandler} />) : (
-          <Link to={"/login"} className=" ml-2 font-semibold inline-blockbg-indigo-500 bg-indigo-500 text-white px-4 py-1 rounded-lg hover:bg-indigo-600">
+          <Link to={"/login"} className=" ml-2 font-semibold inline-blockbg-indigo-500 bg-indigo-500 text-gray-200 px-4 py-1 rounded-lg hover:bg-indigo-600">
             <p className="cursor-pointer">Login</p>
           </Link>
         )}

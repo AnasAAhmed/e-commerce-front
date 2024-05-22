@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import ProductReview from "../components/ProductReviews";
 import StarRatings from "../components/StarsRatings";
 import Footer from "../components/Footer";
+import ImageZoom from "../components/ImageZoom";
 
 const ProductDetails = () => {
   const [loading, setLoading] = useState(false);
@@ -52,17 +53,20 @@ const ProductDetails = () => {
     toast.success("Added to cart");
   };
 
-
+  
   useEffect(() => {
     setLoading(true);
-    setTimeout(()=>{
-      setLoading(false);
-    },500)
     window.scroll(0, 0);
+  }, [params.id])
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 400)
     setSize(sizeArray[0]);
     setColor(colorArray[0]);
     setStyle(styleArray[0]);
-  }, [params.id])
+  }, [data])
 
   if (isError) return <Navigate to={"/404"} />;
 
@@ -76,7 +80,8 @@ const ProductDetails = () => {
           ) : (
             <>
               <section className="sec1 flex-1 flex-shrink-0 w-full md:w-72 mr-10 mb-10">
-                <img src={`${server}/${photo}`} alt={name} className="w-full shadow-md  md:h-[400px] h-[320px] object-cover" />
+                <img src={`${server}/${photo}`} alt={name} className="w-full shadow-md md:hidden md:h-[400px] h-[250px] object-cover" />
+                <ImageZoom src={`${server}/${photo}`} alt={name} />
               </section>
               <article className="sec2 flex-1 w-full  md:w-96">
                 <p className="min-h-16 text-2xl font-semibold mb-4">{name}</p>
@@ -114,8 +119,8 @@ const ProductDetails = () => {
                     ))}
                   </div>
                 }
-                <span className="text-lg">
-                  <StarRatings rating={ratings} />
+                <span className="text-lg flex flex-row">
+                  <StarRatings rating={ratings} /> Reviews ({numOfReviews})
                 </span>
 
 

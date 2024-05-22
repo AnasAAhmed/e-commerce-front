@@ -27,7 +27,7 @@ const RelatedProducts = ({ category, heading, filteredProductId }: CategoryProdu
         ) : (
           <main className='md:flex md:flex-wrap grid grid-cols-2 justify-center gap-4 md:gap-16'>
             {filteredProducts?.length === 0 || data?.products.length === 0 ? (
-              <p className="font-bold text-4xl h-[260px]">No products found</p>
+              <p className="font-bold text-4xl h-[260px]">No Related products found</p>
             ) : (
               filteredProducts?.map((product) => (
                 <ProductCard
@@ -41,7 +41,6 @@ const RelatedProducts = ({ category, heading, filteredProductId }: CategoryProdu
                   cutPrice={product.cutPrice}
                   size={product.size ? product.size[0] : ""}
                   color={product.color ? product.color[0] : ""}
-                  style={product.style ? product.style[0] : ""}
                   stock={product.stock}
                 />
               ))

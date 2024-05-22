@@ -61,6 +61,7 @@ const Customers = () => {
   const { user } = useSelector((state: RootState) => state.userReducer);
 
   const [searchId, setSearchId] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
   const [email, setEmail] = useState<string>("");
 
   const { isLoading, data, isError, error } = useAllUsersQuery({
@@ -76,8 +77,10 @@ const Customers = () => {
   const deleteHandler = async (userId: string) => {
     const confirmed = window.confirm("Are you sure you want to delete this user completely?");
     if (confirmed) {
+      setLoading(true);
       const res = await deleteUser({ userId, adminUserId: user?._id! });
       responseToast(res, null, "");
+      setLoading(false);
     } else {
       // User cancelled the deletion, do nothing
     }
@@ -110,7 +113,7 @@ const Customers = () => {
           action: (
 
             <button onClick={() => deleteHandler(i._id)}>
-              <FaTrash />
+              {loading ? <FaSpinner className="animate-spin mr-2" /> : <FaTrash/>}
             </button>
           ),
           details: (
@@ -139,7 +142,7 @@ const Customers = () => {
             onChange={(e) => setSearchId(e.target.value)}
             placeholder="Search By id"
           />
-            <MdOutlineEmail size="3rem" />
+          <MdOutlineEmail size="3rem" />
           <input type="email"
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Search By email"

@@ -35,9 +35,9 @@ const Home = () => {
             autoPlay={true}
 
           >
-            <img src={heroImg} className="w-full h-[40vh] md:h-[75vh] sm:h-[50vh]" alt="heroImg" />
-            <img src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFDYCCsQ3MxbAXHCSu6cG77fLvhnakopvkFQ&s"} className="w-full h-[40vh] md:h-[75vh] sm:h-[50vh]" alt="heroImg" />
-            <img src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmxOruz0L6Y-Zn_Wt-ifVGR5aqKXSpZZg0HA&s"} className="w-full h-[40vh] md:h-[75vh] sm:h-[50vh]" alt="heroImg" />
+            <img src={heroImg} className="w-full h-[40vh] sm:h-[50vh] md:h-[85vh]" alt="heroImg" />
+            <img src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFDYCCsQ3MxbAXHCSu6cG77fLvhnakopvkFQ&s"} className="w-full h-[40vh] md:h-[85vh] sm:h-[50vh]" alt="heroImg" />
+            <img src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmxOruz0L6Y-Zn_Wt-ifVGR5aqKXSpZZg0HA&s"} className="w-full h-[40vh] md:h-[85vh] sm:h-[50vh]" alt="heroImg" />
           </Carousel>
         </section>
         <CollectionsList />
@@ -64,7 +64,6 @@ const Home = () => {
                     cutPrice={i.cutPrice}
                     size={i.size ? i.size[0] : ""}
                     color={i.color ? i.color[0] : ""}
-                    style={i.style ? i.style[0] : ""}
                     stock={i.stock}
                   />
                 ))

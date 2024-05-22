@@ -14,6 +14,7 @@ import { RootState } from "./redux/store";
 
 
 const Search = lazy(() => import("./pages/search"));
+const UserProfile = lazy(() => import("./pages/UserProfile"));
 const Collections = lazy(() => import("./pages/Collections"));
 const Cart = lazy(() => import("./pages/cart"));
 const ProductDetails = lazy(() => import("./pages/ProductDetails"));
@@ -88,6 +89,7 @@ const App = () => {
               element={<ProtectedRoute isAuthenticated={user ? true : false} />}
             >
               <Route path="/shipping" element={<Shipping />} />
+              <Route path="/user-profile" element={<UserProfile />} />
               <Route path="/orders" element={<Orders />} />
               <Route path="/order/:id" element={<OrderDetails />} />
               <Route path="/pay" element={<Checkout />} />

@@ -21,7 +21,7 @@ const Productmanagement = () => {
 
   const { data, isLoading, isError } = useProductDetailsQuery(params.id!);
 
-  const { price, cutPrice, photo, description, name, stock, category, collections, size, color, style } = data?.product || {
+  const { price, cutPrice, photo, description, name, stock, category, collections, size, color } = data?.product || {
     photo: "",
     category: "",
     collections: "",
@@ -32,7 +32,6 @@ const Productmanagement = () => {
     cutPrice: 0,
     size: [],
     color: [],
-    style: []
   };
 
   const [priceUpdate, setPriceUpdate] = useState<number>(price);
@@ -44,11 +43,11 @@ const Productmanagement = () => {
   const [collectionsUpdate, setCollectionsUpdate] = useState<string>(collections);
   const [sizeUpdate, setSizeUpdate] = useState<string[]>(size);
   const [colorUpdate, setColorUpdate] = useState<string[]>(color);
-  const [styleUpdate, setStyleUpdate] = useState<string[]>(style);
   const [photoUpdate, setPhotoUpdate] = useState<string>("");
   const [photoFile, setPhotoFile] = useState<File | null>(null);
 
   const [load, setLoad] = useState<boolean>(false);
+  const [loadDel, setLoadDel] = useState<boolean>(false);
 
   const [updateProduct] = useUpdateProductMutation();
   const [deleteProduct] = useDeleteProductMutation();
@@ -93,11 +92,6 @@ const Productmanagement = () => {
         formData.append(`color[${index}]`, c);
       });
     }
-    if (styleUpdate.length > 0) {
-      styleUpdate.forEach((st, index) => {
-        formData.append(`style[${index}]`, st);
-      });
-    }
     const res = await updateProduct({
       formData,
       userId: user?._id!,
@@ -109,10 +103,12 @@ const Productmanagement = () => {
   };
 
   const deleteHandler = async () => {
+    setLoadDel(true)
     const res = await deleteProduct({
       userId: user?._id!,
       productId: data?.product._id!,
     });
+    setLoadDel(false)
 
     responseToast(res, navigate, "/admin/product");
   };
@@ -128,7 +124,6 @@ const Productmanagement = () => {
       setCollectionsUpdate(data.product.collections);
       setSizeUpdate(data.product.size);
       setColorUpdate(data.product.color);
-      setStyleUpdate(data.product.style);
     }
   }, [data]);
 
@@ -162,7 +157,7 @@ const Productmanagement = () => {
               )}
 
               <button className="bg-red-500 my-3 sm:my-0 w-24 mt-2 h-10 text-white text-lg rounded-md mx-2 font-semibold" onClick={deleteHandler}>
-                Delete
+              {loadDel ? <FaSpinner className='animate-spin text-2xl mx-auto ' /> : "Delete"}
               </button>
             </section>
             <article>
@@ -256,16 +251,6 @@ const Productmanagement = () => {
                     placeholder="eg. Red, Blue, Green"
                     value={colorUpdate.join(",")}
                     onChange={(e) => setColorUpdate(e.target.value.split(",").map(item => item.trim()))}
-                    className="border border-gray-300 rounded-md w-[96%] px-3 py-3 "
-                  />
-                </div>
-                <div>
-                  <label className="font-semibold text-sm sm:text-lg block">Style (comma-separated)</label>
-                  <input
-                    type="text"
-                    placeholder="eg. Casual, Formal, Sporty"
-                    value={styleUpdate.join(",")}
-                    onChange={(e) => setStyleUpdate(e.target.value.split(",").map(item => item.trim()))}
                     className="border border-gray-300 rounded-md w-[96%] px-3 py-3 "
                   />
                 </div>

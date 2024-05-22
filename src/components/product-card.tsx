@@ -13,7 +13,6 @@ type ProductsProps = {
   price: number;
   cutPrice: number;
   size: string;
-  style: string;
   color: string;
   stock: number;
   numOfReviews: number,
@@ -28,7 +27,6 @@ const ProductCard = ({
   photo,
   size,
   color,
-  style,
   stock,
   numOfReviews ,
   ratings
@@ -58,7 +56,7 @@ const ProductCard = ({
       <button
         className='w-full mt-4 psl-7 pr-2 py-2 text-center bg-yellow-500 rounded-md text-white text-sm sm:text-md font-semibold transition duration-300 ease-in-out hover:bg-yellow-600'
         onClick={() =>
-          addToCartHandler({ productId, size, color, style, price, cutPrice, name, photo, stock, quantity: 1 })
+          addToCartHandler({ productId, size, color, price, cutPrice, name, photo, stock, quantity: 1 })
         }
       >
         Add to Cart
